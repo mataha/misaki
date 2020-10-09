@@ -1,0 +1,18 @@
+# Gradle files
+.gradle
+build/
+!gradle-wrapper.jar
+
+# Local configuration file
+local.properties
+
+# Generated files
+bin/
+out/
+
+# Log files
+*.log
+
+# IntelliJ IDEA
+.idea
+*.iml
