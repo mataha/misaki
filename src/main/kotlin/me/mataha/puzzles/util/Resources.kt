@@ -3,7 +3,6 @@
 package me.mataha.puzzles.util
 
 import java.net.URL
-import kotlin.reflect.KClass
 
 fun resource(path: String): URL
 {
@@ -16,14 +15,6 @@ fun resource(path: String): URL
 
     return requireNotNull(url)
         { "Resource '$path' was not found." }
-}
-
-fun resource(path: String, contextClass: KClass<*>): URL
-{
-    val url = contextClass.java.getResource(path)
-
-    return requireNotNull(url)
-        { "Resource '$path' relative to '$contextClass' was not found." }
 }
 
 private object Context
