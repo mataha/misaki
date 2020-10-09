@@ -1,3 +1,5 @@
+@file:JvmName("Resources")
+
 package me.mataha.puzzles.util
 
 import java.net.URL

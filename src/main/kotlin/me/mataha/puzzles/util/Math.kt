@@ -1,3 +1,5 @@
+@file:JvmName("Math")
+
 package me.mataha.puzzles.util
 
 fun min(number: Int, vararg numbers: Int): Int
