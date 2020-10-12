@@ -8,7 +8,7 @@ import java.security.MessageDigest
 
 private const val MD5 = "MD5"
 
-fun getMd5Digest(): MessageDigest = MessageDigest.getInstance(MD5)
+private fun getMd5Digest(): MessageDigest = MessageDigest.getInstance(MD5)
 
 fun md5(bytes: ByteArray): ByteArray
         = getMd5Digest().digest(bytes)

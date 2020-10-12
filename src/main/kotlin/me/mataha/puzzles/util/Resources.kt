@@ -8,7 +8,7 @@ fun resource(path: String): URL
 {
     val loader = listOfNotNull(
         Thread.currentThread().contextClassLoader,
-        Context.javaClass.classLoader,
+        ::resource.javaClass.classLoader,
     ).first()
 
     val url = loader.getResource(path)
@@ -16,5 +16,3 @@ fun resource(path: String): URL
     return requireNotNull(url)
         { "Resource '$path' was not found." }
 }
-
-private object Context
