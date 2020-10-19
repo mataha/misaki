@@ -9,7 +9,7 @@ class NotQuiteLispTests
 {
     @DisplayName("Given directions, Santa should end at the correct floor")
     @ParameterizedTest(name = "{0} => {1}")
-    @CsvFileSource(resources = ["/adventofcode/2015/01/floor.csv"], delimiter = '|', numLinesToSkip = 2)
+    @CsvFileSource(resources = ["/solutions/adventofcode/2015/01/floor.csv"], numLinesToSkip = 1)
     fun testFirst(directions: String, expected: Int)
     {
         val solution = NotQuiteLisp()
@@ -22,7 +22,7 @@ class NotQuiteLispTests
     }
 
     @ParameterizedTest(name = "Given \"{0}\", Santa should enter the basement at character position {1}")
-    @CsvFileSource(resources = ["/adventofcode/2015/01/basement.csv"], delimiter = '|', numLinesToSkip = 2)
+    @CsvFileSource(resources = ["/solutions/adventofcode/2015/01/basement.csv"], numLinesToSkip = 1)
     fun testSecond(directions: String, expected: Int)
     {
         val solution = NotQuiteLisp()

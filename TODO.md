@@ -29,7 +29,7 @@
     
    * Or find a case that executes in a relatively short time
 
- * Figure out how and where to keep test inputs (code, csv (how exactly?), something else?)
+ * Figure out how and where to keep test inputs (code, csv, something else?)
  * Platform setup: is concurrent + same thread fine?
  * Argument providers
  * Dedicated packages
