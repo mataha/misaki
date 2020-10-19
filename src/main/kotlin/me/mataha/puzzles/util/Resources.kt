@@ -8,7 +8,7 @@ fun resource(path: String): URL
 {
     val loader = listOfNotNull(
         Thread.currentThread().contextClassLoader,
-        ::resource.javaClass.classLoader,
+        ::resource::class.java.classLoader,
     ).first()
 
     val url = loader.getResource(path)
