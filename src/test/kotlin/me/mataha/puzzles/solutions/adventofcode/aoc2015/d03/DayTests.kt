@@ -3,17 +3,13 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d03
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.CsvFileSource
 
 class PerfectlySphericalHousesTests
 {
     @DisplayName("Given directions, the correct number of houses should receive at least one present")
     @ParameterizedTest(name = "{0} => {1}")
-    @CsvSource(
-        ">, 2",
-        "^>v<, 4",
-        "^v^v^v^v^v, 2"
-    )
+    @CsvFileSource(resources = ["/solutions/adventofcode/2015/03/santa.csv"], numLinesToSkip = 1)
     fun testGetHousesWithAtLeastOnePresentReceivedFromSanta(directions: String, expected: Int)
     {
         val solution = PerfectlySphericalHouses()
@@ -27,11 +23,7 @@ class PerfectlySphericalHousesTests
 
     @DisplayName("Given directions, the correct number of houses should receive at least one present")
     @ParameterizedTest(name = "{0} => {1}")
-    @CsvSource(
-        "^v, 3",
-        "^>v<, 3",
-        "^v^v^v^v^v, 11"
-    )
+    @CsvFileSource(resources = ["/solutions/adventofcode/2015/03/santa-robot.csv"], numLinesToSkip = 1)
     fun testGetHousesWithAtLeastOnePresentReceivedFromSantaAndHisRobot(directions: String, expected: Int)
     {
         val solution = PerfectlySphericalHouses()
