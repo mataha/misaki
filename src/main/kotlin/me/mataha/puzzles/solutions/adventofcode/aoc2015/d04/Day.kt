@@ -29,6 +29,7 @@ class IdealStockingStuffer: AdventOfCodeDay<String, Int>(), OneLineParser
                 }
             }
 
+            // Hash starting with that prefix was not found (given Int boundary)
             return -1
         }
     }

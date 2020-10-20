@@ -33,6 +33,7 @@ class NotQuiteLisp: AdventOfCodeDay<String, Int>(), OneLineParser
             }
         }
 
+        // Santa did never enter the basement
         return -1
     }
 
