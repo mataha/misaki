@@ -4,16 +4,16 @@ import me.mataha.puzzles.util.math.max
 
 data class Box(val length: Int, val width: Int, val height: Int)
 {
-    val smallestSideArea: Int
+    internal val smallestSideArea: Int
         get() = length * width * height / max(length, width, height)
 
-    val surfaceArea: Int
+    internal val surfaceArea: Int
         get() = 2 * (length * width + width * height + height * length)
 
-    val smallestSidePerimeter: Int
+    internal val smallestSidePerimeter: Int
         get() = 2 * (length + width + height - max(length, width, height))
 
-    val volume: Int
+    internal val volume: Int
         get() = length * width * height
 
     companion object

@@ -2,6 +2,7 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d02
 
 import me.mataha.puzzles.domain.adventofcode.AdventOfCode
 import me.mataha.puzzles.domain.adventofcode.AdventOfCodeDay
+import me.mataha.puzzles.util.annotations.VisibleForTesting
 
 @AdventOfCode("I Was Told There Would Be No Math", 2015, 2)
 class ThereWouldBeNoMath: AdventOfCodeDay<List<Box>, Int>()
@@ -12,13 +13,21 @@ class ThereWouldBeNoMath: AdventOfCodeDay<List<Box>, Int>()
                 .map { dimensions -> Box.create(dimensions) }
 
     override fun first(input: List<Box>): Int
-            = input.sumBy { box -> box.surfaceArea + box.smallestSideArea }
+            = input.sumBy { box -> box.squareFeetOfWrappingPaper }
 
     override fun second(input: List<Box>): Int
-            = input.sumBy { box -> box.smallestSidePerimeter + box.volume }
+            = input.sumBy { box -> box.feetOfRibbon }
 
-    companion object
+    internal companion object
     {
         private const val PARSE_DELIMITER = 'x'
+
+        @VisibleForTesting
+        internal val Box.squareFeetOfWrappingPaper: Int
+            get() = this.surfaceArea + this.smallestSideArea
+
+        @VisibleForTesting
+        internal val Box.feetOfRibbon: Int
+            get() = this.smallestSidePerimeter + this.volume
     }
 }
