@@ -13,10 +13,10 @@ class ThereWouldBeNoMath: AdventOfCodeDay<List<Box>, Int>()
                 .map { dimensions -> Box.create(dimensions) }
 
     override fun first(input: List<Box>): Int
-            = input.sumBy { box -> box.squareFeetOfWrappingPaper }
+            = input.sumBy { box -> getSquareFeetOfWrappingPaper(box) }
 
     override fun second(input: List<Box>): Int
-            = input.sumBy { box -> box.feetOfRibbon }
+            = input.sumBy { box -> getFeetOfRibbon(box) }
 
     @VisibleForTesting
     internal companion object
@@ -24,11 +24,11 @@ class ThereWouldBeNoMath: AdventOfCodeDay<List<Box>, Int>()
         private const val PARSE_DELIMITER = 'x'
 
         @VisibleForTesting
-        internal val Box.squareFeetOfWrappingPaper: Int
-            get() = this.surfaceArea + this.smallestSideArea
+        internal fun getSquareFeetOfWrappingPaper(box: Box): Int
+                = box.surfaceArea + box.smallestSideArea
 
         @VisibleForTesting
-        internal val Box.feetOfRibbon: Int
-            get() = this.smallestSidePerimeter + this.volume
+        internal fun getFeetOfRibbon(box: Box): Int
+                = box.smallestSidePerimeter + box.volume
     }
 }
