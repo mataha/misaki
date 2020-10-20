@@ -18,6 +18,7 @@ class ThereWouldBeNoMath: AdventOfCodeDay<List<Box>, Int>()
     override fun second(input: List<Box>): Int
             = input.sumBy { box -> box.feetOfRibbon }
 
+    @VisibleForTesting
     internal companion object
     {
         private const val PARSE_DELIMITER = 'x'

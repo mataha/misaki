@@ -2,7 +2,7 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d06
 
 import me.mataha.puzzles.solutions.adventofcode.aoc2015.d06.Instruction.Type
 
-abstract class LightGrid
+internal abstract class LightGrid
 {
     private val length = 1000
     private val width = 1000
@@ -24,7 +24,7 @@ abstract class LightGrid
         return this
     }
 
-    fun process(instruction: Instruction): LightGrid
+    internal fun process(instruction: Instruction): LightGrid
     {
         for (x in instruction.x)
             for (y in instruction.y)
@@ -40,9 +40,9 @@ abstract class LightGrid
         return this
     }
 
-    abstract fun turnOn(x: Int, y: Int): LightGrid
+    protected abstract fun turnOn(x: Int, y: Int): LightGrid
 
-    abstract fun turnOff(x: Int, y: Int): LightGrid
+    protected abstract fun turnOff(x: Int, y: Int): LightGrid
 
-    abstract fun toggle(x: Int, y: Int): LightGrid
+    protected abstract fun toggle(x: Int, y: Int): LightGrid
 }

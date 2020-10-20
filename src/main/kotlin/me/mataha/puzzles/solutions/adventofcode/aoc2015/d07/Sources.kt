@@ -7,13 +7,13 @@ sealed class Source
 }
 
 @ExperimentalUnsignedTypes
-data class Value(val signal: UShort): Source()
+internal data class Value(val signal: UShort): Source()
 {
     override fun resolve(circuit: Circuit): UShort = signal
 }
 
 @ExperimentalUnsignedTypes
-data class Wire(val identifier: String): Source()
+internal data class Wire(val identifier: String): Source()
 {
     override fun resolve(circuit: Circuit): UShort = circuit[identifier]
 }

@@ -4,7 +4,7 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 
 @ExperimentalUnsignedTypes
-object CircuitGrammar: Grammar<Part>()
+internal object CircuitGrammar: Grammar<Part>()
 {
     @Suppress("unused")
     @JvmStatic private val whiteSpace by token("""\s+""", ignore = true)

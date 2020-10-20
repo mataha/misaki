@@ -3,7 +3,7 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d09
 import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 
-object LocationGrammar: Grammar<WeightedGraph<Location>>()
+internal object LocationGrammar: Grammar<WeightedGraph<Location>>()
 {
     @Suppress("unused")
     @JvmStatic private val whiteSpace by token("""\s+""", ignore = true)

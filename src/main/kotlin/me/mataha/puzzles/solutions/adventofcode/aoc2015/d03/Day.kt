@@ -44,7 +44,7 @@ class PerfectlySphericalHouses: AdventOfCodeDay<String, Int>(), OneLineParser
         return grid.size
     }
 
-    companion object
+    private companion object
     {
         private enum class Turn
         {

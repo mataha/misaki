@@ -36,7 +36,7 @@ class NoInternElvesForThis: AdventOfCodeDay<List<String>, Int>(), NoOpParser
         return input.nice(*predicates).count()
     }
 
-    companion object
+    private companion object
     {
         private fun List<String>.nice(vararg predicates: (string: String) -> Boolean): List<String>
                 = this.filter { string -> string.isNice(*predicates) }

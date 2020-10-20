@@ -44,7 +44,7 @@ class ProbablyAFireHazard: AdventOfCodeDay<List<Instruction>, Int>()
         return grid.illuminate(input)
     }
 
-    companion object
+    private companion object
     {
         private fun LightGrid.illuminate(instructions: List<Instruction>): Int
         {

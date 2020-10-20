@@ -4,7 +4,7 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import me.mataha.puzzles.solutions.adventofcode.aoc2015.d06.Instruction.Type
 
-object InstructionGrammar: Grammar<Instruction>()
+internal object InstructionGrammar: Grammar<Instruction>()
 {
     @Suppress("unused")
     @JvmStatic private val whiteSpace by token("""\s+""", ignore = true)

@@ -2,7 +2,7 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d02
 
 import me.mataha.puzzles.util.math.max
 
-data class Box(val length: Int, val width: Int, val height: Int)
+data class Box internal constructor(val length: Int, val width: Int, val height: Int)
 {
     internal val smallestSideArea: Int
         get() = length * width * height / max(length, width, height)

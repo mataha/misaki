@@ -36,7 +36,7 @@ class NotQuiteLisp: AdventOfCodeDay<String, Int>(), OneLineParser
         return -1
     }
 
-    companion object
+    private companion object
     {
         private fun ascendOrDescend(char: Char, floor: Int): Int
         {

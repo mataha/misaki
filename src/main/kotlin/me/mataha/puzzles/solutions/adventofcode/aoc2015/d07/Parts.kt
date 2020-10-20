@@ -10,7 +10,7 @@ sealed class Part(open val identifier: String)
 }
 
 @ExperimentalUnsignedTypes
-data class NoOpGate(
+internal data class NoOpGate(
     override val identifier: String,
     val source: Source
 ): Part(identifier)
@@ -20,7 +20,7 @@ data class NoOpGate(
 }
 
 @ExperimentalUnsignedTypes
-data class AndGate(
+internal data class AndGate(
     override val identifier: String,
     val a: Source,
     val b: Source
@@ -31,7 +31,7 @@ data class AndGate(
 }
 
 @ExperimentalUnsignedTypes
-data class OrGate(
+internal data class OrGate(
     override val identifier: String,
     val a: Source,
     val b: Source
@@ -42,7 +42,7 @@ data class OrGate(
 }
 
 @ExperimentalUnsignedTypes
-data class NotGate(
+internal data class NotGate(
     override val identifier: String,
     val source: Source
 ): Part(identifier)
@@ -52,7 +52,7 @@ data class NotGate(
 }
 
 @ExperimentalUnsignedTypes
-data class LeftShiftGate(
+internal data class LeftShiftGate(
     override val identifier: String,
     val a: Source,
     val bitCount: Int
@@ -63,7 +63,7 @@ data class LeftShiftGate(
 }
 
 @ExperimentalUnsignedTypes
-data class RightShiftGate(
+internal data class RightShiftGate(
     override val identifier: String,
     val a: Source,
     val bitCount: Int
