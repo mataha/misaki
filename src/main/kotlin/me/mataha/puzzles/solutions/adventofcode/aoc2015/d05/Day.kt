@@ -27,7 +27,7 @@ class NoInternElvesForThis: AdventOfCodeDay<List<String>, Int>(), NoOpParser
             val vowels = "aeiou"
 
             val predicates = arrayOf<(string: String) -> Boolean>(
-                { string -> string.filter { it in vowels }.count() >= 3 },
+                { string -> string.count { it in vowels } >= 3 },
                 { string -> string.zipWithNext().any { it.first == it.second } },
                 { string -> forbidden.none { it in string } }
             )
@@ -39,7 +39,7 @@ class NoInternElvesForThis: AdventOfCodeDay<List<String>, Int>(), NoOpParser
         internal fun String.isNiceAfter(): Boolean
         {
             val predicates = arrayOf<(string: String) -> Boolean>(
-                { string -> string.windowed(2).any { it in string.replaceFirst(it, "==") } },
+                { string -> string.windowed(2).any { it in string.replaceFirst(it, "  ") } },
                 { string -> string.zipWithAfterNext().any { it.first == it.second } }
             )
 
