@@ -4,6 +4,11 @@ package me.mataha.puzzles.util
 
 import java.net.URL
 
+/**
+ * Returns a `URL` pointing to a resource under the specified [path].
+ *
+ * Throws an [IllegalArgumentException] if the resource was not found.
+ */
 fun resource(path: String): URL
 {
     val loader = listOfNotNull(
