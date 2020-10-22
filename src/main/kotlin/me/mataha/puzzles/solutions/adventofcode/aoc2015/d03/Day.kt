@@ -38,7 +38,7 @@ class PerfectlySphericalHouses: AdventOfCodeDay<String, Int>(), OneLineParser
             grid.add(new)
             map[turn] = new
 
-            turn = if (DIRECTIONS.contains(direction)) turn.next() else turn
+            turn = if (direction in DIRECTIONS) turn.next() else turn
         }
 
         return grid.size
