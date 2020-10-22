@@ -18,7 +18,7 @@ fun CharSequence.zipAdjacent(): List<Pair<Char, Char>> = zipAdjacent { a, b -> a
 inline fun <Result> CharSequence.zipAdjacent(transform: (a: Char, b: Char) -> Result): List<Result>
 {
     val size = length - 2
-    if (size < 2)
+    if (size < 1)
     {
         return emptyList()
     }
