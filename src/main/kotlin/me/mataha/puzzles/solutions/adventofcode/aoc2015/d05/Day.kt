@@ -8,7 +8,7 @@ import me.mataha.puzzles.domain.NoOpParser
 import me.mataha.puzzles.domain.adventofcode.AdventOfCode
 import me.mataha.puzzles.domain.adventofcode.AdventOfCodeDay
 import me.mataha.puzzles.util.annotations.VisibleForTesting
-import me.mataha.puzzles.util.extensions.zipWithAfterNext
+import me.mataha.puzzles.util.extensions.zipAdjacent
 
 @AdventOfCode("Doesn't He Have Intern-Elves For This?", 2015, 5)
 class NoInternElvesForThis: AdventOfCodeDay<List<String>, Int>(), NoOpParser
@@ -48,7 +48,7 @@ internal fun String.isNiceAfter(): Boolean
 {
     val predicates = arrayOf<(string: String) -> Boolean>(
         { string -> string.windowed(2).any { window -> window in string.replaceFirst(window, "  ") } },
-        { string -> string.zipWithAfterNext().any { pair -> pair.first == pair.second } }
+        { string -> string.zipAdjacent().any { pair -> pair.first == pair.second } }
     )
 
     return this.isNice(*predicates)
