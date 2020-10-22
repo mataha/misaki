@@ -2,11 +2,14 @@
 
 package me.mataha.puzzles.util.extensions
 
+import me.mataha.puzzles.util.annotations.InlineCall
+
 /**
  * Shifts this value left by the [bitCount] number of bits.
  *
  * Converts to [UInt], then to [UShort] under the hood.
  */
+@InlineCall
 inline infix fun UShort.shl(bitCount: Int): UShort = (this.toUInt() shl bitCount).toUShort()
 
 /**
@@ -15,4 +18,5 @@ inline infix fun UShort.shl(bitCount: Int): UShort = (this.toUInt() shl bitCount
  *
  * Converts to [UInt], then to [UShort] under the hood.
  */
+@InlineCall
 inline infix fun UShort.shr(bitCount: Int): UShort = (this.toUInt() shr bitCount).toUShort()
