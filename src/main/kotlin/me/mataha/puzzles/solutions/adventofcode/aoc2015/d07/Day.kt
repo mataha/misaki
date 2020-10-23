@@ -12,14 +12,14 @@ class SomeAssemblyRequired: AdventOfCodeDay<List<Part>, Int>()
 
     override fun first(input: List<Part>): Int
     {
-        val circuit = Circuit.fromParts(input)
+        val circuit = Circuit.of(input)
 
         return circuit["a"].toInt()
     }
 
     override fun second(input: List<Part>): Int
     {
-        val circuit = Circuit.fromParts(input)
+        val circuit = Circuit.of(input)
 
         val a = circuit["a"]
         circuit.reset()

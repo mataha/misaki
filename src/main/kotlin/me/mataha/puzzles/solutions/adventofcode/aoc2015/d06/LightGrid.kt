@@ -4,8 +4,8 @@ import me.mataha.puzzles.solutions.adventofcode.aoc2015.d06.Instruction.Type
 
 internal abstract class LightGrid
 {
-    private val length = 1000
-    private val width = 1000
+    private val length = DEFAULT_LENGTH
+    private val width = DEFAULT_WIDTH
     private val grid = Array(length) { IntArray(width) }
 
     internal var luminosity = 0
@@ -45,4 +45,10 @@ internal abstract class LightGrid
     protected abstract fun turnOff(x: Int, y: Int): LightGrid
 
     protected abstract fun toggle(x: Int, y: Int): LightGrid
+
+    private companion object
+    {
+        private const val DEFAULT_LENGTH = 1000
+        private const val DEFAULT_WIDTH = 1000
+    }
 }

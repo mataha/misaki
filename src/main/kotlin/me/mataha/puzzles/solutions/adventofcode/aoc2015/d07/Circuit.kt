@@ -1,7 +1,7 @@
 package me.mataha.puzzles.solutions.adventofcode.aoc2015.d07
 
 @ExperimentalUnsignedTypes
-class Circuit
+class Circuit private constructor()
 {
     private val parts: MutableMap<String, Part> = mutableMapOf()
 
@@ -34,6 +34,6 @@ class Circuit
 
     companion object
     {
-        fun fromParts(parts: Collection<Part> = setOf()): Circuit = Circuit().add(parts)
+        fun of(parts: Collection<Part> = setOf()): Circuit = Circuit().add(parts)
     }
 }

@@ -18,15 +18,6 @@ class NoInternElvesForThis: AdventOfCodeDay<List<String>, Int>(), NoOpParser
     override fun second(input: List<String>): Int = input.count(String::isNiceAfter)
 }
 
-private fun String.isNice(vararg predicates: (string: String) -> Boolean): Boolean
-        = runBlocking {
-            predicates
-                .asFlow()
-                .map { predicate -> predicate(this@isNice) }
-                .toList()
-                .none { condition -> !condition }
-        }
-
 private const val VOWELS = "aeiou"
 
 @VisibleForTesting
@@ -53,3 +44,12 @@ internal fun String.isNiceAfter(): Boolean
 
     return this.isNice(*predicates)
 }
+
+private fun String.isNice(vararg predicates: (string: String) -> Boolean): Boolean
+        = runBlocking {
+            predicates
+                .asFlow()
+                .map { predicate -> predicate(this@isNice) }
+                .toList()
+                .none { condition -> !condition }
+        }

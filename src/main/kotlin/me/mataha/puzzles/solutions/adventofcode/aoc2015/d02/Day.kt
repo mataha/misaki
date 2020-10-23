@@ -18,17 +18,16 @@ class ThereWouldBeNoMath: AdventOfCodeDay<List<Box>, Int>()
     override fun second(input: List<Box>): Int
             = input.sumBy { box -> getFeetOfRibbon(box) }
 
-    @VisibleForTesting
-    internal companion object
+    private companion object
     {
         private const val PARSE_DELIMITER = 'x'
-
-        @VisibleForTesting
-        internal fun getSquareFeetOfWrappingPaper(box: Box): Int
-                = box.surfaceArea + box.smallestSideArea
-
-        @VisibleForTesting
-        internal fun getFeetOfRibbon(box: Box): Int
-                = box.smallestSidePerimeter + box.volume
     }
 }
+
+@VisibleForTesting
+internal fun getSquareFeetOfWrappingPaper(box: Box): Int
+        = box.surfaceArea + box.smallestSideArea
+
+@VisibleForTesting
+internal fun getFeetOfRibbon(box: Box): Int
+        = box.smallestSidePerimeter + box.volume

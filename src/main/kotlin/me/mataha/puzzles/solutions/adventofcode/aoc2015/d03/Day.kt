@@ -38,34 +38,32 @@ class PerfectlySphericalHouses: AdventOfCodeDay<String, Int>(), OneLineParser
             grid.add(new)
             map[turn] = new
 
-            turn = if (direction in DIRECTIONS) turn.next() else turn
+            turn = if (direction.isDirection()) turn.next() else turn
         }
 
         return grid.size
     }
+}
 
-    private companion object
+private enum class Turn
+{
+    SANTA, ROBOT
+}
+
+private data class Position(val x: Int, val y: Int)
+{
+    fun next(move: Char): Position
     {
-        private enum class Turn
+        return when (move)
         {
-            SANTA, ROBOT
+            '^' -> Position(x, y + 1)
+            'v' -> Position(x, y - 1)
+            '>' -> Position(x + 1, y)
+            '<' -> Position(x - 1, y)
+            else -> this
         }
-
-        private data class Position(val x: Int, val y: Int)
-        {
-            fun next(move: Char): Position
-            {
-                return when (move)
-                {
-                    '^' -> Position(x, y + 1)
-                    'v' -> Position(x, y - 1)
-                    '>' -> Position(x + 1, y)
-                    '<' -> Position(x - 1, y)
-                    else -> this
-                }
-            }
-        }
-
-        private const val DIRECTIONS = "^>v<"
     }
 }
+
+private const val DIRECTIONS = "^>v<"
+private fun Char.isDirection(): Boolean = this in DIRECTIONS

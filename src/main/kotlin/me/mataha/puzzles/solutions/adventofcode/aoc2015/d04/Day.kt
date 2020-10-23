@@ -12,25 +12,24 @@ class IdealStockingStuffer: AdventOfCodeDay<String, Int>(), OneLineParser
     override fun first(input: String): Int = md5StartingWith(input, "00000")
 
     override fun second(input: String): Int = md5StartingWith(input, "000000")
+}
 
-    @VisibleForTesting
-    internal companion object
+@VisibleForTesting
+internal fun md5StartingWith(key: String, prefix: String, range: IntRange = 1..Int.MAX_VALUE): Int
+{
+    require(range.first > 0)
+        { "Lower bound must be a positive number (is: ${range.first})." }
+
+    for (number in range)
     {
-        @VisibleForTesting
-        internal fun md5StartingWith(key: String, prefix: String): Int
+        val string = key + number
+
+        if (string.md5Hex().startsWith(prefix))
         {
-            for (number in 1..Int.MAX_VALUE)
-            {
-                val string = key + number
-
-                if (string.md5Hex().startsWith(prefix))
-                {
-                    return number
-                }
-            }
-
-            // Hash starting with that prefix was not found (given Int boundary)
-            return -1
+            return number
         }
     }
+
+    // Hash starting with that prefix was not found (given supplied range)
+    return -1
 }
