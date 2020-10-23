@@ -13,7 +13,7 @@ class NotQuiteLisp: AdventOfCodeDay<String, Int>(), OneLineParser
 
         for (char in input)
         {
-            floor = ascendOrDescend(char, floor)
+            floor = changeFloor(char, floor)
         }
 
         return floor
@@ -25,7 +25,7 @@ class NotQuiteLisp: AdventOfCodeDay<String, Int>(), OneLineParser
 
         for ((index, char) in input.withIndex())
         {
-            floor = ascendOrDescend(char, floor)
+            floor = changeFloor(char, floor)
 
             if (floor < 0)
             {
@@ -36,17 +36,14 @@ class NotQuiteLisp: AdventOfCodeDay<String, Int>(), OneLineParser
         // Santa did never enter the basement
         return -1
     }
+}
 
-    private companion object
+private fun changeFloor(char: Char, floor: Int): Int
+{
+    return when (char)
     {
-        private fun ascendOrDescend(char: Char, floor: Int): Int
-        {
-            return when (char)
-            {
-                '(' -> floor + 1
-                ')' -> floor - 1
-                else -> floor
-            }
-        }
+        '(' -> floor + 1
+        ')' -> floor - 1
+        else -> floor
     }
 }
