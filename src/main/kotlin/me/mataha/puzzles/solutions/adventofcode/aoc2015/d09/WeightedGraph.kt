@@ -7,7 +7,7 @@ class WeightedGraph<Node>
     private val nodes
         get() = edges.keys
 
-    operator fun get(source: Node, destination: Node): Int
+    private operator fun get(source: Node, destination: Node): Int
             = edges.getValue(source).getValue(destination)
 
     operator fun set(source: Node, destination: Node, weight: Int): WeightedGraph<Node>
