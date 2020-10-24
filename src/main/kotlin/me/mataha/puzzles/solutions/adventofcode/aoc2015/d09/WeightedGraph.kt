@@ -4,7 +4,7 @@ class WeightedGraph<Node>
 {
     private val edges: MutableMap<Node, MutableMap<Node, Int>> = mutableMapOf()
 
-    private val nodes
+    private val nodes: MutableSet<Node>
         get() = edges.keys
 
     private operator fun get(source: Node, destination: Node): Int
