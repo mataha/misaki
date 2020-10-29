@@ -1,0 +1,5 @@
+* text=auto eol=lf
+
+# Enforce Windows newlines for .bat and .cmd files
+*.bat text eol=crlf
+*.cmd text eol=crlf
