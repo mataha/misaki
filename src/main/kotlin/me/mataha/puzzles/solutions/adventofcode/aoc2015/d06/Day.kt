@@ -8,7 +8,7 @@ import me.mataha.puzzles.domain.adventofcode.AdventOfCodeDay
 class ProbablyAFireHazard: AdventOfCodeDay<List<Instruction>, Int>()
 {
     override fun parse(input: List<String>): List<Instruction>
-            = input.map { line -> InstructionGrammar.parseToEnd(line) }
+            = input.map { line -> LightGridGrammar.parseToEnd(line) }
 
     override fun first(input: List<Instruction>): Int
     {
