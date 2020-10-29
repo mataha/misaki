@@ -18,9 +18,11 @@ class Circuit private constructor()
 
     private fun computeSignal(wireIdentifier: String): UShort
     {
-        val signal = parts[wireIdentifier]?.getSignal(this)
-            ?: throw IllegalArgumentException("Part with identifier '$wireIdentifier' does not exist.")
+        val part = requireNotNull(parts[wireIdentifier]) {
+            "Part with identifier '$wireIdentifier' does not exist."
+        }
 
+        val signal = part.getSignal(this)
         signals[wireIdentifier] = signal
 
         return signal
