@@ -3,13 +3,7 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d07
 @ExperimentalUnsignedTypes
 class Circuit private constructor()
 {
-    private val parts: MutableMap<String, Part> = mutableMapOf()
-
-    private fun add(part: Part): Circuit
-            = apply { parts[part.identifier] = part }
-
-    fun add(parts: Collection<Part>): Circuit
-            = apply { parts.forEach { part -> add(part) } }
+    private lateinit var parts: Map<String, Part>
 
     private val signals: MutableMap<String, UShort> by lazy { mutableMapOf() }
 
@@ -34,6 +28,13 @@ class Circuit private constructor()
 
     companion object
     {
-        fun of(parts: Collection<Part> = setOf()): Circuit = Circuit().add(parts)
+        fun of(parts: List<Part> = listOf()): Circuit
+        {
+            val circuit = Circuit()
+
+            circuit.parts = parts.associateBy { part -> part.identifier }
+
+            return circuit
+        }
     }
 }
