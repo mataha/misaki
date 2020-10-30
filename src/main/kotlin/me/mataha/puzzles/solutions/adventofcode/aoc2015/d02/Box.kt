@@ -2,12 +2,11 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d02
 
 import me.mataha.puzzles.util.math.max
 
-data class Box(val length: Int, val width: Int, val height: Int)
-{
-    init
-    {
-        require(length > 0 && width > 0 && height > 0)
-            { "Dimensions must be positive numbers (are: [$length, $width, $height])." }
+data class Box(val length: Int, val width: Int, val height: Int) {
+    init {
+        require(length > 0 && width > 0 && height > 0) {
+            "Dimensions must be positive numbers (are: [$length, $width, $height])."
+        }
     }
 
     internal val smallestSideArea: Int
@@ -22,12 +21,11 @@ data class Box(val length: Int, val width: Int, val height: Int)
     internal val volume: Int
         get() = length * width * height
 
-    companion object
-    {
-        fun create(dimensions: List<Int>): Box
-        {
-            require(dimensions.size == NUMBER_OF_DIMENSIONS)
-                { "Number of dimensions does not match (is: ${dimensions.size})." }
+    companion object {
+        fun create(dimensions: List<Int>): Box {
+            require(dimensions.size == NUMBER_OF_DIMENSIONS) {
+                "Number of dimensions does not match (is: ${dimensions.size})."
+            }
 
             val (length, width, height) = dimensions.take(3)
             return Box(length, width, height)

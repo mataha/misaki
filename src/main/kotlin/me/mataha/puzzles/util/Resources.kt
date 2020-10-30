@@ -9,8 +9,7 @@ import java.net.URL
  *
  * Throws an [IllegalArgumentException] if the resource was not found.
  */
-fun resource(path: String): URL
-{
+fun resource(path: String): URL {
     val loader = listOfNotNull(
         Thread.currentThread().contextClassLoader,
         ::resource::class.java.classLoader,
@@ -18,6 +17,7 @@ fun resource(path: String): URL
 
     val url = loader.getResource(path)
 
-    return requireNotNull(url)
-        { "Resource '$path' was not found." }
+    return requireNotNull(url) {
+        "Resource '$path' was not found."
+    }
 }

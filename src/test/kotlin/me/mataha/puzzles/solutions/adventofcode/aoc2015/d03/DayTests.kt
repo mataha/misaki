@@ -5,13 +5,11 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
 
-class PerfectlySphericalHousesTests
-{
+class PerfectlySphericalHousesTests {
     @DisplayName("Given directions, the correct number of houses should receive at least one present")
     @ParameterizedTest(name = "{0} => {1}")
     @CsvFileSource(resources = ["/solutions/adventofcode/2015/03/santa.csv"], numLinesToSkip = 1)
-    fun testGetHousesWithAtLeastOnePresentReceivedFromSanta(directions: String, expected: Int)
-    {
+    fun testGetHousesWithAtLeastOnePresentReceivedFromSanta(directions: String, expected: Int) {
         val solution = PerfectlySphericalHouses()
 
         val actual = solution.first(directions)
@@ -24,8 +22,7 @@ class PerfectlySphericalHousesTests
     @DisplayName("Given directions, the correct number of houses should receive at least one present")
     @ParameterizedTest(name = "{0} => {1}")
     @CsvFileSource(resources = ["/solutions/adventofcode/2015/03/santa-robot.csv"], numLinesToSkip = 1)
-    fun testGetHousesWithAtLeastOnePresentReceivedFromSantaAndHisRobot(directions: String, expected: Int)
-    {
+    fun testGetHousesWithAtLeastOnePresentReceivedFromSantaAndHisRobot(directions: String, expected: Int) {
         val solution = PerfectlySphericalHouses()
 
         val actual = solution.second(directions)

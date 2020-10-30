@@ -28,14 +28,12 @@ annotation class VisibleForTesting(
      * Name of the test module. Defaults to `test` if not specified.
      */
     val testModule: String = "test"
-)
-{
+) {
     /**
-    * The visibility the annotated element would have if it did not need
-    * to be made visible for testing.
-    */
-    enum class Visibility
-    {
+     * The visibility the annotated element would have if it did not need
+     * to be made visible for testing.
+     */
+    enum class Visibility {
         /** Private visibility */
         PRIVATE,
 

@@ -3,16 +3,15 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d09
 import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 
-internal object LocationGrammar: Grammar<WeightedGraph<Location>>()
-{
+internal object LocationGrammar : Grammar<WeightedGraph<Location>>() {
     @Suppress("unused")
-    @JvmStatic private val whiteSpace by token("""\s+""", ignore = true)
+    private val whiteSpace by token("""\s+""", ignore = true)
 
-    @JvmStatic private val TO by token("to")
-    @JvmStatic private val EQUALS by token("=")
+    private val TO by token("to")
+    private val EQUALS by token("=")
 
-    @JvmStatic private val string by token("""[A-Za-z]+""")
-    @JvmStatic private val numeral by token("""\d+""")
+    private val string by token("""[A-Za-z]+""")
+    private val numeral by token("""\d+""")
 
     private val identifier by string use { text }
     private val number by numeral use { text.toInt() }

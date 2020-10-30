@@ -7,13 +7,11 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-class ThereWouldBeNoMathTests
-{
+class ThereWouldBeNoMathTests {
     @DisplayName("something something")
     @ParameterizedTest(name = "asdf")
     @MethodSource("boxProvider")
-    fun testGetSquareFeetOfWrappingPaper(boxes: List<Box>, expected: Int)
-    {
+    fun testGetSquareFeetOfWrappingPaper(boxes: List<Box>, expected: Int) {
         val day = ThereWouldBeNoMath()
 
         val actual = day.first(boxes)
@@ -23,11 +21,11 @@ class ThereWouldBeNoMathTests
         }
     }
 
-    companion object
-    {
+    companion object {
         @JvmStatic
-        private fun boxProvider() : Stream<Arguments>
-                = Stream.of(Arguments.of(listOf(Box(2, 3, 4)), 58),  //58, 34
-                            Arguments.of(listOf(Box(1, 1, 10)), 43)) //43, 14
+        private fun boxProvider(): Stream<Arguments> = Stream.of(
+            Arguments.of(listOf(Box(2, 3, 4)), 58),  //58, 34
+            Arguments.of(listOf(Box(1, 1, 10)), 43)
+        ) //43, 14
     }
 }

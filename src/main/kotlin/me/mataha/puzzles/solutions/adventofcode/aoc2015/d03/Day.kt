@@ -6,15 +6,12 @@ import me.mataha.puzzles.domain.adventofcode.AdventOfCodeDay
 import me.mataha.puzzles.util.extensions.nextCircular
 
 @AdventOfCode("Perfectly Spherical Houses in a Vacuum", 2015, 3)
-class PerfectlySphericalHouses: AdventOfCodeDay<String, Int>(), OneLineParser
-{
-    override fun first(input: String): Int
-    {
+class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), OneLineParser {
+    override fun first(input: String): Int {
         var current = Position(0, 0)
         val grid = mutableSetOf(current)
 
-        for (direction in input)
-        {
+        for (direction in input) {
             val new = current.next(direction)
 
             grid.add(new)
@@ -24,14 +21,12 @@ class PerfectlySphericalHouses: AdventOfCodeDay<String, Int>(), OneLineParser
         return grid.size
     }
 
-    override fun second(input: String): Int
-    {
+    override fun second(input: String): Int {
         val map = mutableMapOf(Turn.SANTA to Position(0, 0), Turn.ROBOT to Position(0, 0))
         var turn = Turn.SANTA
         val grid = mutableSetOf(map[turn]!!)
 
-        for (direction in input)
-        {
+        for (direction in input) {
             val current = map[turn]!!
             val new = current.next(direction)
 
@@ -45,17 +40,11 @@ class PerfectlySphericalHouses: AdventOfCodeDay<String, Int>(), OneLineParser
     }
 }
 
-private enum class Turn
-{
-    SANTA, ROBOT
-}
+private enum class Turn { SANTA, ROBOT }
 
-private data class Position(val x: Int, val y: Int)
-{
-    fun next(move: Char): Position
-    {
-        return when (move)
-        {
+private data class Position(val x: Int, val y: Int) {
+    fun next(move: Char): Position {
+        return when (move) {
             '^' -> Position(x, y + 1)
             'v' -> Position(x, y - 1)
             '>' -> Position(x + 1, y)

@@ -4,18 +4,17 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import me.mataha.puzzles.solutions.adventofcode.aoc2015.d06.Instruction.Type
 
-internal object LightGridGrammar: Grammar<Instruction>()
-{
+internal object LightGridGrammar : Grammar<Instruction>() {
     @Suppress("unused")
-    @JvmStatic private val whiteSpace by token("""\s+""", ignore = true)
+    private val whiteSpace by token("""\s+""", ignore = true)
 
-    @JvmStatic private val COMMA by token(",")
-    @JvmStatic private val TOGGLE by token("toggle")
-    @JvmStatic private val TURN_ON by token("turn on")
-    @JvmStatic private val TURN_OFF by token("turn off")
-    @JvmStatic private val THROUGH by token("through")
+    private val COMMA by token(",")
+    private val TOGGLE by token("toggle")
+    private val TURN_ON by token("turn on")
+    private val TURN_OFF by token("turn off")
+    private val THROUGH by token("through")
 
-    @JvmStatic private val numeral by token("""\d+""")
+    private val numeral by token("""\d+""")
 
     private val number by numeral use { text.toInt() }
 

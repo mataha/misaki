@@ -4,20 +4,19 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 
 @ExperimentalUnsignedTypes
-internal object CircuitGrammar: Grammar<Part>()
-{
+internal object CircuitGrammar : Grammar<Part>() {
     @Suppress("unused")
-    @JvmStatic private val whiteSpace by token("""\s+""", ignore = true)
+    private val whiteSpace by token("""\s+""", ignore = true)
 
-    @JvmStatic private val ARROW by token("->")
-    @JvmStatic private val AND by token("AND")
-    @JvmStatic private val OR by token("OR")
-    @JvmStatic private val NOT by token("NOT")
-    @JvmStatic private val LSHIFT by token("LSHIFT")
-    @JvmStatic private val RSHIFT by token("RSHIFT")
+    private val ARROW by token("->")
+    private val AND by token("AND")
+    private val OR by token("OR")
+    private val NOT by token("NOT")
+    private val LSHIFT by token("LSHIFT")
+    private val RSHIFT by token("RSHIFT")
 
-    @JvmStatic private val string by token("""[a-z]+""")
-    @JvmStatic private val numeral by token("""-?\d+""")
+    private val string by token("""[a-z]+""")
+    private val numeral by token("""-?\d+""")
 
     private val identifier by string use { text }
     private val number by numeral use { text.toInt() }

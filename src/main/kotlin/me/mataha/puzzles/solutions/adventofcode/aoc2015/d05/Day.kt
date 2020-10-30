@@ -11,8 +11,7 @@ import me.mataha.puzzles.util.annotations.VisibleForTesting
 import me.mataha.puzzles.util.extensions.zipAdjacent
 
 @AdventOfCode("Doesn't He Have Intern-Elves For This?", 2015, 5)
-class NoInternElvesForThis: AdventOfCodeDay<List<String>, Int>(), NoOpParser
-{
+class NoInternElvesForThis : AdventOfCodeDay<List<String>, Int>(), NoOpParser {
     override fun first(input: List<String>): Int = input.count(String::isNiceBefore)
 
     override fun second(input: List<String>): Int = input.count(String::isNiceAfter)
@@ -21,8 +20,7 @@ class NoInternElvesForThis: AdventOfCodeDay<List<String>, Int>(), NoOpParser
 private const val VOWELS = "aeiou"
 
 @VisibleForTesting
-internal fun String.isNiceBefore(): Boolean
-{
+internal fun String.isNiceBefore(): Boolean {
     val forbidden = arrayOf("ab", "cd", "pq", "xy")
 
     val predicates = arrayOf<(string: String) -> Boolean>(
@@ -35,8 +33,7 @@ internal fun String.isNiceBefore(): Boolean
 }
 
 @VisibleForTesting
-internal fun String.isNiceAfter(): Boolean
-{
+internal fun String.isNiceAfter(): Boolean {
     val predicates = arrayOf<(string: String) -> Boolean>(
         { string -> string.windowed(2).any { window -> window in string.replaceFirst(window, "  ") } },
         { string -> string.zipAdjacent().any { pair -> pair.first == pair.second } }
@@ -45,11 +42,10 @@ internal fun String.isNiceAfter(): Boolean
     return this.isNice(*predicates)
 }
 
-private fun String.isNice(vararg predicates: (string: String) -> Boolean): Boolean
-        = runBlocking {
-            predicates
-                .asFlow()
-                .map { predicate -> predicate(this@isNice) }
-                .toList()
-                .none { condition -> !condition }
-        }
+private fun String.isNice(vararg predicates: (string: String) -> Boolean): Boolean = runBlocking {
+    predicates
+        .asFlow()
+        .map { predicate -> predicate(this@isNice) }
+        .toList()
+        .none { condition -> !condition }
+}

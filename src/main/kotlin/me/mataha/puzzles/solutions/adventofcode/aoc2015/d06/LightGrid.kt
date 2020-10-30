@@ -2,8 +2,7 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d06
 
 import me.mataha.puzzles.solutions.adventofcode.aoc2015.d06.Instruction.Type
 
-internal abstract class LightGrid
-{
+internal abstract class LightGrid {
     private val length = DEFAULT_LENGTH
     private val width = DEFAULT_WIDTH
     private val grid = Array(length) { IntArray(width) }
@@ -13,10 +12,10 @@ internal abstract class LightGrid
 
     protected operator fun get(x: Int, y: Int): Int = grid[x][y]
 
-    protected operator fun set(x: Int, y: Int, value: Int): LightGrid
-    {
-        require(value >= 0)
-            { "Brightness can't be negative (is: $value)." }
+    protected operator fun set(x: Int, y: Int, value: Int): LightGrid {
+        require(value >= 0) {
+            "Brightness can't be negative (is: $value)."
+        }
 
         luminosity += value - grid[x][y]
         grid[x][y] = value
@@ -24,13 +23,10 @@ internal abstract class LightGrid
         return this
     }
 
-    internal fun process(instruction: Instruction): LightGrid
-    {
+    internal fun process(instruction: Instruction): LightGrid {
         for (x in instruction.x)
-            for (y in instruction.y)
-            {
-                when (instruction.type)
-                {
+            for (y in instruction.y) {
+                when (instruction.type) {
                     Type.TURN_ON -> this.turnOn(x, y)
                     Type.TURN_OFF -> this.turnOff(x, y)
                     Type.TOGGLE -> this.toggle(x, y)
@@ -46,8 +42,7 @@ internal abstract class LightGrid
 
     protected abstract fun toggle(x: Int, y: Int): LightGrid
 
-    private companion object
-    {
+    private companion object {
         private const val DEFAULT_LENGTH = 1000
         private const val DEFAULT_WIDTH = 1000
     }

@@ -2,13 +2,11 @@ package me.mataha.puzzles.domain.adventofcode
 
 import me.mataha.puzzles.domain.PuzzleSolution
 
-abstract class AdventOfCodeDay<Input, out Output>: PuzzleSolution<Input, AdventOfCodeResults<Output, Output>>()
-{
-    override fun solve(input: Input): AdventOfCodeResults<Output, Output>
-            = AdventOfCodeResults(first(input), second(input))
+abstract class AdventOfCodeDay<Input, out Output> : PuzzleSolution<Input, AdventOfCodeResults<Output, Output>>() {
+    override fun solve(input: Input): AdventOfCodeResults<Output, Output> =
+        AdventOfCodeResults(first(input), second(input))
 
-    override fun process(input: List<String>): AdventOfCodeResults<Output, Output>
-    {
+    override fun process(input: List<String>): AdventOfCodeResults<Output, Output> {
         val parsed = parse(input)
 
         return AdventOfCodeResults(first(parsed), second(parsed))
@@ -23,8 +21,7 @@ abstract class AdventOfCodeDay<Input, out Output>: PuzzleSolution<Input, AdventO
     fun processSecond(input: List<String>): Output = second(parse(input))
 }
 
-data class AdventOfCodeResults<out First, out Second>(val first: First, val second: Second)
-{
+data class AdventOfCodeResults<out First, out Second>(val first: First, val second: Second) {
     override fun toString(): String = "[$first, $second]"
 }
 
