@@ -7,24 +7,22 @@ import me.mataha.puzzles.util.annotations.VisibleForTesting
 
 @AdventOfCode("Elves Look, Elves Say", 2015, 10)
 class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), OneLineParser {
-    override fun first(input: String): Int = input.lookAndSay(40).length
+    override fun first(input: String): Int = lookAndSay(input, 40).length
 
-    override fun second(input: String): Int = input.lookAndSay(50).length
+    override fun second(input: String): Int = lookAndSay(input, 50).length
 }
 
 @VisibleForTesting
-internal fun String.lookAndSay(steps: Int = 1): String {
+internal fun lookAndSay(string: String, steps: Int = 1): String {
     require(steps >= 1) {
         "Number of steps has to be positive (is: $steps)."
     }
 
-    var string = this
+    var str = string
 
-    for (_unused in 1..steps) {
-        string = string.phonetic()
-    }
+    (1..steps).forEach { _ -> str = str.phonetic() }
 
-    return string
+    return str
 }
 
 private val REGEX = Regex("""(.)\1*""")
