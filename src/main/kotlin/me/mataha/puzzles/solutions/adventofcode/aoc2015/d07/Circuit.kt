@@ -15,9 +15,7 @@ class Circuit private constructor() {
     fun reset(): Circuit = apply { signals.clear() }
 
     private fun computeSignal(wireIdentifier: String): UShort {
-        val part = requireNotNull(parts[wireIdentifier]) {
-            "Part with identifier '$wireIdentifier' does not exist."
-        }
+        val part = parts.getValue(wireIdentifier)
 
         val signal = part.getSignal(this)
         signals[wireIdentifier] = signal
