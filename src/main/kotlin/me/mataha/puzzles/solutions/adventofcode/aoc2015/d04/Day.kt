@@ -28,5 +28,7 @@ internal fun md5StartingWith(key: String, prefix: String, range: IntRange = 1..I
     }
 
     // Hash starting with that prefix was not found (given supplied range)
-    return -1
+    return HASH_NOT_FOUND
 }
+
+private const val HASH_NOT_FOUND = -1

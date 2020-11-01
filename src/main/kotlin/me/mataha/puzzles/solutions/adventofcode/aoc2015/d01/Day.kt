@@ -28,7 +28,11 @@ class NotQuiteLisp : AdventOfCodeDay<String, Int>(), OneLineParser {
         }
 
         // Santa did never enter the basement
-        return -1
+        return BASEMENT_NOT_ENTERED
+    }
+
+    private companion object {
+        private const val BASEMENT_NOT_ENTERED = -1
     }
 }
 
