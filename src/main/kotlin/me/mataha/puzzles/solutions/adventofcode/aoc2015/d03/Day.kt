@@ -3,7 +3,7 @@ package me.mataha.puzzles.solutions.adventofcode.aoc2015.d03
 import me.mataha.puzzles.domain.OneLineParser
 import me.mataha.puzzles.domain.adventofcode.AdventOfCode
 import me.mataha.puzzles.domain.adventofcode.AdventOfCodeDay
-import me.mataha.puzzles.util.extensions.nextCircular
+import me.mataha.puzzles.util.extensions.next
 
 @AdventOfCode("Perfectly Spherical Houses in a Vacuum", 2015, 3)
 class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), OneLineParser {
@@ -33,7 +33,7 @@ class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), OneLineParser {
             grid.add(new)
             map[turn] = new
 
-            turn = if (direction.isDirection()) turn.nextCircular() else turn
+            turn = if (direction.isDirection()) turn.next() else turn
         }
 
         return grid.size

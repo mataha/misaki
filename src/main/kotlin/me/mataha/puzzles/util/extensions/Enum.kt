@@ -8,7 +8,7 @@ package me.mataha.puzzles.util.extensions
  * **Circular** (this function will return the first element of an enum
  * after the last).
  */
-inline fun <reified E : Enum<E>> E.nextCircular(): E {
+inline fun <reified E : Enum<E>> E.next(): E {
     val values = enumValues<E>()
     val ordinal = (this.ordinal + 1) % values.size
     return values[ordinal]
