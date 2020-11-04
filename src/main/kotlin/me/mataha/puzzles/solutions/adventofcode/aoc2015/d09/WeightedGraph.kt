@@ -20,13 +20,13 @@ class WeightedGraph<Node> {
         return this
     }
 
-    fun travel(aggregate: Iterable<Int>.() -> Int?): Int =
+    fun findRoute(aggregate: Iterable<Int>.() -> Int?): Int =
         nodes
-            .map { node -> travel(aggregate, node, nodes - node) }
+            .map { node -> findRoute(aggregate, node, nodes - node) }
             .aggregate() ?: 0
 
-    private fun travel(aggregate: Iterable<Int>.() -> Int?, start: Node, remaining: Set<Node>): Int =
+    private fun findRoute(aggregate: Iterable<Int>.() -> Int?, start: Node, remaining: Set<Node>): Int =
         remaining
-            .map { node -> this[node, start] + travel(aggregate, node, remaining - node) }
+            .map { node -> this[node, start] + findRoute(aggregate, node, remaining - node) }
             .aggregate() ?: 0
 }
