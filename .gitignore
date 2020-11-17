@@ -1,4 +1,4 @@
-# Gradle files
+# Gradle files and directories
 .gradle
 build/
 !gradle-wrapper.jar
@@ -6,13 +6,11 @@ build/
 # Local configuration file
 local.properties
 
-# Generated files
-bin/
-out/
-
 # Log files
 *.log
 
 # IntelliJ IDEA
+bin/
+out/
 .idea
 *.iml

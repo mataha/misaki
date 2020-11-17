@@ -5,7 +5,7 @@ package me.mataha.puzzles.util.extensions
  * defined by the natural order of the elements (the order in which the enum
  * constants are declared).
  *
- * **Circular** (this function will return the first element of an enum
+ * This function is **circular** (it will return the first element of an enum
  * after the last).
  */
 inline fun <reified E : Enum<E>> E.next(): E {

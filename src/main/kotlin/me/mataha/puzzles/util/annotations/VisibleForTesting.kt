@@ -8,12 +8,12 @@ import kotlin.annotation.AnnotationRetention.SOURCE
 /**
  * Indicates that the element annotated by this annotation (typically
  * a class, function or field) has its visibility elevated so that unit
- * tests can access it. This means that this API is not public.
+ * tests can access it. This means that that API is not public.
  *
  * This annotation is **not** backed by any annotation processor -
  * its intended use is to be a guideline.
  *
- * Inspired by similar annotation in Android (licensed under ASL 2.0).
+ * Inspired by similar annotation in Android Core (licensed under ASL 2.0).
  */
 @MustBeDocumented
 @Retention(SOURCE)
