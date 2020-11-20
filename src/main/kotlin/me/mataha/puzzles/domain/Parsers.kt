@@ -1,6 +1,6 @@
 package me.mataha.puzzles.domain
 
-interface Parser<in Input, out Output> {
+fun interface Parser<in Input, out Output> {
     fun parse(input: Input): Output
 }
 
