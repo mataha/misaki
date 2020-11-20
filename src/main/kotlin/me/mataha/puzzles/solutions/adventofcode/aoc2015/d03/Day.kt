@@ -24,10 +24,10 @@ class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), OneLineParser {
     override fun second(input: String): Int {
         val map = mutableMapOf(Turn.SANTA to Position(0, 0), Turn.ROBOT to Position(0, 0))
         var turn = Turn.SANTA
-        val grid = mutableSetOf(map[turn]!!)
+        val grid = mutableSetOf(map.getValue(turn))
 
         for (direction in input) {
-            val current = map[turn]!!
+            val current = map.getValue(turn)
             val new = current.next(direction)
 
             grid.add(new)
