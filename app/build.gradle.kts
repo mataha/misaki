@@ -10,7 +10,7 @@ group = "me.mataha"
 version = "1.0-SNAPSHOT"
 
 application {
-    mainClass.value("me.mataha.puzzles.Main")
+    mainClass.value("me.mataha.misaki.Main")
 }
 
 repositories {

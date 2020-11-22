@@ -1,2 +1,2 @@
-rootProject.name = "puzzle-solutions"
+rootProject.name = "misaki"
 include("app")
