@@ -2,7 +2,7 @@ package me.mataha.puzzles.domain.adventofcode
 
 import me.mataha.puzzles.domain.PuzzleSolution
 
-abstract class AdventOfCodeDay<Input, out Output> : PuzzleSolution<Input, AdventOfCodeResults<Output, Output>>() {
+abstract class AdventOfCodeDay<Input : Any, out Output> : PuzzleSolution<Input, AdventOfCodeResults<Output, Output>>() {
     override fun solve(input: Input): AdventOfCodeResults<Output, Output> =
         AdventOfCodeResults(first(input), second(input))
 
