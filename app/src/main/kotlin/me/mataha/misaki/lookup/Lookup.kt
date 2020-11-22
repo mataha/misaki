@@ -8,7 +8,7 @@ import me.mataha.misaki.domain.SolutionData
 import me.mataha.misaki.domain.SolutionDataFactory
 
 interface ISolutionLookup {
-    fun get(origin: String, predicate: (String) -> Boolean): List<SolutionData<*, *>>
+    fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>>
 
     fun get(origin: String, task: String): SolutionData<*, *>?
 }
@@ -18,14 +18,14 @@ class SolutionLookup : ISolutionLookup {
         solutions[origin]?.filter { solution -> predicate(solution.name) } ?: emptyList()
 
     override fun get(origin: String, task: String): SolutionData<*, *>? =
-        get(origin) { it == task }.firstOrNull()
+        get(origin) { name -> name == task }.firstOrNull()
 
     companion object {
         @JvmStatic
         private val solutions: SolutionMap by lazy(LazyThreadSafetyMode.NONE) { discover(ROOT) }
 
         @JvmStatic
-        fun discover(vararg packages: String): SolutionMap {
+        private fun discover(vararg packages: String): SolutionMap {
             val map: SolutionMap = ClassGraph()
                 .acceptPackages(*packages)
                 .enableAnnotationInfo()
@@ -43,7 +43,6 @@ class SolutionLookup : ISolutionLookup {
                             val factory = puzzle.factory
 
                             val solution = info.loadClass(PuzzleSolution::class.java).kotlin
-
                             val x = SolutionDataFactory.get(factory)
                             x.create(solution)
                         })
