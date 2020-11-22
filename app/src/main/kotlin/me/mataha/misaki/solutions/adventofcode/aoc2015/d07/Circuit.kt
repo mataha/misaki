@@ -26,9 +26,7 @@ class Circuit private constructor() {
     companion object {
         fun of(parts: List<Part> = listOf()): Circuit {
             val circuit = Circuit()
-
             circuit.parts = parts.associateBy { part -> part.identifier }
-
             return circuit
         }
     }

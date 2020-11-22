@@ -12,7 +12,7 @@ import kotlin.reflect.full.valueParameters
  *  - is an object;
  *  - has a public, parameterless constructor.
  */
-fun <Result : Any> KClass<out Result>.instance(): Result {
+fun <R : Any> KClass<out R>.instance(): R {
     val instance = constructors.firstOrNull { constructor ->
         constructor.isPublic() && constructor.isParameterless()
     }?.call() ?: objectInstance
@@ -22,6 +22,6 @@ fun <Result : Any> KClass<out Result>.instance(): Result {
     }
 }
 
-private fun <Result> KCallable<Result>.isParameterless(): Boolean = valueParameters.isEmpty()
+private fun <R> KCallable<R>.isParameterless(): Boolean = valueParameters.isEmpty()
 
-private fun <Result> KCallable<Result>.isPublic(): Boolean = visibility == KVisibility.PUBLIC
+private fun <R> KCallable<R>.isPublic(): Boolean = visibility == KVisibility.PUBLIC

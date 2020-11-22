@@ -1,15 +1,15 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d09
 
-class WeightedGraph<Node> {
-    private val edges: MutableMap<Node, MutableMap<Node, Int>> = mutableMapOf()
+class WeightedGraph<N> {
+    private val edges: MutableMap<N, MutableMap<N, Int>> = mutableMapOf()
 
-    private val nodes: MutableSet<Node>
+    private val nodes: MutableSet<N>
         get() = edges.keys
 
-    private operator fun get(source: Node, destination: Node): Int =
+    private operator fun get(source: N, destination: N): Int =
         edges.getValue(source).getValue(destination)
 
-    operator fun set(source: Node, destination: Node, weight: Int): WeightedGraph<Node> {
+    operator fun set(source: N, destination: N, weight: Int): WeightedGraph<N> {
         require(weight > 0) {
             "Weight must be a positive number (is: $weight)."
         }
@@ -25,7 +25,7 @@ class WeightedGraph<Node> {
             .map { node -> traverse(aggregate, node, nodes - node) }
             .aggregate() ?: 0
 
-    private fun traverse(aggregate: Iterable<Int>.() -> Int?, start: Node, remaining: Set<Node>): Int =
+    private fun traverse(aggregate: Iterable<Int>.() -> Int?, start: N, remaining: Set<N>): Int =
         remaining
             .map { node -> this[node, start] + traverse(aggregate, node, remaining - node) }
             .aggregate() ?: 0

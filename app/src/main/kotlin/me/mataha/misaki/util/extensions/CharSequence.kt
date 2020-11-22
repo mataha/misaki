@@ -15,13 +15,13 @@ fun CharSequence.zipAdjacent(): List<Pair<Char, Char>> = zipAdjacent { a, b -> a
  *
  * The returned list is empty if this char sequence contains two or less characters.
  */
-inline fun <Result> CharSequence.zipAdjacent(transform: (a: Char, b: Char) -> Result): List<Result> {
+inline fun <R> CharSequence.zipAdjacent(transform: (a: Char, b: Char) -> R): List<R> {
     val size = length - 2
     if (size < 1) {
         return emptyList()
     }
 
-    val result = ArrayList<Result>(size)
+    val result = ArrayList<R>(size)
     for (index in 0 until size) {
         result.add(transform(this[index], this[index + 2]))
     }

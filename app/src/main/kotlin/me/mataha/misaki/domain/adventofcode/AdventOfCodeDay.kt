@@ -2,27 +2,27 @@ package me.mataha.misaki.domain.adventofcode
 
 import me.mataha.misaki.domain.PuzzleSolution
 
-abstract class AdventOfCodeDay<Input : Any, out Output> : PuzzleSolution<Input, AdventOfCodeResults<Output, Output>>() {
-    override fun solve(input: Input): AdventOfCodeResults<Output, Output> =
+abstract class AdventOfCodeDay<I : Any, out O> : PuzzleSolution<I, AdventOfCodeResults<O, O>>() {
+    override fun solve(input: I): AdventOfCodeResults<O, O> =
         AdventOfCodeResults(first(input), second(input))
 
-    override fun process(input: List<String>): AdventOfCodeResults<Output, Output> {
+    override fun process(input: List<String>): AdventOfCodeResults<O, O> {
         val parsed = parse(input)
 
         return AdventOfCodeResults(first(parsed), second(parsed))
     }
 
-    abstract fun first(input: Input): Output
+    abstract fun first(input: I): O
 
-    fun processFirst(input: List<String>): Output = first(parse(input))
+    fun processFirst(input: List<String>): O = first(parse(input))
 
-    abstract fun second(input: Input): Output
+    abstract fun second(input: I): O
 
-    fun processSecond(input: List<String>): Output = second(parse(input))
+    fun processSecond(input: List<String>): O = second(parse(input))
 }
 
-data class AdventOfCodeResults<out First, out Second>(val first: First, val second: Second) {
+data class AdventOfCodeResults<out A, out B>(val first: A, val second: B) {
     override fun toString(): String = "[$first, $second]"
 }
 
-fun <Type> AdventOfCodeResults<Type, Type>.toList(): List<Type> = listOf(first, second)
+fun <T> AdventOfCodeResults<T, T>.toList(): List<T> = listOf(first, second)

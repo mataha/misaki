@@ -24,7 +24,7 @@ import kotlin.contracts.contract
  */
 @ExperimentalContracts
 @InlineCall
-inline fun <Result> assign(value: Result, crossinline something: (Result) -> Unit): Result {
+inline fun <T> assign(value: T, crossinline something: (T) -> Unit): T {
     contract {
         callsInPlace(something, EXACTLY_ONCE)
     }

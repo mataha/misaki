@@ -8,9 +8,9 @@ import kotlin.reflect.KClass
 @Target(CLASS, ANNOTATION_CLASS)
 @Retention(RUNTIME)
 @Repeatable
-annotation class Puzzle<Solution : PuzzleSolution<*, *>, out Data : SolutionData<*, *>>(
+annotation class Puzzle<S : PuzzleSolution<*, *>, out D : SolutionData<*, *>>(
     val origin: String,
-    val factory: KClass<out SolutionDataFactory<Solution, Data>>,
+    val factory: KClass<out SolutionDataFactory<S, D>>,
     val handles: Array<String> = [], // TODO: unused for now
 )
 
