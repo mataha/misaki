@@ -20,13 +20,15 @@ class WeightedGraph<N> {
         return this
     }
 
-    fun traverse(aggregate: Iterable<Int>.() -> Int?): Int =
-        nodes
+    fun traverse(aggregate: Iterable<Int>.() -> Int?): Int {
+        fun traverse(aggregate: Iterable<Int>.() -> Int?, start: N, remaining: Set<N>): Int {
+            return remaining
+                .map { node -> this[node, start] + traverse(aggregate, node, remaining - node) }
+                .aggregate() ?: 0
+        }
+
+        return nodes
             .map { node -> traverse(aggregate, node, nodes - node) }
             .aggregate() ?: 0
-
-    private fun traverse(aggregate: Iterable<Int>.() -> Int?, start: N, remaining: Set<N>): Int =
-        remaining
-            .map { node -> this[node, start] + traverse(aggregate, node, remaining - node) }
-            .aggregate() ?: 0
+    }
 }
