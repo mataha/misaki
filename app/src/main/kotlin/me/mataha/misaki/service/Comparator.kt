@@ -1,11 +1,11 @@
 package me.mataha.misaki.service
 
-import me.mataha.misaki.util.text.levenshteinDistance
+import me.mataha.misaki.util.text.levenshteinDistance as distance
 
-interface IEqualityComparator<in T> {
+interface EqualityComparator<in T> {
     fun compare(a: T, b: T): Boolean
 }
 
-class FuzzyEqualityComparator : IEqualityComparator<String> {
-    override fun compare(a: String, b: String): Boolean = levenshteinDistance(a.toLowerCase(), b.toLowerCase()) <= 2
+class FuzzyEqualityComparator(private val threshold: Int) : EqualityComparator<String> {
+    override fun compare(a: String, b: String): Boolean = distance(a.toLowerCase(), b.toLowerCase()) <= threshold
 }

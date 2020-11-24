@@ -7,18 +7,18 @@ import me.mataha.misaki.domain.PuzzleSolution
 import me.mataha.misaki.domain.SolutionData
 import me.mataha.misaki.domain.SolutionDataFactory
 
-interface ISolutionLookup {
+interface SolutionLookup {
     fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>>
 
     fun get(origin: String, task: String): SolutionData<*, *>?
 }
 
-class SolutionLookup : ISolutionLookup {
+class DefaultSolutionLookup : SolutionLookup {
     override fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>> =
         solutions[origin]?.filter { solution -> predicate(solution.name) } ?: emptyList()
 
     override fun get(origin: String, task: String): SolutionData<*, *>? =
-        get(origin) { name -> name == task }.firstOrNull()
+        get(origin) { it == task }.firstOrNull()
 
     companion object {
         @JvmStatic
