@@ -13,19 +13,3 @@ annotation class Puzzle<S : PuzzleSolution<*, *>, out D : SolutionData<*, *>>(
     val factory: KClass<out SolutionDataFactory<S, D>>,
     val handles: Array<String> = [], // TODO: unused for now
 )
-
-/* What would happen if [factory] didn't have the `out` variance annotation? Well... the following
- * throws two warnings (useless cast + unchecked cast), but does what it's supposed to do:
- *
- * ```kt
- * object TestDataFactory : SolutionDataFactory<PuzzleSolution<*, *>, SolutionData<*, *>> {
- *     override fun create(solution: KClass<out PuzzleSolution<*, *>>): SolutionData<*, *> = TO DO()
- * }
- *
- * @Puzzle(
- *     name = "Test",
- *     factory = (TestDataFactory as SolutionDataFactory<*, *>)::class as KClass<SolutionDataFactory<*, *>>,
- * )
- * annotation class TestPuzzle
- * ```
- */
