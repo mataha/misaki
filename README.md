@@ -2,7 +2,7 @@
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 
-Totally ~~not~~ named after [Misaki][misaki] from [Welcome to the N.H.K.][nhk]
+Totally ~~not~~ named after [Nakahara Misaki][misaki] from [Welcome to the N.H.K.][nhk]
 
 ## Getting Started
 
