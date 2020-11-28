@@ -17,8 +17,8 @@ It is assumed that:
  - you are using Windows.
 
 ```batch
-git clone https://github.com/mataha/puzzle-solutions.git
-cd puzzle-solutions
+git clone https://github.com/mataha/misaki.git
+cd misaki
 gradlew build
 ```
 
