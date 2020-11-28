@@ -6,7 +6,7 @@ import me.mataha.misaki.service.SolutionService
 
 val ROOT: String = ::main::class.java.`package`.name
 
-fun main() {//= Cli().main(args)
+fun main() {
     val service = koin.get<SolutionService>()
 
     val task = service.get("Advent of Code", "All In A Single Night")
