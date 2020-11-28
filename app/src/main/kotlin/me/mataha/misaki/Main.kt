@@ -4,7 +4,7 @@ package me.mataha.misaki
 
 import me.mataha.misaki.service.SolutionService
 
-val ROOT: String = ::main::class.java.packageName
+val ROOT: String = ::main::class.java.`package`.name
 
 fun main() {//= Cli().main(args)
     val service = koin.get<SolutionService>()
