@@ -10,7 +10,7 @@ import me.mataha.misaki.domain.SolutionData
 import me.mataha.misaki.domain.SolutionDataFactory
 import kotlin.reflect.KClass
 
-interface SolutionLookup {
+internal interface SolutionLookup {
     fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>>
 
     fun get(origin: String, task: String): SolutionData<*, *>?
@@ -18,7 +18,7 @@ interface SolutionLookup {
     fun getAll(): Map<String, List<SolutionData<*, *>>>
 }
 
-class DefaultSolutionLookup(vararg packages: String) : SolutionLookup {
+internal class DefaultSolutionLookup(vararg packages: String) : SolutionLookup {
     override fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>> =
         getAll()[origin]?.filter { solution -> predicate(solution.name) } ?: emptyList()
 
