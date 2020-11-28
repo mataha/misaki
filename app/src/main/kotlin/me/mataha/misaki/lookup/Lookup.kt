@@ -1,56 +1,66 @@
 package me.mataha.misaki.lookup
 
 import io.github.classgraph.ClassGraph
-import me.mataha.misaki.ROOT
+import io.github.classgraph.ClassInfo
+import io.github.classgraph.ClassInfoList
+import io.github.classgraph.ScanResult
 import me.mataha.misaki.domain.Puzzle
 import me.mataha.misaki.domain.PuzzleSolution
 import me.mataha.misaki.domain.SolutionData
 import me.mataha.misaki.domain.SolutionDataFactory
+import kotlin.reflect.KClass
 
 interface SolutionLookup {
     fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>>
 
     fun get(origin: String, task: String): SolutionData<*, *>?
+
+    fun getAll(): Map<String, List<SolutionData<*, *>>>
 }
 
-class DefaultSolutionLookup : SolutionLookup {
+class DefaultSolutionLookup(vararg packages: String) : SolutionLookup {
     override fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>> =
-        solutions[origin]?.filter { solution -> predicate(solution.name) } ?: emptyList()
+        getAll()[origin]?.filter { solution -> predicate(solution.name) } ?: emptyList()
 
     override fun get(origin: String, task: String): SolutionData<*, *>? =
         get(origin) { it == task }.firstOrNull()
 
-    companion object {
-        @JvmStatic
-        private val solutions: SolutionMap by lazy(LazyThreadSafetyMode.NONE) { discover(ROOT) }
+    override fun getAll(): Map<String, List<SolutionData<*, *>>> =
+        solutions
 
-        @JvmStatic
-        private fun discover(vararg packages: String): SolutionMap {
-            val map: SolutionMap = ClassGraph()
-                .acceptPackages(*packages)
-                .enableAnnotationInfo()
-                .scan()
-                .use { result ->
-                    result
-                        .getClassesWithAnnotation(Puzzle::class.java.name)
-                        .filter { info -> !info.isAnnotation }
-                        .groupBy ({ info ->
-                            val puzzle = info.annotationInfo[Puzzle::class.java.name].loadClassAndInstantiate() as Puzzle<*, *>
-
-                            puzzle.origin
-                        }, { info ->
-                            val puzzle = info.annotationInfo[Puzzle::class.java.name].loadClassAndInstantiate() as Puzzle<*, *>
-                            val factory = puzzle.factory
-
-                            val solution = info.loadClass(PuzzleSolution::class.java).kotlin
-                            val x = SolutionDataFactory.get(factory)
-                            x.create(solution)
-                        })
-                }
-            println(map)
-            return map
-        }
+    private val solutions: Map<String, List<SolutionData<*, *>>> by lazy {
+        ClassGraph()
+            .acceptPackages(*packages)
+            .enableAnnotationInfo()
+            .scan()
+            .use { result ->
+                result
+                    .getClassesWithAnnotation<Puzzle<*, *>>()
+                    .filter { info -> !info.isAnnotation } // discard meta-annotations
+                    .groupBy({ info ->
+                        val puzzle = info.loadAnnotation<Puzzle<*, *>>()
+                        puzzle.origin
+                    }, { info ->
+                        val puzzle = info.loadAnnotation<Puzzle<*, *>>()
+                        val factory = SolutionDataFactory.get(puzzle.factory)
+                        val solution = info.load<PuzzleSolution<*, *>>()
+                        factory.create(solution)
+                    })
+            }
     }
 }
 
-private typealias SolutionMap = Map<String, List<SolutionData<*, *>>>
+/** Loads the class named by this object as a KClass. */
+private inline fun <reified T : Any> ClassInfo.load(): KClass<T> =
+    this.loadClass(T::class.java).kotlin
+
+/** Returns a list of classes with the named class annotation or meta-annotation. */
+private inline fun <reified A : Annotation> ScanResult.getClassesWithAnnotation(): ClassInfoList =
+    this.getClassesWithAnnotation(A::class.java.name)
+
+/** Loads and instantiates an annotation if it's present on this class. */
+private inline fun <reified A : Annotation> ClassInfo.loadAnnotation(): A =
+    this.annotationInfo[A::class.java.name]?.loadClassAndInstantiate() as? A
+        ?: throw AnnotationNotPresentException("Annotation '${A::class.qualifiedName}' was not present on this class")
+
+private class AnnotationNotPresentException(message: String?) : NoSuchElementException(message)
