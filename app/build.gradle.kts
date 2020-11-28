@@ -6,9 +6,6 @@ plugins {
     kotlin("jvm") version "1.4.0"
 }
 
-group = "me.mataha"
-version = "1.0-SNAPSHOT"
-
 application {
     mainClass.value("me.mataha.misaki.Main")
 }
