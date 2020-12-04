@@ -1,12 +1,10 @@
 ## Runtime
 
- * Naming conventions for interfaces
  * Input parsing - switch to `readText()` (resource)
    * Strip newlines while we're at it?
  * Create a service/repository of solutions to puzzles
    * That repo will lazily scan classpath for Puzzle annotations (auto-discovery)
    * Repository for access to solutions, Service for processing?
-     * Given the above, might as well use DI (Kodein?)
      * What should be the criteria for search? Is a name enough? Maybe more?
  * Some basic parsing of input would be nice
    * Input file, if any (directory based on project root)
@@ -15,7 +13,6 @@
    * Timeout?
    * Link to a puzzle?
    * Help (man format?)
- * Resource access
 
 ## Tests
 
@@ -35,12 +32,6 @@
  * Dedicated packages
  * Naming
  * Internalize functions intended for testing (`@VisibleForTesting` not available)
- 
- ## Scripts
- 
- * Batch script that can execute `installDist` equivalent **from root directory**
-   * Or modify the one created with `installDist`
- * Bash script (don't have to run through hoops with this one)
  
  ## README
  
