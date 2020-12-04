@@ -4,7 +4,7 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 
 @ExperimentalUnsignedTypes
-internal object CircuitGrammar : Grammar<Part>() {
+internal object CircuitGrammar : Grammar<List<Part>>() {
     @Suppress("unused")
     private val whiteSpace by token("""\s+""", ignore = true)
 
@@ -54,5 +54,7 @@ internal object CircuitGrammar : Grammar<Part>() {
     private val part
             by noOpGate or andGate or orGate or notGate or leftShiftGate or rightShiftGate
 
-    override val rootParser by part
+    private val parts by oneOrMore(part)
+
+    override val rootParser by parts
 }

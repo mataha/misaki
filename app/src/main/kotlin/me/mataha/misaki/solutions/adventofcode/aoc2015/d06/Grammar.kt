@@ -4,7 +4,7 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import me.mataha.misaki.solutions.adventofcode.aoc2015.d06.Instruction.Type
 
-internal object LightGridGrammar : Grammar<Instruction>() {
+internal object LightGridGrammar : Grammar<List<Instruction>>() {
     @Suppress("unused")
     private val whiteSpace by token("""\s+""", ignore = true)
 
@@ -33,7 +33,9 @@ internal object LightGridGrammar : Grammar<Instruction>() {
             by (type and coordinates and -THROUGH and coordinates)
                 .map { (type, from, to) -> Instruction(type, IntRange(from.x, to.x), IntRange(from.y, to.y)) }
 
-    override val rootParser by instruction
+    private val instructions by zeroOrMore(instruction)
+
+    override val rootParser by instructions
 }
 
 private data class Coordinates(val x: Int, val y: Int)
