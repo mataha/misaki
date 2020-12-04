@@ -6,8 +6,8 @@ Solutions to various programming koans bundled with a mini-framework
 capable of executing them against input of user's choice, whether
 from a file or a command line.
 
-Totally ~~not~~ named after [Nakahara Misaki][misaki]
-from [Welcome to the N.H.K.][nhk]
+Totally ~~not~~ named after [Nakahara Misaki][1]
+from [Welcome to the N.H.K.][2]
 
 ## Installation
 
@@ -22,5 +22,5 @@ cd misaki
 gradlew build
 ```
 
-[misaki]: https://anidb.net/character/2809
-[nhk]: https://www.mangaupdates.com/series.html?id=8861
+[1]: https://anidb.net/character/2809
+[2]: https://www.mangaupdates.com/series.html?id=8861
