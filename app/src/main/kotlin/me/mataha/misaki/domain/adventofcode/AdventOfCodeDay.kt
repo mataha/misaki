@@ -1,8 +1,8 @@
 package me.mataha.misaki.domain.adventofcode
 
-import me.mataha.misaki.domain.PuzzleSolution
+import me.mataha.misaki.domain.Solution
 
-abstract class AdventOfCodeDay<I : Any, out O> : PuzzleSolution<I, AdventOfCodeResults<O, O>>() {
+abstract class AdventOfCodeDay<I : Any, out O : Any> : Solution<I, AdventOfCodeResults<O, O>> {
     override fun solve(input: I): AdventOfCodeResults<O, O> =
         AdventOfCodeResults(first(input), second(input))
 

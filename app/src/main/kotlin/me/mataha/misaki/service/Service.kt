@@ -3,7 +3,7 @@ package me.mataha.misaki.service
 import me.mataha.misaki.domain.SolutionData
 import me.mataha.misaki.lookup.SolutionLookup
 
-internal interface SolutionService {
+internal fun interface SolutionService {
     fun get(origin: String, task: String): SolutionData<*, *>?
 }
 

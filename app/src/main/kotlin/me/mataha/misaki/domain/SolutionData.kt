@@ -1,11 +1,6 @@
 package me.mataha.misaki.domain
 
-interface ISolutionData<I : Any, out O> {
+interface SolutionData<I : Any, out O : Any> {
     val name: String
-    val solution: IPuzzleSolution<I, O>
+    val solution: Solution<I, O>
 }
-
-abstract class SolutionData<I : Any, out O>(
-    override val name: String,
-    override val solution: PuzzleSolution<I, O>
-): ISolutionData<I, O>

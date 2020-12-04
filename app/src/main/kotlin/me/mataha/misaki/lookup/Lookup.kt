@@ -5,7 +5,7 @@ import io.github.classgraph.ClassInfo
 import io.github.classgraph.ClassInfoList
 import io.github.classgraph.ScanResult
 import me.mataha.misaki.domain.Puzzle
-import me.mataha.misaki.domain.PuzzleSolution
+import me.mataha.misaki.domain.Solution
 import me.mataha.misaki.domain.SolutionData
 import me.mataha.misaki.domain.SolutionDataFactory
 import kotlin.reflect.KClass
@@ -35,15 +35,15 @@ internal class DefaultSolutionLookup(vararg packages: String) : SolutionLookup {
             .scan()
             .use { result ->
                 result
-                    .getClassesWithAnnotation<Puzzle<*, *>>()
-                    .filter { info -> !info.isAnnotation } // discard meta-annotations
+                    .getClassesWithAnnotation<Puzzle>()
+                    .filter { info -> !info.isAnnotation } // discard meta-annotation uses
                     .groupBy({ info ->
-                        val puzzle = info.loadAnnotation<Puzzle<*, *>>()
+                        val puzzle = info.loadAnnotation<Puzzle>()
                         puzzle.origin
                     }, { info ->
-                        val puzzle = info.loadAnnotation<Puzzle<*, *>>()
+                        val puzzle = info.loadAnnotation<Puzzle>()
                         val factory = SolutionDataFactory.get(puzzle.factory)
-                        val solution = info.load<PuzzleSolution<*, *>>()
+                        val solution = info.load<Solution<*, *>>()
                         factory.create(solution)
                     })
             }
