@@ -6,8 +6,8 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
 @AdventOfCode("Probably a Fire Hazard", 2015, 6)
 class ProbablyAFireHazard : AdventOfCodeDay<List<Instruction>, Int>() {
-    override fun parse(input: List<String>): List<Instruction> =
-        input.map { line -> LightGridGrammar.parseToEnd(line) }
+    override fun parse(input: String): List<Instruction> =
+        input.lines().map { line -> LightGridGrammar.parseToEnd(line) }
 
     override fun first(input: List<Instruction>): Int {
         val grid = object : LightGrid() {

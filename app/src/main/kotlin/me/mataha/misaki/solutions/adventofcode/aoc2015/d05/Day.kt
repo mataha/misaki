@@ -4,14 +4,14 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
-import me.mataha.misaki.domain.NoOpParser
+import me.mataha.misaki.domain.LineParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.util.annotations.VisibleForTesting
 import me.mataha.misaki.util.extensions.zipAdjacent
 
 @AdventOfCode("Doesn't He Have Intern-Elves For This?", 2015, 5)
-class NoInternElvesForThis : AdventOfCodeDay<List<String>, Int>(), NoOpParser {
+class NoInternElvesForThis : AdventOfCodeDay<List<String>, Int>(), LineParser {
     override fun first(input: List<String>): Int = input.count(String::isNiceBefore)
 
     override fun second(input: List<String>): Int = input.count(String::isNiceAfter)

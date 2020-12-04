@@ -1,11 +1,11 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d01
 
-import me.mataha.misaki.domain.OneLineParser
+import me.mataha.misaki.domain.NoOpParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
 @AdventOfCode("Not Quite Lisp", 2015, 1)
-class NotQuiteLisp : AdventOfCodeDay<String, Int>(), OneLineParser {
+class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun first(input: String): Int {
         var floor = 0
 

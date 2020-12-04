@@ -1,13 +1,13 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d08
 
-import me.mataha.misaki.domain.NoOpParser
+import me.mataha.misaki.domain.LineParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.*
 import me.mataha.misaki.util.annotations.VisibleForTesting
 
 @AdventOfCode("Matchsticks", 2015, 8)
-class Matchsticks : AdventOfCodeDay<List<String>, Int>(), NoOpParser {
+class Matchsticks : AdventOfCodeDay<List<String>, Int>(), LineParser {
     override fun first(input: List<String>): Int =
         input.sumBy { string -> string.length(LITERAL) - string.length(IN_MEMORY) }
 

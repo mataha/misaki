@@ -1,12 +1,12 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d10
 
-import me.mataha.misaki.domain.OneLineParser
+import me.mataha.misaki.domain.NoOpParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.util.annotations.VisibleForTesting
 
 @AdventOfCode("Elves Look, Elves Say", 2015, 10)
-class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), OneLineParser {
+class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun first(input: String): Int = lookAndSay(input, 40).length
 
     override fun second(input: String): Int = lookAndSay(input, 50).length

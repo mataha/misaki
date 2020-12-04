@@ -4,12 +4,12 @@ fun interface Parser<in I : Any, out O : Any> {
     fun parse(input: I): O
 }
 
-typealias StringParser<O> = Parser<List<String>, O>
+typealias StringParser<O> = Parser<String, O>
 
-interface NoOpParser : StringParser<List<String>> {
-    override fun parse(input: List<String>): List<String> = input
+interface NoOpParser : StringParser<String> {
+    override fun parse(input: String): String = input
 }
 
-interface OneLineParser : StringParser<String> {
-    override fun parse(input: List<String>): String = input.joinToString("")
+interface LineParser : StringParser<List<String>> {
+    override fun parse(input: String): List<String> = input.lines()
 }

@@ -1,13 +1,13 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d04
 
-import me.mataha.misaki.domain.OneLineParser
+import me.mataha.misaki.domain.NoOpParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.util.annotations.VisibleForTesting
 import me.mataha.misaki.util.extensions.md5Hex
 
 @AdventOfCode("The Ideal Stocking Stuffer", 2015, 4)
-class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), OneLineParser {
+class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun first(input: String): Int = md5StartingWith(input, "00000")
 
     override fun second(input: String): Int = md5StartingWith(input, "000000")

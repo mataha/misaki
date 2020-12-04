@@ -6,8 +6,9 @@ import me.mataha.misaki.util.annotations.VisibleForTesting
 
 @AdventOfCode("I Was Told There Would Be No Math", 2015, 2)
 class ThereWouldBeNoMath : AdventOfCodeDay<List<Box>, Int>() {
-    override fun parse(input: List<String>): List<Box> =
+    override fun parse(input: String): List<Box> =
         input
+            .lines()
             .map { line -> line.split(PARSE_DELIMITER).map { it.toInt() } }
             .map { dimensions -> Box.create(dimensions) }
 

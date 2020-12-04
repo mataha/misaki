@@ -1,12 +1,12 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d03
 
-import me.mataha.misaki.domain.OneLineParser
+import me.mataha.misaki.domain.NoOpParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.util.extensions.next
 
 @AdventOfCode("Perfectly Spherical Houses in a Vacuum", 2015, 3)
-class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), OneLineParser {
+class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun first(input: String): Int {
         var current = Position(0, 0)
         val grid = mutableSetOf(current)

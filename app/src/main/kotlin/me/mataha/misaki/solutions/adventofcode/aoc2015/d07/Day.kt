@@ -6,8 +6,8 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
 @AdventOfCode("Some Assembly Required", 2015, 7)
 class SomeAssemblyRequired : AdventOfCodeDay<List<Part>, Int>() {
-    override fun parse(input: List<String>): List<Part> =
-        input.map { line -> CircuitGrammar.parseToEnd(line) }
+    override fun parse(input: String): List<Part> =
+        input.lines().map { line -> CircuitGrammar.parseToEnd(line) }
 
     override fun first(input: List<Part>): Int {
         val circuit = Circuit.of(input)
