@@ -14,7 +14,7 @@ class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), OneLineParser {
 }
 
 @VisibleForTesting
-internal fun md5StartingWith(key: String, prefix: String, range: IntRange = 1..Int.MAX_VALUE): Int {
+internal fun md5StartingWith(key: String, prefix: String, range: IntRange = IntRange.NATURAL): Int {
     require(range.first > 0) {
         "Lower bound must be a positive number (is: ${range.first})."
     }
@@ -32,3 +32,5 @@ internal fun md5StartingWith(key: String, prefix: String, range: IntRange = 1..I
 }
 
 private const val HASH_NOT_FOUND = -1
+
+private val IntRange.Companion.NATURAL: IntRange by lazy { IntRange(1, Int.MAX_VALUE) }
