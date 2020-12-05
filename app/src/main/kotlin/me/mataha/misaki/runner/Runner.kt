@@ -2,6 +2,7 @@ package me.mataha.misaki.runner
 
 import me.mataha.misaki.domain.process
 import me.mataha.misaki.service.SolutionService
+import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 internal fun interface SolutionRunner {
@@ -11,6 +12,7 @@ internal fun interface SolutionRunner {
 internal class DefaultSolutionRunner(
     private val service: SolutionService, private val skinner: Skinner<String>
 ) : SolutionRunner {
+    @ExperimentalTime
     override fun run(origin: String, task: String, input: String): Result? {
         val data = service.get(origin, task)
         val skinned = skinner.skin(input)
