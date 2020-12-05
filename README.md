@@ -25,18 +25,27 @@ cd misaki
 
 ```shell
 $ ./run "Advent of Code" "Not Quite Lisp"
+```
+
+Input and output:
+
+```
 Enter your puzzle input:
 ()()))())(()))()()(())(())()()(
 ^D
 [-3, 5]
 ```
 
-where `^D` is `EOF` (`^Z` on Windows).
+where `^D` is `EOF` (`^Z` on Windows)
 
 #### File input
 
 ```shell
 $ ./run "Advent of Code" "Some Assembly Required" -i "samples/adventofcode/2015/07/input.txt"
+```
+
+Output:
+```
 [3176, 14710]
 ```
 
@@ -44,11 +53,16 @@ $ ./run "Advent of Code" "Some Assembly Required" -i "samples/adventofcode/2015/
 
 ```shell
 $ ./run "Advent of Code" "All in a Single Night" -i "samples/adventofcode/2015/09/input.txt" --measure
+```
+
+Output:
+
+```
 [141, 736]
 That took: 127ms
 ```
 
-If in doubt, `./run --help`.
+When in doubt, `./run --help`.
 
 ## License
 
