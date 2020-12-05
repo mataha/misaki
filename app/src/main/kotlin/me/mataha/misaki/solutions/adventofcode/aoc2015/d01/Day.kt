@@ -27,7 +27,7 @@ class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
             }
         }
 
-        // Santa did never enter the basement
+        // Santa never did enter the basement
         return BASEMENT_NOT_ENTERED
     }
 
