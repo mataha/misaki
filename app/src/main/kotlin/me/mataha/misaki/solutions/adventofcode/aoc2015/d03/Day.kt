@@ -8,7 +8,7 @@ import me.mataha.misaki.util.extensions.next
 /** See [https://adventofcode.com/2015/day/3]. */
 @AdventOfCode("Perfectly Spherical Houses in a Vacuum", 2015, 3)
 class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
-    override fun first(input: String): Int {
+    override fun solveFirst(input: String): Int {
         var current = Position(0, 0)
         val grid = mutableSetOf(current)
 
@@ -22,7 +22,7 @@ class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
         return grid.size
     }
 
-    override fun second(input: String): Int {
+    override fun solveSecond(input: String): Int {
         val map = mutableMapOf(Turn.SANTA to Position(0, 0), Turn.ROBOT to Position(0, 0))
         var turn = Turn.SANTA
         val grid = mutableSetOf(map.getValue(turn))

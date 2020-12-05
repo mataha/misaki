@@ -14,7 +14,7 @@ class ThereWouldBeNoMathTests {
     fun testGetSquareFeetOfWrappingPaper(boxes: List<Box>, expected: Int) {
         val day = ThereWouldBeNoMath()
 
-        val actual = day.first(boxes)
+        val actual = day.solveFirst(boxes)
 
         Assertions.assertEquals(expected, actual) {
             "..."

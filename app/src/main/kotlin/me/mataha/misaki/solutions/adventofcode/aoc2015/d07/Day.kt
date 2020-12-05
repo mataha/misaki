@@ -10,13 +10,13 @@ class SomeAssemblyRequired : AdventOfCodeDay<List<Part>, Int>() {
     override fun parse(input: String): List<Part> =
         CircuitGrammar.parseToEnd(input)
 
-    override fun first(input: List<Part>): Int {
+    override fun solveFirst(input: List<Part>): Int {
         val circuit = Circuit.of(input)
 
         return circuit["a"].toInt()
     }
 
-    override fun second(input: List<Part>): Int {
+    override fun solveSecond(input: List<Part>): Int {
         val circuit = Circuit.of(input)
 
         val a = circuit["a"]

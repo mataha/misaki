@@ -12,7 +12,7 @@ class NotQuiteLispTests {
     fun testFirst(directions: String, expected: Int) {
         val solution = NotQuiteLisp()
 
-        val actual = solution.first(directions)
+        val actual = solution.solveFirst(directions)
 
         assertEquals(expected, actual) {
             "Given $directions, Santa somehow ended at floor $expected"
@@ -24,7 +24,7 @@ class NotQuiteLispTests {
     fun testSecond(directions: String, expected: Int) {
         val solution = NotQuiteLisp()
 
-        val actual = solution.second(directions)
+        val actual = solution.solveSecond(directions)
 
         assertEquals(expected, actual) {
             "Given $directions, Santa somehow entered the basement at character position $expected"

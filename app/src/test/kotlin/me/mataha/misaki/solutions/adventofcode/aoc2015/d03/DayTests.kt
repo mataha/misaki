@@ -12,7 +12,7 @@ class PerfectlySphericalHousesTests {
     fun testGetHousesWithAtLeastOnePresentReceivedFromSanta(directions: String, expected: Int) {
         val solution = PerfectlySphericalHouses()
 
-        val actual = solution.first(directions)
+        val actual = solution.solveFirst(directions)
 
         Assertions.assertEquals(expected, actual) {
             "Given $directions, somehow, $actual house(s) received at least one present"
@@ -25,7 +25,7 @@ class PerfectlySphericalHousesTests {
     fun testGetHousesWithAtLeastOnePresentReceivedFromSantaAndHisRobot(directions: String, expected: Int) {
         val solution = PerfectlySphericalHouses()
 
-        val actual = solution.second(directions)
+        val actual = solution.solveSecond(directions)
 
         Assertions.assertEquals(expected, actual) {
             "Given $directions, somehow, $actual house(s) received at least one present"

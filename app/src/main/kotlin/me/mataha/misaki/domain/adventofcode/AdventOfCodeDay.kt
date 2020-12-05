@@ -2,17 +2,17 @@ package me.mataha.misaki.domain.adventofcode
 
 import me.mataha.misaki.domain.Solution
 
-abstract class AdventOfCodeDay<I : Any, out O : Any> : Solution<I, AdventOfCodeResults<O, O>> {
-    override fun solve(input: I): AdventOfCodeResults<O, O> =
-        AdventOfCodeResults(first(input), second(input))
+abstract class AdventOfCodeDay<I : Any, out O : Any> : Solution<I, AdventOfCodeResult<O, O>> {
+    override fun solve(input: I): AdventOfCodeResult<O, O> =
+        AdventOfCodeResult(solveFirst(input), solveSecond(input))
 
-    abstract fun first(input: I): O
+    abstract fun solveFirst(input: I): O
 
-    abstract fun second(input: I): O
+    abstract fun solveSecond(input: I): O
 }
 
-data class AdventOfCodeResults<out A, out B>(val first: A, val second: B) {
+data class AdventOfCodeResult<out A, out B>(val first: A, val second: B) {
     override fun toString(): String = "[$first, $second]"
 }
 
-fun <T> AdventOfCodeResults<T, T>.toList(): List<T> = listOf(first, second)
+fun <T> AdventOfCodeResult<T, T>.toList(): List<T> = listOf(first, second)

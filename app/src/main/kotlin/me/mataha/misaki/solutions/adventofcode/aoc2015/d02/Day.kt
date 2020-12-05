@@ -13,10 +13,10 @@ class ThereWouldBeNoMath : AdventOfCodeDay<List<Box>, Int>() {
             .map { line -> line.split(PARSE_DELIMITER).map { it.toInt() } }
             .map { dimensions -> Box.create(dimensions) }
 
-    override fun first(input: List<Box>): Int =
+    override fun solveFirst(input: List<Box>): Int =
         input.sumBy { box -> getSquareFeetOfWrappingPaper(box) }
 
-    override fun second(input: List<Box>): Int =
+    override fun solveSecond(input: List<Box>): Int =
         input.sumBy { box -> getFeetOfRibbon(box) }
 
     private companion object {

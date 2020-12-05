@@ -13,9 +13,9 @@ import me.mataha.misaki.util.extensions.zipAdjacent
 /** See [https://adventofcode.com/2015/day/5]. */
 @AdventOfCode("Doesn't He Have Intern-Elves For This?", 2015, 5)
 class NoInternElvesForThis : AdventOfCodeDay<List<String>, Int>(), LineParser {
-    override fun first(input: List<String>): Int = input.count(String::isNiceBefore)
+    override fun solveFirst(input: List<String>): Int = input.count(String::isNiceBefore)
 
-    override fun second(input: List<String>): Int = input.count(String::isNiceAfter)
+    override fun solveSecond(input: List<String>): Int = input.count(String::isNiceAfter)
 }
 
 private const val VOWELS = "aeiou"

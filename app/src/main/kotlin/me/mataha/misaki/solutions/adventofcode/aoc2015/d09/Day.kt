@@ -10,9 +10,9 @@ class AllInASingleNight : AdventOfCodeDay<WeightedGraph<Location>, Int>() {
     override fun parse(input: String): WeightedGraph<Location> =
         LocationGrammar.parseToEnd(input)
 
-    override fun first(input: WeightedGraph<Location>): Int =
+    override fun solveFirst(input: WeightedGraph<Location>): Int =
         input.traverse(Iterable<Int>::minOrNull)
 
-    override fun second(input: WeightedGraph<Location>): Int =
+    override fun solveSecond(input: WeightedGraph<Location>): Int =
         input.traverse(Iterable<Int>::maxOrNull)
 }

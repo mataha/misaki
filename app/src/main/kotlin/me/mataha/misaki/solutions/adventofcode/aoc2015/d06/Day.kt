@@ -10,7 +10,7 @@ class ProbablyAFireHazard : AdventOfCodeDay<List<Instruction>, Int>() {
     override fun parse(input: String): List<Instruction> =
         LightGridGrammar.parseToEnd(input)
 
-    override fun first(input: List<Instruction>): Int {
+    override fun solveFirst(input: List<Instruction>): Int {
         val grid = object : LightGrid() {
             override fun turnOn(x: Int, y: Int): LightGrid = apply { this[x, y] = 1 }
 
@@ -22,7 +22,7 @@ class ProbablyAFireHazard : AdventOfCodeDay<List<Instruction>, Int>() {
         return grid.illuminate(input)
     }
 
-    override fun second(input: List<Instruction>): Int {
+    override fun solveSecond(input: List<Instruction>): Int {
         val grid = object : LightGrid() {
             override fun turnOn(x: Int, y: Int): LightGrid = apply { this[x, y]++ }
 

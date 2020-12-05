@@ -8,9 +8,9 @@ import me.mataha.misaki.util.annotations.VisibleForTesting
 /** See [https://adventofcode.com/2015/day/10]. */
 @AdventOfCode("Elves Look, Elves Say", 2015, 10)
 class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), NoOpParser {
-    override fun first(input: String): Int = lookAndSay(input, 40).length
+    override fun solveFirst(input: String): Int = lookAndSay(input, 40).length
 
-    override fun second(input: String): Int = lookAndSay(input, 50).length
+    override fun solveSecond(input: String): Int = lookAndSay(input, 50).length
 }
 
 @VisibleForTesting
