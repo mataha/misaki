@@ -4,6 +4,7 @@ import me.mataha.misaki.domain.NoOpParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
+/** See [https://adventofcode.com/2015/day/1]. */
 @AdventOfCode("Not Quite Lisp", 2015, 1)
 class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun first(input: String): Int {

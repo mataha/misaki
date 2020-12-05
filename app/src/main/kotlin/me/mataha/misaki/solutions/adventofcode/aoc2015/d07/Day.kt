@@ -4,6 +4,7 @@ import com.github.h0tk3y.betterParse.grammar.parseToEnd
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
+/** See [https://adventofcode.com/2015/day/7]. */
 @AdventOfCode("Some Assembly Required", 2015, 7)
 class SomeAssemblyRequired : AdventOfCodeDay<List<Part>, Int>() {
     override fun parse(input: String): List<Part> =

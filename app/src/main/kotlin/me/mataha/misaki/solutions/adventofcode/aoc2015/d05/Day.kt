@@ -10,6 +10,7 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.util.annotations.VisibleForTesting
 import me.mataha.misaki.util.extensions.zipAdjacent
 
+/** See [https://adventofcode.com/2015/day/5]. */
 @AdventOfCode("Doesn't He Have Intern-Elves For This?", 2015, 5)
 class NoInternElvesForThis : AdventOfCodeDay<List<String>, Int>(), LineParser {
     override fun first(input: List<String>): Int = input.count(String::isNiceBefore)

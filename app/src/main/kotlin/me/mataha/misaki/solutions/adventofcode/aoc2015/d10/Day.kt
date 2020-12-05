@@ -5,6 +5,7 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.util.annotations.VisibleForTesting
 
+/** See [https://adventofcode.com/2015/day/10]. */
 @AdventOfCode("Elves Look, Elves Say", 2015, 10)
 class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun first(input: String): Int = lookAndSay(input, 40).length
