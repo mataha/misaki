@@ -1,5 +1,3 @@
-@file:JvmName("Math")
-
 package me.mataha.misaki.util.math
 
 import kotlin.math.max as mathMax

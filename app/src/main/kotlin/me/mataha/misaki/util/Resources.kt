@@ -1,5 +1,3 @@
-@file:JvmName("Resources")
-
 package me.mataha.misaki.util
 
 import java.net.URL

@@ -1,5 +1,3 @@
-@file:JvmName("Levenshtein")
-
 package me.mataha.misaki.util.text
 
 import me.mataha.misaki.util.functional.assign

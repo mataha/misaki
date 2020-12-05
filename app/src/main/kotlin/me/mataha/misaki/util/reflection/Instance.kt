@@ -1,5 +1,3 @@
-@file:JvmName("Instance")
-
 package me.mataha.misaki.util.reflection
 
 import kotlin.reflect.KCallable

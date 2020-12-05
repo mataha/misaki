@@ -1,5 +1,3 @@
-@file:JvmName("Digest")
-
 package me.mataha.misaki.util
 
 import me.mataha.misaki.util.extensions.hex

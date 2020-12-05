@@ -1,5 +1,3 @@
-@file:JvmName("Assign")
-
 package me.mataha.misaki.util.functional
 
 import me.mataha.misaki.util.annotations.InlineCall
