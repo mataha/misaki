@@ -9,15 +9,17 @@ import com.github.ajalt.clikt.parameters.types.defaultStdin
 import com.github.ajalt.clikt.parameters.types.defaultStdout
 import com.github.ajalt.clikt.parameters.types.inputStream
 import com.github.ajalt.clikt.parameters.types.outputStream
-import me.mataha.misaki.domain.process
-import me.mataha.misaki.service.SolutionService
+import me.mataha.misaki.runner.SolutionRunner
+import me.mataha.misaki.util.io.printWriter
 import java.io.InputStream
-import java.io.PrintWriter
-import kotlin.time.measureTimedValue
 
 class Cli(runScriptName: String) : CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
     init {
         versionOption(version) { it }
+    }
+
+    private companion object {
+        private const val EPILOG = """See also: README.md (general usage and examples)"""
     }
 
     private val inputStream by option("-i", "--input", help = """File to read puzzle input from""")
@@ -34,35 +36,36 @@ class Cli(runScriptName: String) : CliktCommand(name = runScriptName, printHelpO
     private val task by argument(help = """Task name""")
 
     override fun run() {
-        val service = koin.get<SolutionService>()
+        if (inputStream.default) {
+            println("Enter your puzzle input:")
+        }
 
-        val data = service.get(origin, task)
+        val input = inputStream.bufferedReader().use { reader ->
+            reader.readText()
+        }
 
-        data?.let {
-            if (inputStream.default) println("Enter your puzzle input:")
+        try {
+            val runner = koin.get<SolutionRunner>()
+            val result = runner.run(origin, task, input)
 
-            val input = inputStream.bufferedReader().use { reader ->
-                reader.readText().trim()
+            if (result != null) {
+                outputStream.printWriter().use { writer ->
+                    writer.println(result.result)
+
+                    if (measure) {
+                        writer.println("That took: ${result.duration}")
+                    }
+                }
+            } else {
+                System.err.println("$origin: '$task' was not found")
             }
-
-            val solution = it.solution
-
-            val result = measureTimedValue { solution.process(input) }
-
-            PrintWriter(outputStream.bufferedWriter()).use { writer ->
-                writer.println(result.value)
-                if (measure) writer.println("That took: ${result.duration}")
-            }
-        } ?: System.err.println("Error: requested origin/task could not be found")
-    }
-
-    private companion object {
-        private const val EPILOG = """See also: README.md (general usage and examples)"""
+        } catch (exception: Exception) {
+            System.err.println("Error: ${exception.message}")
+        }
     }
 }
 
 private const val STDIN_WRAPPER_CLASS_NAME = "com.github.ajalt.clikt.parameters.types.UnclosableInputStream"
 
-/* Ugly workaround - that or reflection coowabunga */
 private val InputStream.default: Boolean
     get() = this::class.qualifiedName == STDIN_WRAPPER_CLASS_NAME
