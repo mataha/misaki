@@ -14,9 +14,9 @@ from [Welcome to the N.H.K.][2]
 Assumes `git` and JDK >= 8 (possibly from [here][3]):
 
 ```shell
-git clone https://github.com/mataha/misaki.git
+git clone https://gitgud.io/mataha/misaki
 cd misaki
-./gradlew build
+./gradlew build  # or without `./` on Windows
 ```
 
 ## Sample usage
@@ -25,6 +25,12 @@ cd misaki
 $ ./run "Advent of Code" "Some Assembly Required" -i "samples/adventofcode/2015/07/input.txt"
 [3176, 14710]
 ```
+
+If in doubt, `./run --help`.
+
+## License
+
+See [LICENSE](./LICENSE).
 
 [1]: https://anidb.net/character/2809
 [2]: https://www.mangaupdates.com/series.html?id=8861
