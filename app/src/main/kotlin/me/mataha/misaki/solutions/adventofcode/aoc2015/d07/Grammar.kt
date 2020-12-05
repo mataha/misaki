@@ -9,6 +9,7 @@ internal object CircuitGrammar : Grammar<List<Part>>() {
     private val whiteSpace by token("""\s+""", ignore = true)
 
     private val ARROW by token("->")
+
     private val AND by token("AND")
     private val OR by token("OR")
     private val NOT by token("NOT")

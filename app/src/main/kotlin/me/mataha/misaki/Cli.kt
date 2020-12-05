@@ -10,16 +10,12 @@ import com.github.ajalt.clikt.parameters.types.defaultStdout
 import com.github.ajalt.clikt.parameters.types.inputStream
 import com.github.ajalt.clikt.parameters.types.outputStream
 import me.mataha.misaki.runner.SolutionRunner
-import me.mataha.misaki.util.io.printWriter
+import me.mataha.misaki.util.extensions.printWriter
 import java.io.InputStream
 
 class Cli(runScriptName: String) : CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
     init {
         versionOption(version) { it }
-    }
-
-    private companion object {
-        private const val EPILOG = """See also: README.md (general usage and examples)"""
     }
 
     private val inputStream by option("-i", "--input", help = """File to read puzzle input from""")
@@ -35,12 +31,15 @@ class Cli(runScriptName: String) : CliktCommand(name = runScriptName, printHelpO
 
     private val task by argument(help = """Task name""")
 
-    override fun run() {
-        if (inputStream.default) {
-            println("Enter your puzzle input:")
-        }
+    private companion object {
+        private const val EPILOG = """See also: README.md (general usage and examples)"""
+    }
 
+    override fun run() {
         val input = inputStream.bufferedReader().use { reader ->
+            if (inputStream.default) {
+                println("Enter your puzzle input:")
+            }
             reader.readText()
         }
 

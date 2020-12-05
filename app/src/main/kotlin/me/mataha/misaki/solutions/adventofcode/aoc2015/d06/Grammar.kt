@@ -9,10 +9,11 @@ internal object LightGridGrammar : Grammar<List<Instruction>>() {
     private val whiteSpace by token("""\s+""", ignore = true)
 
     private val COMMA by token(",")
+    private val THROUGH by token("through")
+
     private val TOGGLE by token("toggle")
     private val TURN_ON by token("turn on")
     private val TURN_OFF by token("turn off")
-    private val THROUGH by token("through")
 
     private val numeral by token("""\d+""")
 

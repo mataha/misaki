@@ -25,7 +25,7 @@ class ThereWouldBeNoMath : AdventOfCodeDay<List<Box>, Int>() {
 
 @VisibleForTesting
 internal fun getSquareFeetOfWrappingPaper(box: Box): Int =
-    box.surfaceArea + box.smallestSideArea
+    box.smallestSideArea + box.surfaceArea
 
 @VisibleForTesting
 internal fun getFeetOfRibbon(box: Box): Int =

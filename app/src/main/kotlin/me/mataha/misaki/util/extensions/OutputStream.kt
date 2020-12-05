@@ -1,4 +1,4 @@
-package me.mataha.misaki.util.io
+package me.mataha.misaki.util.extensions
 
 import java.io.OutputStream
 import java.io.PrintWriter
