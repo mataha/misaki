@@ -1,17 +1,27 @@
-@file:JvmName("Main")
+@file:JvmName("Main") // Has to be hardcoded - consts won't work
 
 package me.mataha.misaki
 
-import me.mataha.misaki.service.SolutionService
+import java.io.File
+import java.nio.file.Paths
 
-internal val ROOT: String = ::main::class.java.`package`.name
+fun main(vararg args: String) = Cli(getRunScriptName()).main(args)
 
-fun main() {
-    val service = koin.get<SolutionService>()
+internal val root: Package = ::main::class.java.`package`
 
-    val task = service.get("Advent of Code", "All In A Single Night")
+// TODO: Use Kotlin Path API as soon as it's available
+private fun getRunScriptName(default: String = ::main.name.capitalize()): String {
+    val files = Paths.get(".")
+        .toFile()
+        .listFiles()!!
+        .filter { file -> file.isFile }
 
-    task?.let {
-        println(it.solution.process(listOf("London to Belfast = 21")))
-    } ?: println ("Weeeeeeeeeeeew.")
+    val names = files
+        .filter { file -> !file.isGradleFile() }
+        .map { file -> file.nameWithoutExtension }
+        .filter { name -> name.isNotBlank() } // dotfiles
+
+    return names.firstOrNull { name -> (names - name).contains(name) } ?: default
 }
+
+private fun File.isGradleFile(): Boolean = "gradle" in this.name
