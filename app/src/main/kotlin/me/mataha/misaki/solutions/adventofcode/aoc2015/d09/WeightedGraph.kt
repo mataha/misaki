@@ -1,7 +1,7 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d09
 
 class WeightedGraph<N> {
-    private val edges: MutableMap<N, MutableMap<N, Int>> = mutableMapOf()
+    private val edges: MutableMap<N, MutableMap<N, Int>> by lazy { mutableMapOf() }
 
     private val nodes: MutableSet<N>
         get() = edges.keys

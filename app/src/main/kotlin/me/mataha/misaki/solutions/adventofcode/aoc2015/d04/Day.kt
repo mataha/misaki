@@ -8,9 +8,9 @@ import me.mataha.misaki.util.extensions.md5Hex
 
 @AdventOfCode("The Ideal Stocking Stuffer", 2015, 4)
 class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), NoOpParser {
-    override fun first(input: String): Int = md5StartingWith(input, "00000")
+    override fun first(input: String): Int = md5StartingWith(input, "0".repeat(5))
 
-    override fun second(input: String): Int = md5StartingWith(input, "000000")
+    override fun second(input: String): Int = md5StartingWith(input, "0".repeat(6))
 }
 
 @VisibleForTesting

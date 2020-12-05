@@ -15,9 +15,9 @@ internal class DefaultSolutionRunner(
         val data = service.get(origin, task)
         val skinned = skinner.skin(input)
 
-        return data?.let {
+        return data?.let { solutionData ->
             val timed = measureTimedValue {
-                it.solution.process(skinned)
+                solutionData.solution.process(skinned)
             }
 
             Result(data.name, timed.value, timed.duration)
