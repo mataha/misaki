@@ -22,8 +22,8 @@ inline fun <R> CharSequence.zipAdjacent(transform: (a: Char, b: Char) -> R): Lis
     }
 
     val result = ArrayList<R>(size)
-    for (index in 0 until size) {
-        result.add(transform(this[index], this[index + 2]))
+    for (index in 1 until size + 1) {
+        result.add(transform(this[index - 1], this[index + 1]))
     }
     return result
 }
