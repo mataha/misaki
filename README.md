@@ -11,16 +11,21 @@ from [Welcome to the N.H.K.][2]
 
 ## Installation
 
-It is assumed that:
- - both git and JDK >= 8 are available;
- - `JAVA_HOME` is defined and matches your Java installation;
- - you are using Windows.
+Assumes `git` and JDK >= 8 (possibly from [here][3]):
 
-```batch
+```shell
 git clone https://github.com/mataha/misaki.git
 cd misaki
-gradlew build
+./gradlew build
+```
+
+## Sample usage
+
+```shell
+$ ./run "Advent of Code" "Some Assembly Required" -i "samples/adventofcode/2015/07/input.txt"
+[3176, 14710]
 ```
 
 [1]: https://anidb.net/character/2809
 [2]: https://www.mangaupdates.com/series.html?id=8861
+[3]: https://adoptopenjdk.net/installation.html
