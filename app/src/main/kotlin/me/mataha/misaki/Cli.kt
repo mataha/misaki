@@ -52,7 +52,7 @@ class Cli(runScriptName: String) : CliktCommand(name = runScriptName, printHelpO
                     writer.println(result.result)
 
                     if (measure) {
-                        writer.println("That took: ${result.duration}")
+                        writer.println("That took: ${result.elapsed}")
                     }
                 }
             } else {

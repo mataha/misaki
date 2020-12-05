@@ -1,4 +1,4 @@
-package me.mataha.misaki.lookup
+package me.mataha.misaki.repository
 
 import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
@@ -10,7 +10,7 @@ import me.mataha.misaki.domain.SolutionData
 import me.mataha.misaki.domain.SolutionDataFactory
 import kotlin.reflect.KClass
 
-internal interface SolutionLookup {
+internal interface SolutionRepository {
     fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>>
 
     fun get(origin: String, task: String): SolutionData<*, *>?
@@ -18,7 +18,7 @@ internal interface SolutionLookup {
     fun getAll(): Map<String, List<SolutionData<*, *>>>
 }
 
-internal class DefaultSolutionLookup(vararg packages: String) : SolutionLookup {
+internal class DefaultSolutionRepository(vararg packages: String) : SolutionRepository {
     override fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>> =
         getAll()[origin]?.filter { solution -> predicate(solution.name) } ?: emptyList()
 
