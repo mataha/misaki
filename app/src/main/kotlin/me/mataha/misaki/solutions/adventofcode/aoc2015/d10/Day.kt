@@ -16,7 +16,7 @@ class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), NoOpParser {
 @VisibleForTesting
 internal fun lookAndSay(string: String, steps: Int = 1): String {
     require(steps >= 1) {
-        "Number of steps has to be positive (is: $steps)."
+        "Number of steps has to be positive (is: $steps)"
     }
 
     var str = string

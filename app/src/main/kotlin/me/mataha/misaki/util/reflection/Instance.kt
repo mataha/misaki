@@ -19,7 +19,7 @@ fun <R : Any> KClass<out R>.instance(): R {
     }?.call() ?: objectInstance
 
     return requireNotNull(instance) {
-        "$qualifiedName is neither an object nor a class with a public, parameterless constructor."
+        "$qualifiedName is neither an object nor a class with a public, parameterless constructor"
     }
 }
 

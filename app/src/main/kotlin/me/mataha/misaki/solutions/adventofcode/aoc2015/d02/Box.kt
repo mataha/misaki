@@ -5,7 +5,7 @@ import me.mataha.misaki.util.math.max
 data class Box(val length: Int, val width: Int, val height: Int) {
     init {
         require(length > 0 && width > 0 && height > 0) {
-            "Dimensions must be positive numbers (are: [$length, $width, $height])."
+            "Dimensions must be positive numbers (are: [$length, $width, $height])"
         }
     }
 
@@ -24,7 +24,7 @@ data class Box(val length: Int, val width: Int, val height: Int) {
     internal companion object {
         internal fun create(dimensions: List<Int>): Box {
             require(dimensions.size == NUMBER_OF_DIMENSIONS) {
-                "Number of dimensions does not match (is: ${dimensions.size})."
+                "Number of dimensions does not match (is: ${dimensions.size})"
             }
 
             val (length, width, height) = dimensions.take(3)

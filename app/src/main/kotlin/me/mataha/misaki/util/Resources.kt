@@ -16,6 +16,6 @@ fun resource(path: String): URL {
     val url = loader.getResource(path)
 
     return requireNotNull(url) {
-        "Resource '$path' was not found."
+        "Resource '$path' was not found"
     }
 }

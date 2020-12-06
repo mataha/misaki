@@ -11,7 +11,7 @@ class WeightedGraph<N> {
 
     internal operator fun set(source: N, destination: N, weight: Int): WeightedGraph<N> {
         require(weight > 0) {
-            "Weight must be a positive number (is: $weight)."
+            "Weight must be a positive number (is: $weight)"
         }
 
         edges.getOrPut(source, ::mutableMapOf)[destination] = weight

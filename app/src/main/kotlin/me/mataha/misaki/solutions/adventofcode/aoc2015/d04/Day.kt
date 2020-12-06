@@ -17,7 +17,7 @@ class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), NoOpParser {
 @VisibleForTesting
 internal fun md5StartingWith(key: String, prefix: String, range: IntRange = IntRange.NATURAL): Int {
     require(range.first > 0) {
-        "Lower bound must be a positive number (is: ${range.first})."
+        "Lower bound must be a positive number (is: ${range.first})"
     }
 
     for (number in range) {

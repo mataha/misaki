@@ -14,7 +14,7 @@ internal abstract class LightGrid {
 
     protected operator fun set(x: Int, y: Int, value: Int): LightGrid {
         require(value >= 0) {
-            "Brightness can't be negative (is: $value)."
+            "Brightness can't be negative (is: $value)"
         }
 
         luminosity += value - grid[x][y]
