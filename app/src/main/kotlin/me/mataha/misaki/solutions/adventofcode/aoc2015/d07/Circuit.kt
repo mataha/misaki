@@ -6,13 +6,13 @@ class Circuit private constructor() {
 
     private val signals: MutableMap<String, UShort> by lazy { mutableMapOf() }
 
-    operator fun get(wireIdentifier: String): UShort =
+    internal operator fun get(wireIdentifier: String): UShort =
         signals[wireIdentifier] ?: computeSignal(wireIdentifier)
 
-    operator fun set(wireIdentifier: String, signal: UShort): Circuit =
+    internal operator fun set(wireIdentifier: String, signal: UShort): Circuit =
         apply { signals[wireIdentifier] = signal }
 
-    fun reset(): Circuit = apply { signals.clear() }
+    internal fun reset(): Circuit = apply { signals.clear() }
 
     private fun computeSignal(wireIdentifier: String): UShort {
         val part = parts.getValue(wireIdentifier)
@@ -23,8 +23,8 @@ class Circuit private constructor() {
         return signal
     }
 
-    companion object {
-        fun of(parts: List<Part> = listOf()): Circuit {
+    internal companion object {
+        internal fun of(parts: List<Part> = listOf()): Circuit {
             val circuit = Circuit()
             circuit.parts = parts.associateBy { part -> part.identifier }
             return circuit

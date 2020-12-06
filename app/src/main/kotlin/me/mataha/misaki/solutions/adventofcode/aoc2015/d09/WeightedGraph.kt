@@ -9,7 +9,7 @@ class WeightedGraph<N> {
     private operator fun get(source: N, destination: N): Int =
         edges.getValue(source).getValue(destination)
 
-    operator fun set(source: N, destination: N, weight: Int): WeightedGraph<N> {
+    internal operator fun set(source: N, destination: N, weight: Int): WeightedGraph<N> {
         require(weight > 0) {
             "Weight must be a positive number (is: $weight)."
         }
@@ -20,7 +20,7 @@ class WeightedGraph<N> {
         return this
     }
 
-    fun traverse(aggregate: Iterable<Int>.() -> Int?): Int {
+    internal fun traverse(aggregate: Iterable<Int>.() -> Int?): Int {
         fun traverse(aggregate: Iterable<Int>.() -> Int?, start: N, remaining: Set<N>): Int {
             return remaining
                 .map { node -> this[node, start] + traverse(aggregate, node, remaining - node) }

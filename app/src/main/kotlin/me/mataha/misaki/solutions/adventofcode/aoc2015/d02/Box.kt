@@ -21,8 +21,8 @@ data class Box(val length: Int, val width: Int, val height: Int) {
     internal val volume: Int
         get() = length * width * height
 
-    companion object {
-        fun create(dimensions: List<Int>): Box {
+    internal companion object {
+        internal fun create(dimensions: List<Int>): Box {
             require(dimensions.size == NUMBER_OF_DIMENSIONS) {
                 "Number of dimensions does not match (is: ${dimensions.size})."
             }
