@@ -2,7 +2,7 @@
 
 package me.mataha.misaki.util.extensions
 
-import me.mataha.misaki.util.annotations.InlineCall
+import me.mataha.misaki.util.internal.annotations.InlineCall
 
 /**
  * Shifts this value left by the [bitCount] number of bits.

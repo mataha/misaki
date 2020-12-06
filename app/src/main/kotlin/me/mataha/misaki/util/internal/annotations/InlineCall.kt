@@ -1,4 +1,4 @@
-package me.mataha.misaki.util.annotations
+package me.mataha.misaki.util.internal.annotations
 
 import kotlin.annotation.AnnotationRetention.SOURCE
 import kotlin.annotation.AnnotationTarget.*

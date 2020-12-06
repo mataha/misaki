@@ -13,7 +13,8 @@ import me.mataha.misaki.runner.SolutionRunner
 import me.mataha.misaki.util.extensions.printWriter
 import java.io.InputStream
 
-class Cli(runScriptName: String) : CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
+internal class Cli(runScriptName: String) :
+    CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
     init {
         versionOption(version) { it }
     }

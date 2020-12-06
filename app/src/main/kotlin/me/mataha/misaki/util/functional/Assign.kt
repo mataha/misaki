@@ -1,6 +1,6 @@
 package me.mataha.misaki.util.functional
 
-import me.mataha.misaki.util.annotations.InlineCall
+import me.mataha.misaki.util.internal.annotations.InlineCall
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind.EXACTLY_ONCE
 import kotlin.contracts.contract

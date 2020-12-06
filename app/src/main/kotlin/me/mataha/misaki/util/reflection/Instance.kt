@@ -1,5 +1,8 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.mataha.misaki.util.reflection
 
+import me.mataha.misaki.util.internal.annotations.InlineCall
 import kotlin.reflect.KCallable
 import kotlin.reflect.KClass
 import kotlin.reflect.KVisibility
@@ -20,6 +23,8 @@ fun <R : Any> KClass<out R>.instance(): R {
     }
 }
 
-private fun <R> KCallable<R>.isParameterless(): Boolean = valueParameters.isEmpty()
+@InlineCall
+private inline fun <R> KCallable<R>.isParameterless(): Boolean = valueParameters.isEmpty()
 
-private fun <R> KCallable<R>.isPublic(): Boolean = visibility == KVisibility.PUBLIC
+@InlineCall
+private inline fun <R> KCallable<R>.isPublic(): Boolean = visibility == KVisibility.PUBLIC

@@ -4,9 +4,9 @@ import me.mataha.misaki.util.extensions.hex
 import java.nio.charset.Charset
 import java.security.MessageDigest
 
-private const val MD5 = "MD5"
+private const val MD5_ALGORITHM = "MD5"
 
-private fun getMd5Digest(): MessageDigest = MessageDigest.getInstance(MD5)
+private fun getMd5Digest(): MessageDigest = MessageDigest.getInstance(MD5_ALGORITHM)
 
 fun md5(bytes: ByteArray): ByteArray = getMd5Digest().digest(bytes)
 
