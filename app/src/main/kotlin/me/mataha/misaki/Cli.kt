@@ -1,5 +1,6 @@
 package me.mataha.misaki
 
+import com.github.ajalt.clikt.core.Abort
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.flag
@@ -55,18 +56,30 @@ internal class Cli(runScriptName: String) :
 
             outputStream.printWriter().use { writer ->
                 writer.println(result.value)
-
                 if (measure) {
                     writer.println("That took: ${result.duration}")
                 }
             }
         } catch (exception: Exception) {
-            System.err.println("Error: ${exception.message}")
+            echo("Error: ${exception.toCompactString()}", err = true)
+            throw Abort(error = true)
         }
     }
 }
 
-private const val STDIN_WRAPPER_CLASS_NAME = "com.github.ajalt.clikt.parameters.types.UnclosableInputStream"
+private const val STDIN_PROXY_CLASS_NAME = "com.github.ajalt.clikt.parameters.types.UnclosableInputStream"
 
+/** Checks whether this stream is an unclosable [System.`in`] proxy.
+ *
+ *  Indeed, it's an ugly hack, but what can one do?
+ */
 private val InputStream.default: Boolean
-    get() = this::class.qualifiedName == STDIN_WRAPPER_CLASS_NAME
+    get() = this::class.qualifiedName == STDIN_PROXY_CLASS_NAME
+
+/** Returns a short description of this throwable in a compact form. */
+private fun Throwable.toCompactString(): String {
+    val simpleName = this::class.simpleName
+    val localized = this.localizedMessage
+
+    return "$simpleName${if (localized != null) ": $localized" else ""}"
+}
