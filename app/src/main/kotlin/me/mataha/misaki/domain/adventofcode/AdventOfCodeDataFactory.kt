@@ -1,13 +1,13 @@
 package me.mataha.misaki.domain.adventofcode
 
+import me.mataha.misaki.domain.PuzzleData
+import me.mataha.misaki.domain.PuzzleDataFactory
 import me.mataha.misaki.domain.Solution
-import me.mataha.misaki.domain.SolutionData
-import me.mataha.misaki.domain.SolutionDataFactory
 import me.mataha.misaki.util.reflection.instance
 import kotlin.reflect.KClass
 
-object AdventOfCodeDataFactory : SolutionDataFactory {
-    override fun create(solution: KClass<out Solution<*, *>>): SolutionData<*, *> {
+object AdventOfCodeDataFactory : PuzzleDataFactory {
+    override fun create(solution: KClass<out Solution<*, *>>): PuzzleData<*, *> {
         val metadata = solution.annotations.first { annotation ->
             annotation.annotationClass == AdventOfCode::class
         } as AdventOfCode

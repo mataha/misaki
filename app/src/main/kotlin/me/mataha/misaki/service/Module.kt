@@ -14,7 +14,7 @@ internal val module = module {
             ) <= getProperty(THRESHOLD_KEY).toInt()
         }
     }
-    single<SolutionService> {
-        DefaultSolutionService(get(), get())
+    single<PuzzleService> {
+        DefaultPuzzleService(get(), get())
     }
 }

@@ -5,30 +5,30 @@ import io.github.classgraph.ClassInfo
 import io.github.classgraph.ClassInfoList
 import io.github.classgraph.ScanResult
 import me.mataha.misaki.domain.Puzzle
+import me.mataha.misaki.domain.PuzzleData
+import me.mataha.misaki.domain.PuzzleDataFactory
 import me.mataha.misaki.domain.Solution
-import me.mataha.misaki.domain.SolutionData
-import me.mataha.misaki.domain.SolutionDataFactory
 import kotlin.reflect.KClass
 
-internal interface SolutionRepository {
-    fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>>
+internal interface PuzzleRepository {
+    fun get(origin: String, predicate: (task: String) -> Boolean): List<PuzzleData<*, *>>
 
-    fun get(origin: String, task: String): SolutionData<*, *>?
+    fun get(origin: String, task: String): PuzzleData<*, *>?
 
-    fun getAll(): Map<String, List<SolutionData<*, *>>>
+    fun getAll(): Map<String, List<PuzzleData<*, *>>>
 }
 
-internal class DefaultSolutionRepository(vararg packages: String) : SolutionRepository {
-    override fun get(origin: String, predicate: (task: String) -> Boolean): List<SolutionData<*, *>> =
-        getAll()[origin]?.filter { solution -> predicate(solution.name) } ?: emptyList()
+internal class DefaultPuzzleRepository(vararg packages: String) : PuzzleRepository {
+    override fun get(origin: String, predicate: (task: String) -> Boolean): List<PuzzleData<*, *>> =
+        getAll()[origin]?.filter { task -> predicate(task.name) } ?: emptyList()
 
-    override fun get(origin: String, task: String): SolutionData<*, *>? =
+    override fun get(origin: String, task: String): PuzzleData<*, *>? =
         get(origin) { it == task }.firstOrNull()
 
-    override fun getAll(): Map<String, List<SolutionData<*, *>>> =
-        solutions
+    override fun getAll(): Map<String, List<PuzzleData<*, *>>> =
+        puzzles
 
-    private val solutions: Map<String, List<SolutionData<*, *>>> by lazy {
+    private val puzzles: Map<String, List<PuzzleData<*, *>>> by lazy {
         ClassGraph()
             .acceptPackages(*packages)
             .enableAnnotationInfo()
@@ -42,7 +42,7 @@ internal class DefaultSolutionRepository(vararg packages: String) : SolutionRepo
                         puzzle.origin
                     }, { info ->
                         val puzzle = info.loadAnnotation<Puzzle>()
-                        val factory = SolutionDataFactory.get(puzzle.factory)
+                        val factory = PuzzleDataFactory.get(puzzle.factory)
                         val solution = info.load<Solution<*, *>>()
                         factory.create(solution)
                     })

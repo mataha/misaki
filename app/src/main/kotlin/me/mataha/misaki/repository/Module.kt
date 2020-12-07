@@ -4,7 +4,7 @@ import me.mataha.misaki.root
 import org.koin.dsl.module
 
 internal val module = module {
-    single<SolutionRepository> {
-        DefaultSolutionRepository(root.name)
+    single<PuzzleRepository> {
+        DefaultPuzzleRepository(root.name)
     }
 }

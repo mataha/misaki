@@ -11,5 +11,5 @@ import kotlin.reflect.KClass
 annotation class Puzzle(
     val origin: String,
     val handles: Array<String> = [],
-    val factory: KClass<out SolutionDataFactory>,
+    val factory: KClass<out PuzzleDataFactory>,
 )
