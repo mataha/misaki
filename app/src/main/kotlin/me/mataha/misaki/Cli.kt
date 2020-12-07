@@ -2,6 +2,7 @@ package me.mataha.misaki
 
 import com.github.ajalt.clikt.core.Abort
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.ProgramResult
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
@@ -64,6 +65,8 @@ internal class Cli(runScriptName: String) :
             echo("Error: ${exception.toCompactString()}", err = true)
             throw Abort(error = true)
         }
+
+        throw ProgramResult(0)
     }
 }
 
