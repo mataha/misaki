@@ -1,7 +1,7 @@
 package me.mataha.misaki.runner
 
-import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
+import kotlin.time.TimedValue
 
 @ExperimentalTime
-internal data class Result(val name: String, val result: Any, val elapsed: Duration)
+internal typealias Result = TimedValue<Any>

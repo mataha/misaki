@@ -7,6 +7,6 @@ internal val module = module {
         Skinner { string -> string.trim() }
     }
     factory<SolutionRunner> {
-        DefaultSolutionRunner(get(), get())
+        DefaultSolutionRunner(get())
     }
 }

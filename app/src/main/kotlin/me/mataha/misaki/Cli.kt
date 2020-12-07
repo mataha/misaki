@@ -10,6 +10,7 @@ import com.github.ajalt.clikt.parameters.types.defaultStdout
 import com.github.ajalt.clikt.parameters.types.inputStream
 import com.github.ajalt.clikt.parameters.types.outputStream
 import me.mataha.misaki.runner.SolutionRunner
+import me.mataha.misaki.service.PuzzleService
 import me.mataha.misaki.util.extensions.printWriter
 import java.io.InputStream
 
@@ -37,27 +38,27 @@ internal class Cli(runScriptName: String) :
     }
 
     override fun run() {
-        val input = inputStream.bufferedReader().use { reader ->
-            if (inputStream.default) {
-                println("Enter your puzzle input:")
-            }
-            reader.readText()
-        }
+        val service = koin.get<PuzzleService>()
+        val runner = koin.get<SolutionRunner>()
 
         try {
-            val runner = koin.get<SolutionRunner>()
-            val result = runner.run(origin, task, input)
+            val puzzle = service.get(origin, task)
 
-            if (result != null) {
-                outputStream.printWriter().use { writer ->
-                    writer.println(result.result)
-
-                    if (measure) {
-                        writer.println("That took: ${result.elapsed}")
-                    }
+            val input = inputStream.bufferedReader().use { reader ->
+                if (inputStream.default) {
+                    println("Enter your puzzle input:")
                 }
-            } else {
-                System.err.println("$origin: '$task' was not found")
+                reader.readText()
+            }
+
+            val result = runner.run(puzzle.solution, input)
+
+            outputStream.printWriter().use { writer ->
+                writer.println(result.value)
+
+                if (measure) {
+                    writer.println("That took: ${result.duration}")
+                }
             }
         } catch (exception: Exception) {
             System.err.println("Error: ${exception.message}")
