@@ -11,7 +11,11 @@ internal fun interface SolutionRunner {
 
 internal class DefaultSolutionRunner(private val skinner: Skinner<String>) : SolutionRunner {
     @ExperimentalTime
-    override fun run(solution: Solution<*, *>, input: String): Result = measureTimedValue {
-        solution.process(skinner.skin(input))
+    override fun run(solution: Solution<*, *>, input: String): Result {
+        val skinned = skinner.skin(input)
+
+        return measureTimedValue {
+            solution.process(skinned)
+        }
     }
 }
