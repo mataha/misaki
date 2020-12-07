@@ -69,9 +69,10 @@ internal class Cli(runScriptName: String) :
 
 private const val STDIN_PROXY_CLASS_NAME = "com.github.ajalt.clikt.parameters.types.UnclosableInputStream"
 
-/** Checks whether this stream is an unclosable [System.`in`] proxy.
+/**
+ * Checks whether this stream is an unclosable [System.`in`] proxy.
  *
- *  Indeed, it's an ugly hack, but what can one do?
+ * Indeed, it's an ugly hack, but what can one do?
  */
 private val InputStream.default: Boolean
     get() = this::class.qualifiedName == STDIN_PROXY_CLASS_NAME
