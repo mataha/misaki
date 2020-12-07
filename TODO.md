@@ -1,10 +1,3 @@
-## Runtime
-
- * Some basic parsing of input would be nice
-   * Timeout?
-   * Link to a puzzle?
-   * Help (man format?)
-
 ## Tests
 
  * Figure out how to test AoC2015.04 (message digests)
