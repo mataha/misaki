@@ -15,7 +15,7 @@ class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
         for (direction in input) {
             val new = current.next(direction)
 
-            grid.add(new)
+            grid += new
             current = new
         }
 
@@ -31,7 +31,7 @@ class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
             val current = map.getValue(turn)
             val new = current.next(direction)
 
-            grid.add(new)
+            grid += new
             map[turn] = new
 
             turn = if (direction.isDirection()) turn.next() else turn
