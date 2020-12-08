@@ -12,13 +12,15 @@ import kotlin.reflect.full.valueParameters
  * Returns an instance of this class if it either:
  *  - is an object;
  *  - has a public, parameterless constructor.
+ *
+ * Throws an [IllegalStateException] otherwise.
  */
 fun <R : Any> KClass<out R>.instance(): R {
     val instance = constructors.singleOrNull { constructor ->
         constructor.isPublic() && constructor.isParameterless()
     }?.call() ?: objectInstance
 
-    return requireNotNull(instance) {
+    return checkNotNull(instance) {
         "$qualifiedName is neither an object nor a class with a public, parameterless constructor"
     }
 }
