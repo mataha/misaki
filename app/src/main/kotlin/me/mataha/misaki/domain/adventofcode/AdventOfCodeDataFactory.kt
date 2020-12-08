@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 
 object AdventOfCodeDataFactory : PuzzleDataFactory {
     override fun create(solution: KClass<out Solution<*, *>>): PuzzleData<*, *> {
-        val metadata = solution.annotations.first { annotation ->
+        val metadata = solution.annotations.single { annotation ->
             annotation.annotationClass == AdventOfCode::class
         } as AdventOfCode
 

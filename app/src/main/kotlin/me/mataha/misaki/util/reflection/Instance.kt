@@ -14,7 +14,7 @@ import kotlin.reflect.full.valueParameters
  *  - has a public, parameterless constructor.
  */
 fun <R : Any> KClass<out R>.instance(): R {
-    val instance = constructors.firstOrNull { constructor ->
+    val instance = constructors.singleOrNull { constructor ->
         constructor.isPublic() && constructor.isParameterless()
     }?.call() ?: objectInstance
 

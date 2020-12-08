@@ -21,7 +21,7 @@ private fun getRunScriptName(default: String = ::main.name.capitalize()): String
         .map { file -> file.nameWithoutExtension }
         .filter { name -> name.isNotBlank() } // dotfiles
 
-    return names.firstOrNull { name -> (names - name).contains(name) } ?: default
+    return names.singleOrNull { name -> (names - name).contains(name) } ?: default
 }
 
 private fun File.isGradleFile(): Boolean = "gradle" in this.name
