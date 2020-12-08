@@ -7,6 +7,7 @@ fun interface PuzzleDataFactory {
     fun create(solution: KClass<out Solution<*, *>>): PuzzleData<*, *>
 
     companion object {
-        @JvmStatic fun get(factory: KClass<out PuzzleDataFactory>): PuzzleDataFactory = factory.instance()
+        @JvmStatic
+        fun get(factory: KClass<out PuzzleDataFactory>): PuzzleDataFactory = factory.instance()
     }
 }

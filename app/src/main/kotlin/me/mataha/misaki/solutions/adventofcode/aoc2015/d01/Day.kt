@@ -37,10 +37,8 @@ class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
     }
 }
 
-private fun changeFloor(char: Char, floor: Int): Int {
-    return when (char) {
-        '(' -> floor + 1
-        ')' -> floor - 1
-        else -> floor
-    }
+private fun changeFloor(char: Char, floor: Int): Int = when (char) {
+    '(' -> floor + 1
+    ')' -> floor - 1
+    else -> floor
 }
