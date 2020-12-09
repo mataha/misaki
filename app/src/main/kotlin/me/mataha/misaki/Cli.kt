@@ -82,8 +82,8 @@ private val InputStream.default: Boolean
 
 /** Returns a short description of this throwable in a compact form. */
 private fun Throwable.toCompactString(): String {
-    val simpleName = this::class.simpleName
+    val name = this::class.simpleName
     val localized = this.localizedMessage
 
-    return "$simpleName${if (localized != null) ": $localized" else ""}"
+    return name + if (localized != null) ": $localized" else ""
 }
