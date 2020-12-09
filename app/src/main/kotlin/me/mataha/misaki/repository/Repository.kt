@@ -8,6 +8,7 @@ import me.mataha.misaki.domain.Puzzle
 import me.mataha.misaki.domain.PuzzleData
 import me.mataha.misaki.domain.PuzzleDataFactory
 import me.mataha.misaki.domain.Solution
+import me.mataha.misaki.util.reflection.AnnotationNotPresentException
 import kotlin.reflect.KClass
 
 internal interface PuzzleRepository {
@@ -62,5 +63,3 @@ private inline fun <reified A : Annotation> ScanResult.getClassesWithAnnotation(
 private inline fun <reified A : Annotation> ClassInfo.loadAnnotation(): A =
     this.annotationInfo[A::class.java.name]?.loadClassAndInstantiate() as? A
         ?: throw AnnotationNotPresentException("Annotation '${A::class.qualifiedName}' was not present on this class")
-
-private class AnnotationNotPresentException(message: String?) : NoSuchElementException(message)
