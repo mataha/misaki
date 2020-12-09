@@ -8,4 +8,7 @@ data class AdventOfCodeData<I : Any, out O : Any>(
     val year: Int,
     val day: Int,
     override val solution: Solution<I, O>
-) : PuzzleData<I, O>
+) : PuzzleData<I, O> {
+    override val origin: String
+        get() = AdventOfCode.NAME
+}
