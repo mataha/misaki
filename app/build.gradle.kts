@@ -51,10 +51,11 @@ tasks.test {
 }
 
 @Suppress("SuspiciousCollectionReassignment")
-tasks.withType<KotlinCompile>().configureEach {
+tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs += "-java-parameters"
+        freeCompilerArgs += "-Xinline-classes"
         freeCompilerArgs += "-Xopt-in=kotlin.ExperimentalUnsignedTypes"
         freeCompilerArgs += "-Xopt-in=kotlin.contracts.ExperimentalContracts"
         freeCompilerArgs += "-Xopt-in=kotlin.time.ExperimentalTime"
