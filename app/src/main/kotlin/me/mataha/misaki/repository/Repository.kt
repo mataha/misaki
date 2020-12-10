@@ -37,7 +37,7 @@ internal class DefaultPuzzleRepository(vararg packages: String) : PuzzleReposito
             .use { result ->
                 result
                     .getClassesWithAnnotation<Puzzle>()
-                    .filter { info -> !info.isAnnotation } // discard meta-annotation uses
+                    .filter { info -> info.implements<Solution<*, *>>() }
                     .groupBy({ info ->
                         val puzzle = info.loadAnnotation<Puzzle>()
                         puzzle.origin
@@ -50,6 +50,10 @@ internal class DefaultPuzzleRepository(vararg packages: String) : PuzzleReposito
             }
     }
 }
+
+/** Checks whether this class implements the named interface. */
+private inline fun <reified T> ClassInfo.implements(): Boolean =
+    this.implementsInterface(T::class.java.name)
 
 /** Loads the class named by this object as a KClass. */
 private inline fun <reified T : Any> ClassInfo.load(): KClass<T> =
