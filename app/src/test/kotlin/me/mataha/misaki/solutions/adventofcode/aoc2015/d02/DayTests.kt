@@ -1,31 +1,38 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d02
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.DisplayName
+import io.kotest.matchers.ints.shouldBeExactly
+import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
+import org.junit.jupiter.params.provider.CsvFileSource
 
+@AdventOfCodeTest
 class ThereWouldBeNoMathTests {
-    @DisplayName("something something")
-    @ParameterizedTest(name = "asdf")
-    @MethodSource("boxProvider")
-    fun testGetSquareFeetOfWrappingPaper(boxes: List<Box>, expected: Int) {
-        val day = ThereWouldBeNoMath()
+    @Nested
+    inner class PartOne {
+        @ParameterizedTest(name = "For example, {1} ft² given ''{0}''.")
+        @CsvFileSource(resources = ["/solutions/adventofcode/2015/02/wrapping-paper.csv"], numLinesToSkip = 1)
+        fun `Elves should order enough square feet of wrapping paper`(dimensions: String, expected: Int) {
+            val day = ThereWouldBeNoMath()
 
-        val actual = day.solveFirst(boxes)
+            val box = day.parse(dimensions)
+            val actual = day.solveFirst(box)
 
-        Assertions.assertEquals(expected, actual) {
-            "..."
+            actual shouldBeExactly expected
         }
     }
 
-    companion object {
-        @JvmStatic
-        private fun boxProvider(): Stream<Arguments> = Stream.of(
-            Arguments.of(listOf(Box(2, 3, 4)), 58),  //58, 34
-            Arguments.of(listOf(Box(1, 1, 10)), 43)
-        ) //43, 14
+    @Nested
+    inner class PartTwo {
+        @ParameterizedTest(name = "For example, {1} ft given ''{0}''.")
+        @CsvFileSource(resources = ["/solutions/adventofcode/2015/02/ribbon.csv"], numLinesToSkip = 1)
+        fun `Elves should order enough feet of ribbon`(dimensions: String, expected: Int) {
+            val day = ThereWouldBeNoMath()
+
+            val box = day.parse(dimensions)
+            val actual = day.solveSecond(box)
+
+            actual shouldBeExactly expected
+        }
     }
 }
