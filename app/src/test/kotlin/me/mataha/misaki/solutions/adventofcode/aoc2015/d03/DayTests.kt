@@ -1,34 +1,35 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d03
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.DisplayName
+import io.kotest.matchers.ints.shouldBeExactly
+import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
 
+@AdventOfCodeTest
 class PerfectlySphericalHousesTests {
-    @DisplayName("Given directions, the correct number of houses should receive at least one present")
-    @ParameterizedTest(name = "{0} => {1}")
-    @CsvFileSource(resources = ["/solutions/adventofcode/2015/03/santa.csv"], numLinesToSkip = 1)
-    fun testGetHousesWithAtLeastOnePresentReceivedFromSanta(directions: String, expected: Int) {
-        val solution = PerfectlySphericalHouses()
+    @Nested
+    inner class PartOne {
+        @ParameterizedTest(name = "For example, {1} house(s) given ''{0}''.")
+        @CsvFileSource(resources = ["/solutions/adventofcode/2015/03/santa.csv"], numLinesToSkip = 1)
+        fun `Enough houses should receive at least one present from Santa`(moves: String, expected: Int) {
+            val solution = PerfectlySphericalHouses()
 
-        val actual = solution.solveFirst(directions)
+            val actual = solution.solveFirst(moves)
 
-        Assertions.assertEquals(expected, actual) {
-            "Given $directions, somehow, $actual house(s) received at least one present"
+            actual shouldBeExactly expected
         }
     }
+    @Nested
+    inner class PartTwo {
+        @ParameterizedTest(name = "For example, {1} house(s) given ''{0}''.")
+        @CsvFileSource(resources = ["/solutions/adventofcode/2015/03/santa+robot.csv"], numLinesToSkip = 1)
+        fun `Enough houses should receive at least one present from Santa and Robot`(moves: String, expected: Int) {
+            val solution = PerfectlySphericalHouses()
 
-    @DisplayName("Given directions, the correct number of houses should receive at least one present")
-    @ParameterizedTest(name = "{0} => {1}")
-    @CsvFileSource(resources = ["/solutions/adventofcode/2015/03/santa-robot.csv"], numLinesToSkip = 1)
-    fun testGetHousesWithAtLeastOnePresentReceivedFromSantaAndHisRobot(directions: String, expected: Int) {
-        val solution = PerfectlySphericalHouses()
+            val actual = solution.solveSecond(moves)
 
-        val actual = solution.solveSecond(directions)
-
-        Assertions.assertEquals(expected, actual) {
-            "Given $directions, somehow, $actual house(s) received at least one present"
+            actual shouldBeExactly expected
         }
     }
 }
