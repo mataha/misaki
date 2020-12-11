@@ -22,11 +22,12 @@ open class PuzzleNameGenerator : DisplayNameGenerator.Simple() {
         } ?: splitPascamelCasedWords(name)
     }
 
-    override fun generateDisplayNameForMethod(testClass: Class<*>, testMethod: Method): String =
-        testMethod.name.capitalize() + "."
+    override fun generateDisplayNameForNestedClass(nestedClass: Class<*>): String =
+        splitPascamelCasedWords(super.generateDisplayNameForNestedClass(nestedClass))
 
-    open fun generateDisplayNameForPuzzle(puzzle: PuzzleData<*, *>): String =
-        "[${puzzle.origin}] ${puzzle.name}"
+    override fun generateDisplayNameForMethod(testClass: Class<*>, testMethod: Method): String = testMethod.name + "."
+
+    open fun generateDisplayNameForPuzzle(puzzle: PuzzleData<*, *>): String = "[${puzzle.origin}] ${puzzle.name}"
 }
 
 private object PuzzleLookup {
@@ -58,8 +59,7 @@ private fun stripTestSuffix(fixtureName: String): String =
 private val WORD_DELIMITER = Regex("""(?<=\w)(?=[A-Z])""")
 
 /** Separates words in a *PascamelCase* [string] using a single whitespace character (`" "`). */
-private fun splitPascamelCasedWords(string: String): String =
-    string.split(WORD_DELIMITER).joinToString(" ")
+private fun splitPascamelCasedWords(string: String): String = string.split(WORD_DELIMITER).joinToString(" ")
 
 /** Returns a predicate that always returns true. */
 @Suppress("NOTHING_TO_INLINE")
