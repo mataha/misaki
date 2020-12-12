@@ -21,7 +21,7 @@ class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), NoOpParser {
 
 @VisibleForTesting
 internal fun findLowestMd5StartingWith(key: String, prefix: String): Int {
-    repeat(Int.MAX_VALUE - 1) {
+    repeat(Int.MAX_VALUE) {
         val number = it + 1
         val string = key + number
 
