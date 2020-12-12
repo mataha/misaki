@@ -11,6 +11,10 @@ abstract class AdventOfCodeDay<I : Any, out O : Any> : Solution<I, AdventOfCodeR
     abstract fun solveSecond(input: I): O
 }
 
+fun <I : Any, O : Any> AdventOfCodeDay<I, O>.processFirst(input: String): O = solveFirst(parse(input))
+
+fun <I : Any, O : Any> AdventOfCodeDay<I, O>.processSecond(input: String): O = solveSecond(parse(input))
+
 data class AdventOfCodeResult<out A, out B>(val first: A, val second: B) {
     override fun toString(): String = "[$first, $second]"
 }

@@ -1,6 +1,8 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d01
 
 import io.kotest.matchers.ints.shouldBeExactly
+import me.mataha.misaki.domain.adventofcode.processFirst
+import me.mataha.misaki.domain.adventofcode.processSecond
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,7 +19,7 @@ class NotQuiteLispTests {
         fun `Santa should end at the expected floor`(directions: String, expected: Int) {
             val solution = NotQuiteLisp()
 
-            val actual = solution.solveFirst(directions)
+            val actual = solution.processFirst(directions)
 
             actual shouldBeExactly expected
         }
@@ -30,7 +32,7 @@ class NotQuiteLispTests {
         fun `Santa should eventually enter the basement`(directions: String, expected: Int) {
             val solution = NotQuiteLisp()
 
-            val actual = solution.solveSecond(directions)
+            val actual = solution.processSecond(directions)
 
             actual shouldBeExactly expected
         }
@@ -41,7 +43,7 @@ class NotQuiteLispTests {
         fun `Santa should never enter the basement`(directions: String) {
             val solution = NotQuiteLisp()
 
-            val actual = solution.solveSecond(directions)
+            val actual = solution.processSecond(directions)
 
             actual shouldBeExactly NotQuiteLisp.BASEMENT_NOT_ENTERED
         }

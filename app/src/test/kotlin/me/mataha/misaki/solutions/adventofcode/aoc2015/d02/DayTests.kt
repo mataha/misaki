@@ -1,6 +1,8 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d02
 
 import io.kotest.matchers.ints.shouldBeExactly
+import me.mataha.misaki.domain.adventofcode.processFirst
+import me.mataha.misaki.domain.adventofcode.processSecond
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
@@ -13,10 +15,9 @@ class ThereWouldBeNoMathTests {
         @ParameterizedTest(name = "For example, {1} ft² given ''{0}''.")
         @CsvFileSource(resources = ["/solutions/adventofcode/2015/02/wrapping-paper.csv"], numLinesToSkip = 1)
         fun `Elves should order enough square feet of wrapping paper`(dimensions: String, expected: Int) {
-            val day = ThereWouldBeNoMath()
+            val solution = ThereWouldBeNoMath()
 
-            val box = day.parse(dimensions)
-            val actual = day.solveFirst(box)
+            val actual = solution.processFirst(dimensions)
 
             actual shouldBeExactly expected
         }
@@ -27,10 +28,9 @@ class ThereWouldBeNoMathTests {
         @ParameterizedTest(name = "For example, {1} ft given ''{0}''.")
         @CsvFileSource(resources = ["/solutions/adventofcode/2015/02/ribbon.csv"], numLinesToSkip = 1)
         fun `Elves should order enough feet of ribbon`(dimensions: String, expected: Int) {
-            val day = ThereWouldBeNoMath()
+            val solution = ThereWouldBeNoMath()
 
-            val box = day.parse(dimensions)
-            val actual = day.solveSecond(box)
+            val actual = solution.processSecond(dimensions)
 
             actual shouldBeExactly expected
         }
