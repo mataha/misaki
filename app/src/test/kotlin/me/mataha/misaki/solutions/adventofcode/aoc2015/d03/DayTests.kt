@@ -22,6 +22,7 @@ class PerfectlySphericalHousesTests {
             actual shouldBeExactly expected
         }
     }
+
     @Nested
     inner class PartTwo {
         @ParameterizedTest(name = "For example, {1} house(s) given ''{0}''.")
