@@ -21,7 +21,7 @@ internal fun lookAndSay(string: String, steps: Int = 1): String {
 
     var str = string
 
-    (1..steps).forEach { _ -> str = str.phonetic() }
+    repeat(steps) { str = str.phonetic() }
 
     return str
 }

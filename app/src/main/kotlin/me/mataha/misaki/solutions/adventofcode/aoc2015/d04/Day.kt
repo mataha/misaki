@@ -21,7 +21,8 @@ class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), NoOpParser {
 
 @VisibleForTesting
 internal fun findLowestMd5StartingWith(key: String, prefix: String): Int {
-    for (number in 1..Int.MAX_VALUE) {
+    repeat(Int.MAX_VALUE - 1) {
+        val number = it + 1
         val string = key + number
 
         if (string.md5Hex().startsWith(prefix)) {
@@ -29,6 +30,6 @@ internal fun findLowestMd5StartingWith(key: String, prefix: String): Int {
         }
     }
 
-    // Hash starting with that prefix was not found (given supplied range)
+    // Hash starting with that prefix was not found
     return HASH_NOT_FOUND
 }
