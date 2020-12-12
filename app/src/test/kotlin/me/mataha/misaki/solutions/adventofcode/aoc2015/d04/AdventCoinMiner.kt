@@ -38,7 +38,7 @@ internal fun main(vararg args: String) {
     runBlocking(Dispatchers.Default) {
         repeat(iterations) {
             val result = async {
-                findLowestMd5StartingWith(key, prefix)
+                solve(key, prefix)
             }
 
             withTimeoutOrNull(TIMEOUT) {
@@ -51,8 +51,20 @@ internal fun main(vararg args: String) {
     }
 
     if (!anything) {
-        println("Could not find any candidates under $TIMEOUT timeout.")
+        println("Could not find any answers under $TIMEOUT timeout.")
     }
+}
+
+private val solve = ::findLowestMd5StartingWith
+
+private operator fun String.inc(): String {
+    for ((index, char) in this.reversed().withIndex()) {
+        if (char != 'z') {
+            return take(length - (index + 1)) + char.inc() + "a".repeat(index)
+        }
+    }
+
+    return "a".repeat(length + 1)
 }
 
 private inline fun <T> parse(crossinline block: () -> T): T = try {
@@ -64,14 +76,4 @@ private inline fun <T> parse(crossinline block: () -> T): T = try {
 private fun usage(): Nothing {
     println("Usage: AdventCoinMiner ITERATIONS [KEY=$KEY] [PREFIX=$PREFIX]")
     exitProcess(1)
-}
-
-private operator fun String.inc(): String {
-    for ((index, char) in this.reversed().withIndex()) {
-        if (char != 'z') {
-            return take(length - (index + 1)) + char.inc() + "a".repeat(index)
-        }
-    }
-
-    return "a".repeat(length + 1)
 }
