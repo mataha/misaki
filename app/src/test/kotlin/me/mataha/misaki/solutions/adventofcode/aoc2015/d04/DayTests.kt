@@ -4,8 +4,11 @@ import io.kotest.matchers.ints.shouldBeExactly
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT
 
 @AdventOfCodeTest
+@Execution(CONCURRENT)
 class IdealStockingStufferTests {
     @Nested
     inner class PartOne {
