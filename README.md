@@ -62,6 +62,27 @@ Output:
 That took: 127ms
 ```
 
+#### Usage with argument files
+
+`misaki`, much like `javac`, supports [argument files][4]:
+
+```shell
+$ ./run @"samples/adventofcode/2015/05/argfile"
+```
+
+Where `argfile` contains:
+
+```
+"Advent of Code" "Doesn't He Have Intern-Elves For This?"
+-i "samples/adventofcode/2015/05/input.txt"
+```
+
+Output:
+
+```
+[258, 53]
+```
+
 When in doubt, `./run --help`.
 
 ## License
@@ -71,3 +92,4 @@ MIT, of course. See [LICENSE](./LICENSE).
 [1]: https://anidb.net/character/2809
 [2]: https://en.wikipedia.org/wiki/Welcome_to_the_N.H.K.
 [3]: https://adoptopenjdk.net/installation.html
+[4]: https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javac.html#BHCCFGCD
