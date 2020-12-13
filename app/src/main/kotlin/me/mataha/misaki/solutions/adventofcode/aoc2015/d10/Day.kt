@@ -3,7 +3,6 @@ package me.mataha.misaki.solutions.adventofcode.aoc2015.d10
 import me.mataha.misaki.domain.NoOpParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
-import me.mataha.misaki.util.annotations.VisibleForTesting
 
 /** See [https://adventofcode.com/2015/day/10]. */
 @AdventOfCode("Elves Look, Elves Say", 2015, 10)
@@ -13,8 +12,7 @@ class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun solveSecond(input: String): Int = lookAndSay(input, 50).length
 }
 
-@VisibleForTesting
-internal fun lookAndSay(string: String, steps: Int = 1): String {
+private fun lookAndSay(string: String, steps: Int = 1): String {
     require(steps >= 1) {
         "Number of steps has to be positive (is: $steps)"
     }

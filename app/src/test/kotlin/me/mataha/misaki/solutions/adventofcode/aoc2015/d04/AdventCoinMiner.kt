@@ -1,12 +1,11 @@
 @file:JvmName("AdventCoinMiner")
 
-package me.mataha.misaki.solutions.adventofcode.aoc2015.d04.miner
+package me.mataha.misaki.solutions.adventofcode.aoc2015.d04
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeoutOrNull
-import me.mataha.misaki.solutions.adventofcode.aoc2015.d04.findLowestMd5StartingWith
 import kotlin.system.exitProcess
 import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
