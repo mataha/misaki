@@ -69,5 +69,5 @@ When in doubt, `./run --help`.
 MIT, of course. See [LICENSE](./LICENSE).
 
 [1]: https://anidb.net/character/2809
-[2]: https://www.mangaupdates.com/series.html?id=8861
+[2]: https://en.wikipedia.org/wiki/Welcome_to_the_N.H.K.
 [3]: https://adoptopenjdk.net/installation.html
