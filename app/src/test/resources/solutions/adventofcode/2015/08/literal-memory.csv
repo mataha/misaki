@@ -1,0 +1,5 @@
+String         ,Length (in code),Length (in memory)
+""""""         ,2               ,0
+"""abc"""      ,5               ,3
+"""aaa\""aaa""",10              ,7
+"""\x27"""     ,6               ,1
