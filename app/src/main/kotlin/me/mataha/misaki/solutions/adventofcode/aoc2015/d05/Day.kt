@@ -7,7 +7,6 @@ import kotlinx.coroutines.runBlocking
 import me.mataha.misaki.domain.LineParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
-import me.mataha.misaki.util.annotations.VisibleForTesting
 import me.mataha.misaki.util.extensions.zipAdjacent
 
 /** See [https://adventofcode.com/2015/day/5]. */
@@ -20,8 +19,7 @@ class NoInternElvesForThis : AdventOfCodeDay<List<String>, Int>(), LineParser {
 
 private const val VOWELS = "aeiou"
 
-@VisibleForTesting
-internal fun String.isNiceBefore(): Boolean {
+private fun String.isNiceBefore(): Boolean {
     val forbidden = arrayOf("ab", "cd", "pq", "xy")
 
     val predicates = arrayOf<(string: String) -> Boolean>(
@@ -33,8 +31,7 @@ internal fun String.isNiceBefore(): Boolean {
     return this.isNice(*predicates)
 }
 
-@VisibleForTesting
-internal fun String.isNiceAfter(): Boolean {
+private fun String.isNiceAfter(): Boolean {
     val predicates = arrayOf<(string: String) -> Boolean>(
         { string -> string.windowed(2).any { window -> window in string.replaceFirst(window, "  ") } },
         { string -> string.zipAdjacent().any { pair -> pair.first == pair.second } }
