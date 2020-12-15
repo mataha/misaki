@@ -1,5 +1,6 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d05
 
+import io.kotest.assertions.withClue
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import me.mataha.misaki.domain.adventofcode.processFirst
@@ -18,9 +19,9 @@ class NoInternElvesForThisTests {
         fun `Under old rules, given string should be nice`(string: String) {
             val solution = NoInternElvesForThis()
 
-            val actual = solution.processFirst(string) == 1
+            val actual = solution.processFirst(string) == 0
 
-            actual.shouldBeTrue()
+            withClue("String '$string' should be nice.") { actual.shouldBeTrue() }
         }
 
         @ParameterizedTest(name = "For example, ''{0}''.")
@@ -30,7 +31,7 @@ class NoInternElvesForThisTests {
 
             val actual = solution.processFirst(string) == 1
 
-            actual.shouldBeFalse()
+            withClue("String '$string' should be naughty.") { actual.shouldBeFalse() }
         }
     }
 
@@ -43,7 +44,7 @@ class NoInternElvesForThisTests {
 
             val actual = solution.processSecond(string) == 1
 
-            actual.shouldBeTrue()
+            withClue("String '$string' should be nice.") { actual.shouldBeTrue() }
         }
 
         @ParameterizedTest(name = "For example, ''{0}''.")
@@ -53,7 +54,7 @@ class NoInternElvesForThisTests {
 
             val actual = solution.processSecond(string) == 1
 
-            actual.shouldBeFalse()
+            withClue("String '$string' should be naughty.") { actual.shouldBeFalse() }
         }
     }
 }
