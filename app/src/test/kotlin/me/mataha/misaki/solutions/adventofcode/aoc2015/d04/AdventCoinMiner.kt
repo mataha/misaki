@@ -1,4 +1,4 @@
-@file:JvmName("AdventCoinMiner")
+@file:JvmName("AdventCoinMiner") // -Dkotlinx.coroutines.debug
 
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d04
 
@@ -19,22 +19,22 @@ private val TIMEOUT = 1.seconds
 internal fun main(vararg args: String) {
     val iterations = parse {
         args[0].toInt()
-            .also { require(it > 0) }
+            .also { arg -> require(arg > 0) }
     }
 
     var key = parse {
         args.getOrElse(1) { KEY }
-            .also { require(it.matches(Regex("""[a-z]+"""))) }
+            .also { arg -> require(arg.matches(Regex("""[a-z]+"""))) }
     }
 
     val prefix = parse {
         args.getOrElse(2) { PREFIX }
-            .also { require(it.matches(Regex("""[0-9a-f]+"""))) }
+            .also { arg -> require(arg.matches(Regex("""[0-9a-f]+"""))) }
     }
 
     runBlocking {
         repeat(iterations) {
-            val job = async(Dispatchers.Default) {
+            val job = async(CoroutineName("$prefix+$key")) {
                 mine(key, prefix)
             }
 
@@ -48,27 +48,27 @@ internal fun main(vararg args: String) {
     }
 }
 
-private const val HASH_NOT_FOUND = -1
+private suspend fun mine(key: String, prefix: String): Int = withContext(Dispatchers.Default) {
+    repeat(Int.MAX_VALUE) { index ->
+        @Exhaustive when (isActive) {
+            true -> {
+                val number = index + 1
+                val string = key + number
 
-private suspend fun mine(key: String, prefix: String): Int = coroutineScope {
-    withContext(coroutineContext) {
-        repeat(Int.MAX_VALUE) { index ->
-            @Exhaustive when (isActive) {
-                true -> {
-                    val number = index + 1
-                    val string = key + number
-
-                    if (string.md5Hex().startsWith(prefix)) {
-                        return@withContext number
-                    }
+                if (string.md5Hex().startsWith(prefix)) {
+                    return@withContext number
                 }
-                false -> return@withContext HASH_NOT_FOUND
+            }
+            false -> {
+                throw CancellationException("Mining has been cancelled")
             }
         }
-
-        HASH_NOT_FOUND
     }
+
+    HASH_NOT_FOUND
 }
+
+private const val HASH_NOT_FOUND = -1
 
 private operator fun String.inc(): String {
     for ((index, char) in this.reversed().withIndex()) {
