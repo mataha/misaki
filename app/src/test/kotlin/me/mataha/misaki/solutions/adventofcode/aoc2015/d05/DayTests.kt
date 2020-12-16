@@ -19,7 +19,7 @@ class NoInternElvesForThisTests {
         fun `Under old rules, given string should be nice`(string: String) {
             val solution = NoInternElvesForThis()
 
-            val actual = solution.processFirst(string) == 0
+            val actual = solution.processFirst(string) == 1
 
             withClue("String '$string' should be nice.") { actual.shouldBeTrue() }
         }
