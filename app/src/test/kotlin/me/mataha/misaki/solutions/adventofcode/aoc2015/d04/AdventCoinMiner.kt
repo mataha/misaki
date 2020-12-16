@@ -50,9 +50,10 @@ internal fun main(vararg args: String) {
 
 private suspend fun mine(key: String, prefix: String): Int = withContext(Dispatchers.Default) {
     repeat(Int.MAX_VALUE) { index ->
+        val number = index + 1
+
         @Exhaustive when (isActive) {
             true -> {
-                val number = index + 1
                 val string = key + number
 
                 if (string.md5Hex().startsWith(prefix)) {
@@ -60,7 +61,7 @@ private suspend fun mine(key: String, prefix: String): Int = withContext(Dispatc
                 }
             }
             false -> {
-                throw CancellationException("Mining has been cancelled")
+                throw CancellationException("Mining has been cancelled (on $number)")
             }
         }
     }
