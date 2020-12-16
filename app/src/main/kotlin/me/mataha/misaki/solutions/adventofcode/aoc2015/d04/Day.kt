@@ -19,8 +19,8 @@ class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), NoOpParser {
 }
 
 private fun mine(key: String, prefix: String): Int {
-    repeat(Int.MAX_VALUE) { iteration ->
-        val number = iteration + 1
+    repeat(Int.MAX_VALUE) { index ->
+        val number = index + 1
         val string = key + number
 
         if (string.md5Hex().startsWith(prefix)) {

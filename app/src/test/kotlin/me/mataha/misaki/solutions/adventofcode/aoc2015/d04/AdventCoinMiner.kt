@@ -52,10 +52,10 @@ private const val HASH_NOT_FOUND = -1
 
 private suspend fun mine(key: String, prefix: String): Int = coroutineScope {
     withContext(coroutineContext) {
-        repeat(Int.MAX_VALUE) { iteration ->
+        repeat(Int.MAX_VALUE) { index ->
             @Exhaustive when (isActive) {
                 true -> {
-                    val number = iteration + 1
+                    val number = index + 1
                     val string = key + number
 
                     if (string.md5Hex().startsWith(prefix)) {
