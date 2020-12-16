@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     application
     kotlin("jvm") version "1.4.20"
+    id("app.cash.exhaustive") version "0.1.1"
 }
 
 application {

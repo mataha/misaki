@@ -2,16 +2,15 @@
 
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d04
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withTimeoutOrNull
+import app.cash.exhaustive.Exhaustive
+import kotlinx.coroutines.*
+import me.mataha.misaki.util.extensions.md5Hex
 import kotlin.system.exitProcess
 import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
 
 private const val KEY = "a"
-private val PREFIX = "0".repeat(5)
+private const val PREFIX = "00000" // "0".repeat(5)
 
 @ExperimentalTime
 private val TIMEOUT = 1.seconds
@@ -33,29 +32,43 @@ internal fun main(vararg args: String) {
             .also { require(it.matches(Regex("""[0-9a-f]+"""))) }
     }
 
-    var anything = false
-
-    runBlocking(Dispatchers.Default) {
+    runBlocking {
         repeat(iterations) {
-            val result = async {
-                solve(key, prefix)
+            val job = async(Dispatchers.Default) {
+                mine(key, prefix)
             }
 
             withTimeoutOrNull(TIMEOUT) {
-                println("Key: $key, number: ${result.await()}")
-                if (!anything) anything = true
-            }
+                val number = job.await()
+                println("Key: $key, number: $number")
+            } ?: job.cancel()
 
-            key++
+            ++key
         }
-    }
-
-    if (!anything) {
-        println("Could not find any answers under $TIMEOUT timeout.")
     }
 }
 
-private val solve = ::findLowestMd5StartingWith
+private const val HASH_NOT_FOUND = -1
+
+private suspend fun mine(key: String, prefix: String): Int = coroutineScope {
+    withContext(coroutineContext) {
+        repeat(Int.MAX_VALUE) { iteration ->
+            @Exhaustive when (isActive) {
+                true -> {
+                    val number = iteration + 1
+                    val string = key + number
+
+                    if (string.md5Hex().startsWith(prefix)) {
+                        return@withContext number
+                    }
+                }
+                false -> return@withContext HASH_NOT_FOUND
+            }
+        }
+
+        HASH_NOT_FOUND
+    }
+}
 
 private operator fun String.inc(): String {
     for ((index, char) in this.reversed().withIndex()) {
