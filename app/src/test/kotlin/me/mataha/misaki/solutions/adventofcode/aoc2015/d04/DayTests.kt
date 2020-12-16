@@ -18,8 +18,8 @@ class IdealStockingStufferTests {
         fun `MD5 hash of given key + expected number should start with five zeroes`() {
             val solution = IdealStockingStuffer()
 
-            val expected = 420
-            val actual = solution.processFirst("sfrneccg") // <1s
+            val expected = 15
+            val actual = solution.processFirst("taxcnqsl")
 
             actual shouldBeExactly expected
         }
@@ -31,8 +31,8 @@ class IdealStockingStufferTests {
         fun `MD5 hash of given key + expected number should start with six zeroes`() {
             val solution = IdealStockingStuffer()
 
-            val expected = 13285
-            val actual = solution.processSecond("dasmngpa") // <1s
+            val expected = 50
+            val actual = solution.processSecond("eassxskp")
 
             actual shouldBeExactly expected
         }
