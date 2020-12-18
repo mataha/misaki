@@ -1,6 +1,8 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d08
 
-import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.*
+import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.ENCODED
+import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.IN_MEMORY
+import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.LITERAL
 
 internal fun String.length(representation: Representation): Int {
     return when (representation) {

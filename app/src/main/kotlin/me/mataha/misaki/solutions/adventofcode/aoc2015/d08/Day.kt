@@ -3,7 +3,9 @@ package me.mataha.misaki.solutions.adventofcode.aoc2015.d08
 import me.mataha.misaki.domain.LineParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
-import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.*
+import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.ENCODED
+import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.IN_MEMORY
+import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.LITERAL
 
 /** See [https://adventofcode.com/2015/day/8]. */
 @AdventOfCode("Matchsticks", 2015, 8)
