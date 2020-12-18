@@ -114,31 +114,10 @@ private sealed class InputSource {
     abstract fun fetch(data: String?): String
 }
 
-private fun RawOption.inputStreamSource(): NullableOption<InputSource, InputSource> {
-    return inputStream().convert({ localization.fileMetavar() }, CompletionCandidates.Path) { inputStream ->
-        InputStreamSource(inputStream)
-    }
-}
-
-private class InputStreamSource(private val inputStream: InputStream) : InputSource() {
-    override fun fetch(data: String?): String =
-        inputStream.bufferedReader().use { reader ->
-            if (inputStream.default) {
-                println("Enter your puzzle input:")
-            }
-            reader.readText()
-        }
-
-    companion object {
-        fun default(): InputStreamSource = InputStreamSource(UnclosableInputStream(System.`in`))
-    }
-}
-
-private fun RawOption.urlSource(): NullableOption<InputSource, InputSource> {
-    return convert({ "URL" }, CompletionCandidates.Hostname) { url ->
+private fun RawOption.urlSource(): NullableOption<InputSource, InputSource> =
+    convert({ "URL" }, CompletionCandidates.Hostname) { url ->
         UrlSource(url)
     }
-}
 
 private class UrlSource(private val url: String) : InputSource() {
     override fun fetch(data: String?): String = runBlocking {
@@ -165,25 +144,42 @@ private fun HttpRequestBuilder.doNotTrack() =
 private fun HttpRequestBuilder.setSessionToken(token: String) =
     this.header(HttpHeaders.Cookie, "$SESSION_COOKIE=$token")
 
-/** Checks whether this stream is an unclosable [System.`in`] proxy. */
-private val InputStream.default: Boolean
-    get() = this::class == UnclosableInputStream::class
+private fun RawOption.inputStreamSource(): NullableOption<InputSource, InputSource> =
+    inputStream().convert({ localization.fileMetavar() }, CompletionCandidates.Path) { inputStream ->
+        InputStreamSource(inputStream)
+    }
+
+private class InputStreamSource(private val inputStream: InputStream) : InputSource() {
+    override fun fetch(data: String?): String =
+        inputStream.bufferedReader().use { reader ->
+            if (inputStream.default) {
+                println("Enter your puzzle input:")
+            }
+            reader.readText()
+        }
+
+    companion object {
+        fun default(): InputStreamSource = InputStreamSource(UnclosableInputStream(System.`in`))
+    }
+}
 
 private fun MutuallyExclusiveOptions<InputSource, InputSource?>.defaultStdin():
         MutuallyExclusiveOptions<InputSource, InputSource> = default(InputStreamSource.default())
 
+/** Checks whether this stream is an unclosable [System.`in`] proxy. */
+private val InputStream.default: Boolean
+    get() = this::class == UnclosableInputStream::class
+
 private class UnclosableInputStream(private var delegate: InputStream?) : InputStream() {
-    private val stream get() = delegate ?: throw IOException("Stream closed")
+    private val stream get() = delegate ?: throw IOException("Stream is closed")
+
     override fun available(): Int = stream.available()
     override fun read(): Int = stream.read()
-    override fun read(bytes: ByteArray, offset: Int, length: Int): Int = stream.read(bytes, offset, length)
-    override fun skip(bytes: Long): Long = stream.skip(bytes)
+    override fun read(b: ByteArray, off: Int, len: Int): Int = stream.read(b, off, len)
+    override fun skip(n: Long): Long = stream.skip(n)
     override fun reset() = stream.reset()
     override fun markSupported(): Boolean = stream.markSupported()
-
-    override fun mark(limit: Int) {
-        stream.mark(limit)
-    }
+    override fun mark(readlimit: Int) = stream.mark(readlimit)
 
     override fun close() {
         delegate = null
