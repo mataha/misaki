@@ -60,6 +60,7 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs += "-Xinline-classes"
         freeCompilerArgs += "-Xopt-in=kotlin.ExperimentalUnsignedTypes"
         freeCompilerArgs += "-Xopt-in=kotlin.contracts.ExperimentalContracts"
+        freeCompilerArgs += "-Xopt-in=kotlin.io.path.ExperimentalPathApi"
         freeCompilerArgs += "-Xopt-in=kotlin.time.ExperimentalTime"
     }
 }
