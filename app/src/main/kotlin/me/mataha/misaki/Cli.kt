@@ -28,11 +28,13 @@ import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import kotlinx.coroutines.runBlocking
+import me.mataha.misaki.runner.Result
 import me.mataha.misaki.runner.SolutionRunner
 import me.mataha.misaki.service.PuzzleService
 import me.mataha.misaki.util.extensions.printWriter
 import java.io.IOException
 import java.io.InputStream
+import java.io.OutputStream
 
 internal class Cli(runScriptName: String) :
     CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
@@ -52,7 +54,7 @@ internal class Cli(runScriptName: String) :
         ).urlSource()
     ).single().defaultStdin()
 
-    private val outputStream
+    private val output
             by option(
                 "-o", "--output",
                 help = "File to write results to"
@@ -94,13 +96,7 @@ internal class Cli(runScriptName: String) :
             val input = source.fetch(token)
 
             val result = runner.run(puzzle.solution, input)
-
-            outputStream.printWriter().use { writer ->
-                writer.println(result.value)
-                if (measure) {
-                    writer.println("That took: ${result.duration}")
-                }
-            }
+            output.publish(result, measure)
         } catch (exception: Exception) {
             echo("Error: ${exception.toCompactString()}", err = true)
             throw Abort(error = true)
@@ -154,9 +150,10 @@ private fun RawOption.inputStreamSource(): NullableOption<InputSource, InputSour
 private class InputStreamSource(private val inputStream: InputStream) : InputSource() {
     override fun fetch(data: String?): String =
         inputStream.bufferedReader().use { reader ->
-            if (inputStream.default) {
+            if (inputStream.isDefault()) {
                 println("Enter your puzzle input:")
             }
+
             reader.readText()
         }
 }
@@ -183,8 +180,17 @@ private class UnclosableInputStream(private var delegate: InputStream?) : InputS
 }
 
 /** Checks whether this stream is an unclosable [System.`in`] proxy. */
-private val InputStream.default: Boolean
-    get() = this::class == UnclosableInputStream::class
+private fun InputStream.isDefault(): Boolean = this is UnclosableInputStream
+
+private fun OutputStream.publish(result: Result, measure: Boolean) {
+    this.printWriter().use { writer ->
+        writer.println(result.value)
+
+        if (measure) {
+            writer.println("That took: ${result.duration}")
+        }
+    }
+}
 
 /** Returns a short description of this throwable in a compact form. */
 private fun Throwable.toCompactString(): String {
