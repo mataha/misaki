@@ -1,42 +1,87 @@
 package me.mataha.misaki
 
+import com.github.ajalt.clikt.completion.CompletionCandidates
 import com.github.ajalt.clikt.core.Abort
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.ProgramResult
 import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.ajalt.clikt.parameters.groups.MutuallyExclusiveOptions
+import com.github.ajalt.clikt.parameters.groups.default
+import com.github.ajalt.clikt.parameters.groups.mutuallyExclusiveOptions
+import com.github.ajalt.clikt.parameters.groups.single
+import com.github.ajalt.clikt.parameters.options.NullableOption
+import com.github.ajalt.clikt.parameters.options.RawOption
+import com.github.ajalt.clikt.parameters.options.check
+import com.github.ajalt.clikt.parameters.options.convert
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.versionOption
-import com.github.ajalt.clikt.parameters.types.defaultStdin
 import com.github.ajalt.clikt.parameters.types.defaultStdout
 import com.github.ajalt.clikt.parameters.types.inputStream
 import com.github.ajalt.clikt.parameters.types.outputStream
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngineFactory
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.accept
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import kotlinx.coroutines.runBlocking
 import me.mataha.misaki.runner.SolutionRunner
 import me.mataha.misaki.service.PuzzleService
 import me.mataha.misaki.util.extensions.printWriter
+import java.io.IOException
 import java.io.InputStream
 
 internal class Cli(runScriptName: String) :
     CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
     init {
-        versionOption(version) { it }
+        versionOption(version) { string -> string.trim() }
     }
 
-    private val inputStream by option("-i", "--input", help = """File to read puzzle input from""")
-        .inputStream().defaultStdin()
+    private val source by mutuallyExclusiveOptions(
+        option(
+            "-i", "--input",
+            help = "File to read puzzle input from"
+        ).inputStreamSource(),
 
-    private val outputStream by option("-o", "--output", help = """File to write results to""")
-        .outputStream().defaultStdout()
+        option(
+            "-u", "--url",
+            help = "URL to read puzzle input from"
+        ).urlSource()
+    ).single().defaultStdin()
 
-    private val measure by option("--measure", help = """Enable/disable time measurement""")
-        .flag("--no-measure", default = false)
+    private val outputStream
+            by option(
+                "-o", "--output",
+                help = "File to write results to"
+            ).outputStream().defaultStdout()
 
-    private val origin by argument(help = """Puzzle origin (site, company etc.)""")
+    private val measure
+            by option(
+                "--measure",
+                help = "Enable/disable time measurement"
+            ).flag("--no-measure", default = false, defaultForHelp = "disable")
 
-    private val task by argument(help = """Task name""")
+    private val token
+            by option(
+                "--token",
+                help = "Session token to use with URL",
+                metavar = "TOKEN",
+                envvar = "MISAKI_APP_TOKEN"
+            ).check("Session token must be a base16 string") { token ->
+                token.matches(Regex("""[0-9a-f]+"""))
+            }
+
+    private val origin
+            by argument(help = "Puzzle origin (site, company etc.)")
+
+    private val task
+            by argument(help = "Task name")
 
     private companion object {
-        private const val EPILOG = """See also: README.md (general usage and examples)"""
+        private const val EPILOG = "See also: README.md (general usage and examples)"
     }
 
     override fun run() {
@@ -46,12 +91,7 @@ internal class Cli(runScriptName: String) :
         try {
             val puzzle = service.get(origin, task)
 
-            val input = inputStream.bufferedReader().use { reader ->
-                if (inputStream.default) {
-                    println("Enter your puzzle input:")
-                }
-                reader.readText()
-            }
+            val input = source.fetch(token)
 
             val result = runner.run(puzzle.solution, input)
 
@@ -70,15 +110,85 @@ internal class Cli(runScriptName: String) :
     }
 }
 
-private const val STDIN_PROXY_CLASS_NAME = "com.github.ajalt.clikt.parameters.types.UnclosableInputStream"
+private sealed class InputSource {
+    abstract fun fetch(data: String?): String
+}
 
-/**
- * Checks whether this stream is an unclosable [System.`in`] proxy.
- *
- * Indeed, it's an ugly hack, but what can one do?
- */
+private fun RawOption.inputStreamSource(): NullableOption<InputSource, InputSource> {
+    return inputStream().convert({ localization.fileMetavar() }, CompletionCandidates.Path) { inputStream ->
+        InputStreamSource(inputStream)
+    }
+}
+
+private class InputStreamSource(private val inputStream: InputStream) : InputSource() {
+    override fun fetch(data: String?): String =
+        inputStream.bufferedReader().use { reader ->
+            if (inputStream.default) {
+                println("Enter your puzzle input:")
+            }
+            reader.readText()
+        }
+
+    companion object {
+        fun default(): InputStreamSource = InputStreamSource(UnclosableInputStream(System.`in`))
+    }
+}
+
+private fun RawOption.urlSource(): NullableOption<InputSource, InputSource> {
+    return convert({ "URL" }, CompletionCandidates.Hostname) { url ->
+        UrlSource(url)
+    }
+}
+
+private class UrlSource(private val url: String) : InputSource() {
+    override fun fetch(data: String?): String = runBlocking {
+        val factory = koin.get<HttpClientEngineFactory<*>>()
+
+        HttpClient(factory).use { client ->
+            client.get(url) {
+                accept(ContentType.Text.Plain)
+                doNotTrack()
+
+                data?.let { token ->
+                    setSessionToken(token)
+                }
+            }
+        }
+    }
+}
+
+private const val SESSION_COOKIE = "session"
+
+private fun HttpRequestBuilder.doNotTrack() =
+    this.header("DNT", 1)
+
+private fun HttpRequestBuilder.setSessionToken(token: String) =
+    this.header(HttpHeaders.Cookie, "$SESSION_COOKIE=$token")
+
+/** Checks whether this stream is an unclosable [System.`in`] proxy. */
 private val InputStream.default: Boolean
-    get() = this::class.qualifiedName == STDIN_PROXY_CLASS_NAME
+    get() = this::class == UnclosableInputStream::class
+
+private fun MutuallyExclusiveOptions<InputSource, InputSource?>.defaultStdin():
+        MutuallyExclusiveOptions<InputSource, InputSource> = default(InputStreamSource.default())
+
+private class UnclosableInputStream(private var delegate: InputStream?) : InputStream() {
+    private val stream get() = delegate ?: throw IOException("Stream closed")
+    override fun available(): Int = stream.available()
+    override fun read(): Int = stream.read()
+    override fun read(bytes: ByteArray, offset: Int, length: Int): Int = stream.read(bytes, offset, length)
+    override fun skip(bytes: Long): Long = stream.skip(bytes)
+    override fun reset() = stream.reset()
+    override fun markSupported(): Boolean = stream.markSupported()
+
+    override fun mark(limit: Int) {
+        stream.mark(limit)
+    }
+
+    override fun close() {
+        delegate = null
+    }
+}
 
 /** Returns a short description of this throwable in a compact form. */
 private fun Throwable.toCompactString(): String {

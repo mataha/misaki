@@ -29,6 +29,7 @@ dependencies {
     implementation("com.github.ajalt.clikt:clikt:3.0.1")
     implementation("com.github.h0tk3y.betterParse:better-parse-jvm:0.4.0-alpha-3")
     implementation("io.github.classgraph:classgraph:4.8.90")
+    implementation("io.ktor:ktor-client-cio:1.4.3")
     implementation("org.koin:koin-core:2.2.1")
 
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
