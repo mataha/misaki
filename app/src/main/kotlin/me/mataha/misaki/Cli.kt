@@ -112,6 +112,8 @@ internal class Cli(runScriptName: String) :
 
 private sealed class InputSource {
     abstract fun fetch(data: String?): String
+
+    companion object
 }
 
 private fun RawOption.urlSource(): NullableOption<InputSource, InputSource> =
@@ -157,18 +159,12 @@ private class InputStreamSource(private val inputStream: InputStream) : InputSou
             }
             reader.readText()
         }
-
-    companion object {
-        fun default(): InputStreamSource = InputStreamSource(UnclosableInputStream(System.`in`))
-    }
 }
 
 private fun MutuallyExclusiveOptions<InputSource, InputSource?>.defaultStdin():
-        MutuallyExclusiveOptions<InputSource, InputSource> = default(InputStreamSource.default())
+        MutuallyExclusiveOptions<InputSource, InputSource> = default(InputSource.default())
 
-/** Checks whether this stream is an unclosable [System.`in`] proxy. */
-private val InputStream.default: Boolean
-    get() = this::class == UnclosableInputStream::class
+private fun InputSource.Companion.default(): InputSource = InputStreamSource(UnclosableInputStream(System.`in`))
 
 private class UnclosableInputStream(private var delegate: InputStream?) : InputStream() {
     private val stream get() = delegate ?: throw IOException("Stream is closed")
@@ -185,6 +181,10 @@ private class UnclosableInputStream(private var delegate: InputStream?) : InputS
         delegate = null
     }
 }
+
+/** Checks whether this stream is an unclosable [System.`in`] proxy. */
+private val InputStream.default: Boolean
+    get() = this::class == UnclosableInputStream::class
 
 /** Returns a short description of this throwable in a compact form. */
 private fun Throwable.toCompactString(): String {
