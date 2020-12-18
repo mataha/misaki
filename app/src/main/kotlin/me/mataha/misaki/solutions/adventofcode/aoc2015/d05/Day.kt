@@ -1,8 +1,9 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d05
 
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.runBlocking
 import me.mataha.misaki.domain.LineParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
@@ -44,6 +45,6 @@ private fun String.isNice(vararg predicates: (string: String) -> Boolean): Boole
     predicates
         .asFlow()
         .map { predicate -> predicate(this@isNice) }
-        .toList()
-        .none { condition -> !condition }
+        .buffer()
+        .reduce { accumulator, condition -> accumulator && condition }
 }
