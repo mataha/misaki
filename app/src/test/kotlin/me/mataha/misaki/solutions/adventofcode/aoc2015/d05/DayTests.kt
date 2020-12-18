@@ -3,8 +3,8 @@ package me.mataha.misaki.solutions.adventofcode.aoc2015.d05
 import io.kotest.assertions.withClue
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
-import me.mataha.misaki.domain.adventofcode.processFirst
-import me.mataha.misaki.domain.adventofcode.processSecond
+import me.mataha.misaki.domain.adventofcode.processPartOne
+import me.mataha.misaki.domain.adventofcode.processPartTwo
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
@@ -19,7 +19,7 @@ class NoInternElvesForThisTests {
         fun `Under old rules, given string should be nice`(string: String) {
             val solution = NoInternElvesForThis()
 
-            val actual = solution.processFirst(string) == 1
+            val actual = solution.processPartOne(string) == 1
 
             withClue("String '$string' should be nice.") { actual.shouldBeTrue() }
         }
@@ -29,7 +29,7 @@ class NoInternElvesForThisTests {
         fun `Under old rules, given string should be naughty`(string: String) {
             val solution = NoInternElvesForThis()
 
-            val actual = solution.processFirst(string) == 1
+            val actual = solution.processPartOne(string) == 1
 
             withClue("String '$string' should be naughty.") { actual.shouldBeFalse() }
         }
@@ -42,7 +42,7 @@ class NoInternElvesForThisTests {
         fun `Under new rules, given string should be nice`(string: String) {
             val solution = NoInternElvesForThis()
 
-            val actual = solution.processSecond(string) == 1
+            val actual = solution.processPartTwo(string) == 1
 
             withClue("String '$string' should be nice.") { actual.shouldBeTrue() }
         }
@@ -52,7 +52,7 @@ class NoInternElvesForThisTests {
         fun `Under new rules, given string should be naughty`(string: String) {
             val solution = NoInternElvesForThis()
 
-            val actual = solution.processSecond(string) == 1
+            val actual = solution.processPartTwo(string) == 1
 
             withClue("String '$string' should be naughty.") { actual.shouldBeFalse() }
         }

@@ -10,9 +10,9 @@ import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.IN_MEM
 /** See [https://adventofcode.com/2015/day/8]. */
 @AdventOfCode("Matchsticks", 2015, 8)
 class Matchsticks : AdventOfCodeDay<List<String>, Int>(), LineParser {
-    override fun solveFirst(input: List<String>): Int =
+    override fun solvePartOne(input: List<String>): Int =
         input.sumBy { string -> string.length(IN_CODE) - string.length(IN_MEMORY) }
 
-    override fun solveSecond(input: List<String>): Int =
+    override fun solvePartTwo(input: List<String>): Int =
         input.sumBy { string -> string.length(ENCODED) - string.length(IN_CODE) }
 }

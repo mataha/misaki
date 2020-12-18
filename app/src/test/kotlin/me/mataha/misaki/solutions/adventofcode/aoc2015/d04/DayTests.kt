@@ -1,8 +1,8 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d04
 
 import io.kotest.matchers.ints.shouldBeExactly
-import me.mataha.misaki.domain.adventofcode.processFirst
-import me.mataha.misaki.domain.adventofcode.processSecond
+import me.mataha.misaki.domain.adventofcode.processPartOne
+import me.mataha.misaki.domain.adventofcode.processPartTwo
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -19,7 +19,7 @@ class IdealStockingStufferTests {
             val solution = IdealStockingStuffer()
 
             val expected = 15
-            val actual = solution.processFirst("taxcnqsl")
+            val actual = solution.processPartOne("taxcnqsl")
 
             actual shouldBeExactly expected
         }
@@ -32,7 +32,7 @@ class IdealStockingStufferTests {
             val solution = IdealStockingStuffer()
 
             val expected = 50
-            val actual = solution.processSecond("eassxskp")
+            val actual = solution.processPartTwo("eassxskp")
 
             actual shouldBeExactly expected
         }

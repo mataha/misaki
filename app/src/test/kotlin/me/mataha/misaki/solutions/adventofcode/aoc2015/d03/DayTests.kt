@@ -1,8 +1,8 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d03
 
 import io.kotest.matchers.ints.shouldBeExactly
-import me.mataha.misaki.domain.adventofcode.processFirst
-import me.mataha.misaki.domain.adventofcode.processSecond
+import me.mataha.misaki.domain.adventofcode.processPartOne
+import me.mataha.misaki.domain.adventofcode.processPartTwo
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,7 +17,7 @@ class PerfectlySphericalHousesTests {
         fun `Enough houses should receive at least one present from Santa`(moves: String, expected: Int) {
             val solution = PerfectlySphericalHouses()
 
-            val actual = solution.processFirst(moves)
+            val actual = solution.processPartOne(moves)
 
             actual shouldBeExactly expected
         }
@@ -30,7 +30,7 @@ class PerfectlySphericalHousesTests {
         fun `Enough houses should receive at least one present from Santa and Robot`(moves: String, expected: Int) {
             val solution = PerfectlySphericalHouses()
 
-            val actual = solution.processSecond(moves)
+            val actual = solution.processPartTwo(moves)
 
             actual shouldBeExactly expected
         }

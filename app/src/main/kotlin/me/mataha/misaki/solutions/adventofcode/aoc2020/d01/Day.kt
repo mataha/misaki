@@ -8,7 +8,7 @@ class ReportRepair : AdventOfCodeDay<List<Int>, Int>() {
     override fun parse(input: String): List<Int> =
         input.lines().map { string -> string.toInt() }
 
-    override fun solveFirst(input: List<Int>): Int {
+    override fun solvePartOne(input: List<Int>): Int {
         val numbers = mutableSetOf<Int>()
 
         for (number in input) {
@@ -24,7 +24,7 @@ class ReportRepair : AdventOfCodeDay<List<Int>, Int>() {
         return INVALID_EXPENSE_REPORT
     }
 
-    override fun solveSecond(input: List<Int>): Int {
+    override fun solvePartTwo(input: List<Int>): Int {
         val numbers = mutableSetOf<Int>()
         val results = mutableSetOf<Result<Int>>()
 

@@ -7,7 +7,7 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 /** See [https://adventofcode.com/2015/day/1]. */
 @AdventOfCode("Not Quite Lisp", 2015, 1)
 class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
-    override fun solveFirst(input: String): Int {
+    override fun solvePartOne(input: String): Int {
         var floor = 0
 
         for (char in input) {
@@ -17,7 +17,7 @@ class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
         return floor
     }
 
-    override fun solveSecond(input: String): Int {
+    override fun solvePartTwo(input: String): Int {
         var floor = 0
 
         for ((index, char) in input.withIndex()) {

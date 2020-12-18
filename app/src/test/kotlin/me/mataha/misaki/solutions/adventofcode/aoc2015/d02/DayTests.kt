@@ -1,8 +1,8 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d02
 
 import io.kotest.matchers.ints.shouldBeExactly
-import me.mataha.misaki.domain.adventofcode.processFirst
-import me.mataha.misaki.domain.adventofcode.processSecond
+import me.mataha.misaki.domain.adventofcode.processPartOne
+import me.mataha.misaki.domain.adventofcode.processPartTwo
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,7 +17,7 @@ class ThereWouldBeNoMathTests {
         fun `Elves should order enough square feet of wrapping paper`(dimensions: String, expected: Int) {
             val solution = ThereWouldBeNoMath()
 
-            val actual = solution.processFirst(dimensions)
+            val actual = solution.processPartOne(dimensions)
 
             actual shouldBeExactly expected
         }
@@ -30,7 +30,7 @@ class ThereWouldBeNoMathTests {
         fun `Elves should order enough feet of ribbon`(dimensions: String, expected: Int) {
             val solution = ThereWouldBeNoMath()
 
-            val actual = solution.processSecond(dimensions)
+            val actual = solution.processPartTwo(dimensions)
 
             actual shouldBeExactly expected
         }

@@ -7,9 +7,9 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 /** See [https://adventofcode.com/2015/day/10]. */
 @AdventOfCode("Elves Look, Elves Say", 2015, 10)
 class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), NoOpParser {
-    override fun solveFirst(input: String): Int = lookAndSay(input, 40).length
+    override fun solvePartOne(input: String): Int = lookAndSay(input, 40).length
 
-    override fun solveSecond(input: String): Int = lookAndSay(input, 50).length
+    override fun solvePartTwo(input: String): Int = lookAndSay(input, 50).length
 }
 
 private fun lookAndSay(string: String, steps: Int = 1): String {

@@ -1,8 +1,8 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2020.d01
 
 import io.kotest.matchers.ints.shouldBeExactly
-import me.mataha.misaki.domain.adventofcode.processFirst
-import me.mataha.misaki.domain.adventofcode.processSecond
+import me.mataha.misaki.domain.adventofcode.processPartOne
+import me.mataha.misaki.domain.adventofcode.processPartTwo
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ class ReportRepairTests {
             """.trimIndent()
 
             val expected = 514579
-            val actual = solution.processFirst(input)
+            val actual = solution.processPartOne(input)
 
             actual shouldBeExactly expected
         }
@@ -36,7 +36,7 @@ class ReportRepairTests {
 
             val input = "42"
 
-            val actual = solution.processFirst(input)
+            val actual = solution.processPartOne(input)
 
             actual shouldBeExactly ReportRepair.INVALID_EXPENSE_REPORT
         }
@@ -58,7 +58,7 @@ class ReportRepairTests {
             """.trimIndent()
 
             val expected = 241861950
-            val actual = solution.processSecond(input)
+            val actual = solution.processPartTwo(input)
 
             actual shouldBeExactly expected
         }
@@ -69,7 +69,7 @@ class ReportRepairTests {
 
             val input = "42"
 
-            val actual = solution.processSecond(input)
+            val actual = solution.processPartTwo(input)
 
             actual shouldBeExactly ReportRepair.INVALID_EXPENSE_REPORT
         }

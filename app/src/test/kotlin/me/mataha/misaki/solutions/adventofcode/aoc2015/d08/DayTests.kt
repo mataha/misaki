@@ -1,8 +1,8 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d08
 
 import io.kotest.matchers.ints.shouldBeExactly
-import me.mataha.misaki.domain.adventofcode.processFirst
-import me.mataha.misaki.domain.adventofcode.processSecond
+import me.mataha.misaki.domain.adventofcode.processPartOne
+import me.mataha.misaki.domain.adventofcode.processPartTwo
 import me.mataha.misaki.solutions.adventofcode.AdventOfCodeTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
@@ -18,7 +18,7 @@ class MatchsticksTests {
             val solution = Matchsticks()
 
             val expected = a - b
-            val actual = solution.processFirst(string)
+            val actual = solution.processPartOne(string)
 
             actual shouldBeExactly expected
         }
@@ -32,7 +32,7 @@ class MatchsticksTests {
             val solution = Matchsticks()
 
             val expected = a - b
-            val actual = solution.processSecond(string)
+            val actual = solution.processPartTwo(string)
 
             actual shouldBeExactly expected
         }

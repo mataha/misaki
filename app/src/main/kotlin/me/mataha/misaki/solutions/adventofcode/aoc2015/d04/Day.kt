@@ -9,9 +9,9 @@ import me.mataha.misaki.util.extensions.md5Hex
 /** See [https://adventofcode.com/2015/day/4]. */
 @AdventOfCode("The Ideal Stocking Stuffer", 2015, 4)
 class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), NoOpParser {
-    override fun solveFirst(input: String): Int = mine(input, "0".repeat(5))
+    override fun solvePartOne(input: String): Int = mine(input, "0".repeat(5))
 
-    override fun solveSecond(input: String): Int = mine(input, "0".repeat(6))
+    override fun solvePartTwo(input: String): Int = mine(input, "0".repeat(6))
 
     companion object {
         const val HASH_NOT_FOUND = -1
