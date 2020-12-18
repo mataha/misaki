@@ -9,7 +9,7 @@ class ThereWouldBeNoMath : AdventOfCodeDay<List<Box>, Int>() {
     override fun parse(input: String): List<Box> =
         input
             .lines()
-            .map { line -> line.split(PARSE_DELIMITER).map { it.toInt() } }
+            .map { line -> line.split(PARSE_DELIMITER).map { dimension -> dimension.toInt() } }
             .map { dimensions -> Box.create(dimensions) }
 
     override fun solveFirst(input: List<Box>): Int =

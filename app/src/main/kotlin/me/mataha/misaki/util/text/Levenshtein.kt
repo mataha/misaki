@@ -25,7 +25,7 @@ fun levenshteinDistance(a: CharSequence, b: CharSequence): Int {
         first = assign(second) { second = first }
     }
 
-    val distances = IntArray(first.length + 1) { it }
+    val distances = IntArray(first.length + 1) { index -> index }
 
     for (j in 1..second.length) {
         var corner = distances[0]

@@ -16,7 +16,7 @@ internal class DefaultPuzzleService(
         getOrNull(origin, task) ?: throw PuzzleNotFoundException("$origin: '$task' was not found")
 
     override fun getOrNull(origin: String, task: String): PuzzleData<*, *>? =
-        repository.get(origin) { comparator.compare(it, task) }.firstOrNull()
+        repository.get(origin) { taskName -> comparator.compare(task, taskName) }.firstOrNull()
 }
 
 internal class PuzzleNotFoundException(message: String?) : NoSuchElementException(message)

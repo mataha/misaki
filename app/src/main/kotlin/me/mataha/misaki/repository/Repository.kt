@@ -24,7 +24,7 @@ internal class DefaultPuzzleRepository(vararg packages: String) : PuzzleReposito
         getAll()[origin]?.filter { task -> predicate(task.name) } ?: emptyList()
 
     override fun get(origin: String, task: String): PuzzleData<*, *>? =
-        get(origin) { it == task }.firstOrNull()
+        get(origin) { taskName -> task == taskName }.firstOrNull()
 
     override fun getAll(): Map<String, List<PuzzleData<*, *>>> =
         puzzles
