@@ -93,9 +93,7 @@ internal class Cli(runScriptName: String) :
 
         try {
             val puzzle = service.get(origin, task)
-
             val input = source.fetch(token)
-
             val result = runner.run(puzzle.solution, input)
             output.publish(result, measure)
         } catch (exception: Exception) {
