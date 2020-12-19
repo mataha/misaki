@@ -187,6 +187,7 @@ private fun OutputStream.publish(result: Result, measure: Boolean) {
         writer.println(result.value)
 
         if (measure) {
+            writer.println()
             writer.println("That took: ${result.duration}")
         }
     }
