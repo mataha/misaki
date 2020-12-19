@@ -32,6 +32,7 @@ import me.mataha.misaki.runner.Result
 import me.mataha.misaki.runner.SolutionRunner
 import me.mataha.misaki.service.PuzzleService
 import me.mataha.misaki.util.extensions.printWriter
+import me.mataha.misaki.util.extensions.toCompactString
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
@@ -187,12 +188,4 @@ private fun OutputStream.publish(result: Result, measure: Boolean) {
             writer.println("That took: ${result.duration}")
         }
     }
-}
-
-/** Returns a short description of this throwable in a compact form. */
-private fun Throwable.toCompactString(): String {
-    val name = this::class.simpleName
-    val localized = this.localizedMessage
-
-    return name + if (localized != null) ": $localized" else ""
 }
