@@ -124,7 +124,6 @@ private class UrlSource(private val url: String) : InputSource() {
         HttpClient(factory).use { client ->
             client.get(url) {
                 accept(ContentType.Text.Plain)
-                doNotTrack()
 
                 data?.let { token ->
                     setSessionToken(token)
@@ -135,9 +134,6 @@ private class UrlSource(private val url: String) : InputSource() {
 }
 
 private const val SESSION_COOKIE = "session"
-
-private fun HttpRequestBuilder.doNotTrack() =
-    this.header("DNT", 1)
 
 private fun HttpRequestBuilder.setSessionToken(token: String) =
     this.header(HttpHeaders.Cookie, "$SESSION_COOKIE=$token")
