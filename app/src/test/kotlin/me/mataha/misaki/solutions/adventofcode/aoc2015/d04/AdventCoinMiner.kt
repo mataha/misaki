@@ -23,7 +23,7 @@ private const val PREFIX = "00000" // "0".repeat(5)
 private val TIMEOUT = 1.seconds
 
 @ExperimentalTime
-internal fun main(vararg args: String) {
+internal fun main(vararg args: String) = runBlocking {
     val iterations = parse {
         args[0].toInt()
             .also { arg -> require(arg > 0) }
@@ -39,19 +39,17 @@ internal fun main(vararg args: String) {
             .also { arg -> require(arg.matches(Regex("""[0-9a-f]+"""))) }
     }
 
-    runBlocking {
-        repeat(iterations) {
-            val job = async(CoroutineName("$prefix+$key")) {
-                mine(key, prefix)
-            }
-
-            withTimeoutOrNull(TIMEOUT) {
-                val number = job.await()
-                println("Key: $key, number: $number")
-            } ?: job.cancel()
-
-            ++key
+    repeat(iterations) {
+        val job = async(CoroutineName("$prefix+$key")) {
+            mine(key, prefix)
         }
+
+        withTimeoutOrNull(TIMEOUT) {
+            val number = job.await()
+            println("Key: $key, number: $number")
+        } ?: job.cancel()
+
+        ++key
     }
 }
 
