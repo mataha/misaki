@@ -25,9 +25,15 @@ open class PuzzleNameGenerator : DisplayNameGenerator.Simple() {
     override fun generateDisplayNameForNestedClass(nestedClass: Class<*>): String =
         splitPascamelCasedWords(super.generateDisplayNameForNestedClass(nestedClass))
 
-    override fun generateDisplayNameForMethod(testClass: Class<*>, testMethod: Method): String = testMethod.name + "."
+    override fun generateDisplayNameForMethod(testClass: Class<*>, testMethod: Method): String =
+        testMethod.name + "."
 
-    open fun generateDisplayNameForPuzzle(puzzle: PuzzleData<*, *>): String = "[${puzzle.origin}] ${puzzle.name}"
+    open fun generateDisplayNameForPuzzle(puzzle: PuzzleData<*, *>): String {
+        val origin = puzzle.origin
+        val header = if (origin.isNotBlank()) "[$origin] " else ""
+
+        return header + puzzle.name
+    }
 }
 
 private object PuzzleLookup {
