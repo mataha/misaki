@@ -4,6 +4,7 @@ import com.github.ajalt.clikt.completion.CompletionCandidates
 import com.github.ajalt.clikt.core.Abort
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.ProgramResult
+import com.github.ajalt.clikt.core.context
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.groups.MutuallyExclusiveOptions
 import com.github.ajalt.clikt.parameters.groups.default
@@ -19,6 +20,8 @@ import com.github.ajalt.clikt.parameters.options.versionOption
 import com.github.ajalt.clikt.parameters.types.defaultStdout
 import com.github.ajalt.clikt.parameters.types.inputStream
 import com.github.ajalt.clikt.parameters.types.outputStream
+import com.github.ajalt.clikt.sources.PropertiesValueSource
+import com.github.ajalt.clikt.sources.ValueSource
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.request.HttpRequestBuilder
@@ -40,6 +43,13 @@ import java.io.OutputStream
 internal class Cli(runScriptName: String) :
     CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
     init {
+        context {
+            valueSource = PropertiesValueSource.from(
+                file = koin.getProperty(ENVIRONMENT_KEY, ENVIRONMENT_VARIABLE_FILE),
+                requireValid = true,
+                getKey = ValueSource.envvarKey()
+            )
+        }
         versionOption(version) { string -> string.trim() }
     }
 
@@ -72,7 +82,8 @@ internal class Cli(runScriptName: String) :
                 "--token",
                 help = "Session token to use with URL",
                 metavar = "TOKEN",
-                envvar = "MISAKI_APP_TOKEN"
+                envvar = ENVIRONMENT_VARIABLE_TOKEN,
+                valueSourceKey = ENVIRONMENT_VARIABLE_TOKEN
             ).check("Session token must be a base16 string") { token ->
                 token.matches(Regex("""[0-9a-f]+"""))
             }
@@ -85,6 +96,11 @@ internal class Cli(runScriptName: String) :
 
     private companion object {
         private const val EPILOG = "See also: README.md (general usage and examples)"
+
+        private const val ENVIRONMENT_VARIABLE_FILE = ".env"
+        private const val ENVIRONMENT_VARIABLE_TOKEN = "MISAKI_APP_TOKEN"
+
+        private const val ENVIRONMENT_KEY = "misaki.app.cli.context.environment"
     }
 
     override fun run() {
@@ -108,7 +124,9 @@ internal class Cli(runScriptName: String) :
 private sealed class InputSource {
     abstract fun fetch(data: String?): String
 
-    companion object
+    companion object {
+        fun default(): InputSource = InputStreamSource(UnclosableInputStream(System.`in`))
+    }
 }
 
 private fun RawOption.urlSource(): NullableOption<InputSource, InputSource> =
@@ -155,8 +173,6 @@ private class InputStreamSource(private val inputStream: InputStream) : InputSou
 
 private fun MutuallyExclusiveOptions<InputSource, InputSource?>.defaultStdin():
         MutuallyExclusiveOptions<InputSource, InputSource> = default(InputSource.default())
-
-private fun InputSource.Companion.default(): InputSource = InputStreamSource(UnclosableInputStream(System.`in`))
 
 private class UnclosableInputStream(private var delegate: InputStream?) : InputStream() {
     private val stream get() = delegate ?: throw IOException("Stream is closed")
