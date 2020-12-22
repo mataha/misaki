@@ -23,7 +23,7 @@ internal object MemoirGrammar : Grammar<List<Memoir>>() {
     private val identifier by string use { text }
     private val number by numeral use { text.toInt() }
 
-    private val sue
+    private val aunt
             by (-SUE and number)
                 .map { number -> Sue(number) }
 
@@ -36,7 +36,7 @@ internal object MemoirGrammar : Grammar<List<Memoir>>() {
                 .map { compounds -> compounds.associate { compound -> compound } }
 
     private val memoir
-            by (sue and -COLON and compounds)
+            by (aunt and -COLON and compounds)
                 .map { (aunt, compounds) -> Memoir(compounds, aunt) }
 
     private val memoirs by oneOrMore(memoir)

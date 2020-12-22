@@ -24,7 +24,8 @@ class AuntSue : AdventOfCodeDay<List<Memoir>, Int>() {
 }
 
 private fun match(input: List<Memoir>, comparator: CompoundComparator): Int =
-    input.singleOrNull { memoir -> memoir.compareTo(SAMPLE, comparator) }?.sue?.number ?: AuntSue.ANALYSIS_INCONCLUSIVE
+    input.singleOrNull { memoir -> memoir.compareTo(SAMPLE, comparator) }?.aunt?.number
+        ?: AuntSue.ANALYSIS_INCONCLUSIVE
 
 private val SAMPLE = Memoir(
     "children" to 3,
