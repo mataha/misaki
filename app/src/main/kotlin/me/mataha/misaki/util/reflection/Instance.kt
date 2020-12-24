@@ -11,22 +11,22 @@ import kotlin.reflect.full.valueParameters
 /**
  * Returns an instance of this class if it either:
  *  - is an object;
- *  - has a public, parameterless constructor.
+ *  - has a single public constructor with no parameters.
  *
- * Throws an [IllegalStateException] otherwise.
+ * Throws an [IllegalArgumentException] otherwise.
  */
-fun <R : Any> KClass<out R>.instance(): R {
+fun <R : Any> KClass<R>.instance(): R {
     val instance = constructors.singleOrNull { constructor ->
-        constructor.isPublic() && constructor.isParameterless()
+        constructor.isPublic() && constructor.isNoArg()
     }?.call() ?: objectInstance
 
-    return checkNotNull(instance) {
-        "$qualifiedName is neither an object nor a class with a public, parameterless constructor"
+    return requireNotNull(instance) {
+        "$this is neither an object nor a class with a single public, no-arg constructor"
     }
 }
 
 @InlineCall
-private inline fun <R> KCallable<R>.isParameterless(): Boolean = valueParameters.isEmpty()
+private inline fun <R> KCallable<R>.isNoArg(): Boolean = valueParameters.isEmpty()
 
 @InlineCall
 private inline fun <R> KCallable<R>.isPublic(): Boolean = visibility == KVisibility.PUBLIC
