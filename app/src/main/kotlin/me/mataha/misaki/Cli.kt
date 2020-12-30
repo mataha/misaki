@@ -89,10 +89,10 @@ internal class Cli(runScriptName: String) :
             }
 
     private val origin
-            by argument(help = "Puzzle origin (site, company etc.)")
+            by argument(help = "Puzzle origin")
 
-    private val task
-            by argument(help = "Task name")
+    private val name
+            by argument(help = "Puzzle name")
 
     private companion object {
         private const val EPILOG = "See also: README.md (general usage and examples)"
@@ -108,7 +108,7 @@ internal class Cli(runScriptName: String) :
         val runner = koin.get<SolutionRunner>()
 
         try {
-            val puzzle = service.get(origin, task)
+            val puzzle = service.get(origin, name)
             val input = source.fetch(token)
             val result = runner.run(puzzle.solution, input)
             output.publish(result, measure)
