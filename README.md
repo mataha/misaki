@@ -14,7 +14,7 @@ from [Welcome to the N.H.K.][2]
 Assumes `git` and JDK >= 8 (possibly from [here][3]):
 
 ```shell
-git clone https://gitgud.io/mataha/misaki
+git clone https://gitgud.io/mataha/misaki  # or wherever it's hosted right now
 cd misaki
 ./gradlew build
 ```
@@ -33,8 +33,6 @@ By default, `misaki` reads data from standard input:
 $ ./run "Advent of Code" "Not Quite Lisp"
 ```
 
-Input and output:
-
 ```
 Enter your puzzle input:
 ()()))())(()))()()(())(())()()(
@@ -51,7 +49,6 @@ $ ./run "Advent of Code" "Some Assembly Required" \
 > -i "samples/adventofcode/2015/07/input.txt"
 ```
 
-Output:
 ```
 [3176, 14710]
 ```
@@ -62,8 +59,6 @@ Output:
 $ ./run "Advent of Code" "All in a Single Night" \
 > -i "samples/adventofcode/2015/09/input.txt" --measure
 ```
-
-Output:
 
 ```
 [141, 736]
@@ -125,17 +120,15 @@ Sample output:
 $ ./run @"samples/adventofcode/2015/05/argfile"
 ```
 
+```
+[258, 53]
+```
+
 Where `argfile` contains:
 
 ```
 "Advent of Code" "Doesn't He Have Intern-Elves For This?"
 -i "samples/adventofcode/2015/05/input.txt"
-```
-
-Output:
-
-```
-[258, 53]
 ```
 
 ## License
