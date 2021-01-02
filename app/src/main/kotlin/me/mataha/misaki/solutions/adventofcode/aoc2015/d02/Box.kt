@@ -27,7 +27,7 @@ data class Box(val length: Int, val width: Int, val height: Int) {
                 "Number of dimensions does not match (is: ${dimensions.size})"
             }
 
-            val (length, width, height) = dimensions.take(3)
+            val (length, width, height) = dimensions.take(NUMBER_OF_DIMENSIONS)
             return Box(length, width, height)
         }
 
