@@ -31,12 +31,12 @@ internal fun main(vararg args: String) = runBlocking {
 
     var key = parse {
         args.getOrElse(1) { KEY }
-            .also { arg -> require(arg.matches(Regex("""[a-z]+"""))) }
+            .also { arg -> require(arg matches Regex("""[a-z]+""")) }
     }
 
     val prefix = parse {
         args.getOrElse(2) { PREFIX }
-            .also { arg -> require(arg.matches(Regex("""[0-9a-f]+"""))) }
+            .also { arg -> require(arg matches Regex("""[0-9a-f]+""")) }
     }
 
     repeat(iterations) {

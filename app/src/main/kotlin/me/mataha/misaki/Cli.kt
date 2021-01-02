@@ -85,7 +85,7 @@ internal class Cli(runScriptName: String) :
                 envvar = ENVIRONMENT_VARIABLE_TOKEN,
                 valueSourceKey = ENVIRONMENT_VARIABLE_TOKEN
             ).check("Session token must be a base16 string") { token ->
-                token.matches(Regex("""[0-9a-f]+"""))
+                token matches Regex("""[0-9a-f]+""")
             }
 
     private val origin
