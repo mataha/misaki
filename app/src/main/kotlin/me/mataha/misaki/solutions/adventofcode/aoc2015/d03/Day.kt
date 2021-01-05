@@ -28,8 +28,7 @@ class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
         val grid = mutableSetOf(map.getValue(turn))
 
         for (direction in input) {
-            val current = map.getValue(turn)
-            val new = current.next(direction)
+            val new = map.getValue(turn).next(direction)
 
             grid += new
             map[turn] = new
@@ -44,14 +43,12 @@ class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
 private enum class Turn { SANTA, ROBOT }
 
 private data class Position(val x: Int, val y: Int) {
-    fun next(move: Char): Position {
-        return when (move) {
-            '^' -> Position(x, y + 1)
-            'v' -> Position(x, y - 1)
-            '>' -> Position(x + 1, y)
-            '<' -> Position(x - 1, y)
-            else -> this
-        }
+    fun next(direction: Char): Position = when (direction) {
+        '^' -> Position(x, y + 1)
+        'v' -> Position(x, y - 1)
+        '>' -> Position(x + 1, y)
+        '<' -> Position(x - 1, y)
+        else -> this
     }
 }
 
