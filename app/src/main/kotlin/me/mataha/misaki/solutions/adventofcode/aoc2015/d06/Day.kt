@@ -12,11 +12,11 @@ class ProbablyAFireHazard : AdventOfCodeDay<List<Instruction>, Int>() {
 
     override fun solvePartOne(input: List<Instruction>): Int {
         val grid = object : LightGrid() {
-            override fun turnOn(x: Int, y: Int): LightGrid = apply { this[x, y] = 1 }
+            override fun turnOn(x: Int, y: Int) = run { this[x, y] = 1 }
 
-            override fun turnOff(x: Int, y: Int): LightGrid = apply { this[x, y] = 0 }
+            override fun turnOff(x: Int, y: Int) = run { this[x, y] = 0 }
 
-            override fun toggle(x: Int, y: Int): LightGrid = apply { this[x, y] = this[x, y] xor 1 }
+            override fun toggle(x: Int, y: Int) = run { this[x, y] = this[x, y] xor 1 }
         }
 
         return grid.illuminate(input)
@@ -24,11 +24,11 @@ class ProbablyAFireHazard : AdventOfCodeDay<List<Instruction>, Int>() {
 
     override fun solvePartTwo(input: List<Instruction>): Int {
         val grid = object : LightGrid() {
-            override fun turnOn(x: Int, y: Int): LightGrid = apply { this[x, y]++ }
+            override fun turnOn(x: Int, y: Int) = run { this[x, y] += 1 }
 
-            override fun turnOff(x: Int, y: Int): LightGrid = apply { if (this[x, y] > 0) this[x, y]-- }
+            override fun turnOff(x: Int, y: Int) = run { if (this[x, y] > 0) this[x, y] -= 1 }
 
-            override fun toggle(x: Int, y: Int): LightGrid = apply { this[x, y] += 2 }
+            override fun toggle(x: Int, y: Int) = run { this[x, y] += 2 }
         }
 
         return grid.illuminate(input)

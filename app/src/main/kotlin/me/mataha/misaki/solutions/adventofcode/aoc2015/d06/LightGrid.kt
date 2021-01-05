@@ -24,7 +24,7 @@ internal abstract class LightGrid {
     }
 
     internal fun process(instruction: Instruction): LightGrid {
-        for (x in instruction.x)
+        for (x in instruction.x) {
             for (y in instruction.y) {
                 when (instruction.type) {
                     Type.TURN_ON -> this.turnOn(x, y)
@@ -32,15 +32,16 @@ internal abstract class LightGrid {
                     Type.TOGGLE -> this.toggle(x, y)
                 }
             }
+        }
 
         return this
     }
 
-    protected abstract fun turnOn(x: Int, y: Int): LightGrid
+    protected abstract fun turnOn(x: Int, y: Int)
 
-    protected abstract fun turnOff(x: Int, y: Int): LightGrid
+    protected abstract fun turnOff(x: Int, y: Int)
 
-    protected abstract fun toggle(x: Int, y: Int): LightGrid
+    protected abstract fun toggle(x: Int, y: Int)
 
     private companion object {
         private const val DEFAULT_LENGTH = 1000
