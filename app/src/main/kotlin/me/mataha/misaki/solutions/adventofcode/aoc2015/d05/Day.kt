@@ -1,7 +1,6 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d05
 
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.runBlocking
@@ -23,7 +22,7 @@ private const val VOWELS = "aeiou"
 private fun String.isNiceBefore(): Boolean {
     val forbidden = arrayOf("ab", "cd", "pq", "xy")
 
-    val predicates = arrayOf<(string: String) -> Boolean>(
+    val predicates = arrayOf<suspend (string: String) -> Boolean>(
         { string -> string.count { char -> char in VOWELS } >= 3 },
         { string -> string.zipWithNext().any { pair -> pair.first == pair.second } },
         { string -> forbidden.none { letters -> letters in string } }
@@ -33,7 +32,7 @@ private fun String.isNiceBefore(): Boolean {
 }
 
 private fun String.isNiceAfter(): Boolean {
-    val predicates = arrayOf<(string: String) -> Boolean>(
+    val predicates = arrayOf<suspend (string: String) -> Boolean>(
         { string -> string.windowed(2).any { window -> window in string.replaceFirst(window, "  ") } },
         { string -> string.zipAdjacent().any { pair -> pair.first == pair.second } }
     )
@@ -41,10 +40,9 @@ private fun String.isNiceAfter(): Boolean {
     return this.isNice(*predicates)
 }
 
-private fun String.isNice(vararg predicates: (string: String) -> Boolean): Boolean = runBlocking {
+private fun String.isNice(vararg predicates: suspend (string: String) -> Boolean): Boolean = runBlocking {
     predicates
         .asFlow()
         .map { predicate -> predicate(this@isNice) }
-        .buffer()
         .reduce { accumulator, condition -> accumulator && condition }
 }
