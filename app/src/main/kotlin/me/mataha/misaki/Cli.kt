@@ -53,17 +53,18 @@ internal class Cli(runScriptName: String) :
         versionOption(version) { string -> string.trim() }
     }
 
-    private val source by mutuallyExclusiveOptions(
-        option(
-            "-i", "--input",
-            help = "File to read puzzle input from"
-        ).inputStreamSource(),
+    private val source
+            by mutuallyExclusiveOptions(
+                option(
+                    "-i", "--input",
+                    help = "File to read puzzle input from"
+                ).inputStreamSource(),
 
-        option(
-            "-u", "--url",
-            help = "URL to read puzzle input from"
-        ).urlSource()
-    ).single().defaultStdin()
+                option(
+                    "-u", "--url",
+                    help = "URL to read puzzle input from"
+                ).urlSource()
+            ).single().defaultStdin()
 
     private val output
             by option(
