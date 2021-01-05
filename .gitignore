@@ -3,7 +3,6 @@
 # Java files
 *.class
 *.jar
-*.war
 
 # Gradle files and directories
 .gradle
