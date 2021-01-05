@@ -3,9 +3,6 @@ package me.mataha.misaki.solutions.adventofcode.aoc2015.d09
 class WeightedGraph<N> {
     private val edges: MutableMap<N, MutableMap<N, Int>> by lazy { mutableMapOf() }
 
-    private val nodes: MutableSet<N>
-        get() = edges.keys
-
     private operator fun get(source: N, destination: N): Int =
         edges.getValue(source).getValue(destination)
 
@@ -26,6 +23,8 @@ class WeightedGraph<N> {
                 .map { node -> this[node, start] + traverse(aggregate, node, remaining - node) }
                 .aggregate() ?: 0
         }
+
+        val nodes = edges.keys
 
         return nodes
             .map { node -> traverse(aggregate, node, nodes - node) }
