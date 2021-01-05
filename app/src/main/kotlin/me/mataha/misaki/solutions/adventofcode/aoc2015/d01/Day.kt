@@ -7,37 +7,28 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 /** See [https://adventofcode.com/2015/day/1]. */
 @AdventOfCode("Not Quite Lisp", 2015, 1)
 class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
-    override fun solvePartOne(input: String): Int {
-        var floor = 0
-
-        for (char in input) {
-            floor = changeFloor(char, floor)
+    override fun solvePartOne(input: String): Int =
+        input.fold(GROUND_FLOOR) { accumulator, direction ->
+            accumulator + go(direction)
         }
 
-        return floor
-    }
-
-    override fun solvePartTwo(input: String): Int {
-        var floor = 0
-
-        for ((index, char) in input.withIndex()) {
-            floor = changeFloor(char, floor)
-
-            if (floor < 0) {
-                return index + 1
-            }
-        }
-
-        return BASEMENT_NOT_ENTERED
-    }
+    override fun solvePartTwo(input: String): Int =
+        input.foldIndexed(GROUND_FLOOR) { index, accumulator, direction ->
+            val floor = accumulator + go(direction)
+            if (floor < 0) return index + 1
+            floor
+        }.coerceAtMost(BASEMENT_NOT_ENTERED)
 
     companion object {
         const val BASEMENT_NOT_ENTERED = -1
+
+        private const val GROUND_FLOOR = 0
     }
 }
 
-private fun changeFloor(char: Char, floor: Int): Int = when (char) {
-    '(' -> floor + 1
-    ')' -> floor - 1
-    else -> floor
+@Suppress("NOTHING_TO_INLINE")
+private inline fun go(direction: Char): Int = when (direction) {
+    '(' -> +1
+    ')' -> -1
+    else -> 0
 }
