@@ -10,6 +10,8 @@ plugins {
 
 application {
     mainClass.value("me.mataha.misaki.Main")
+
+    applicationDefaultJvmArgs += "-Dfile.encoding=UTF-8"
 }
 
 repositories {
