@@ -7,22 +7,24 @@ import com.github.h0tk3y.betterParse.combinators.or
 import com.github.h0tk3y.betterParse.combinators.unaryMinus
 import com.github.h0tk3y.betterParse.combinators.use
 import com.github.h0tk3y.betterParse.grammar.Grammar
+import com.github.h0tk3y.betterParse.lexer.literalToken
+import com.github.h0tk3y.betterParse.lexer.regexToken
 
 @ExperimentalUnsignedTypes
 internal object CircuitGrammar : Grammar<List<Part>>() {
     @Suppress("unused")
-    private val whiteSpace by token("""\s+""", ignore = true)
+    private val whiteSpace by regexToken("""\s+""", ignore = true)
 
-    private val ARROW by token("->")
+    private val ARROW by literalToken("->")
 
-    private val AND by token("AND")
-    private val OR by token("OR")
-    private val NOT by token("NOT")
-    private val LSHIFT by token("LSHIFT")
-    private val RSHIFT by token("RSHIFT")
+    private val AND by literalToken("AND")
+    private val OR by literalToken("OR")
+    private val NOT by literalToken("NOT")
+    private val LSHIFT by literalToken("LSHIFT")
+    private val RSHIFT by literalToken("RSHIFT")
 
-    private val string by token("""[a-z]+""")
-    private val numeral by token("""-?\d+""")
+    private val string by regexToken("""[a-z]+""")
+    private val numeral by regexToken("""-?\d+""")
 
     private val identifier by string use { text }
     private val number by numeral use { text.toInt() }

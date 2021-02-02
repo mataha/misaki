@@ -7,18 +7,20 @@ import com.github.h0tk3y.betterParse.combinators.separatedTerms
 import com.github.h0tk3y.betterParse.combinators.unaryMinus
 import com.github.h0tk3y.betterParse.combinators.use
 import com.github.h0tk3y.betterParse.grammar.Grammar
+import com.github.h0tk3y.betterParse.lexer.literalToken
+import com.github.h0tk3y.betterParse.lexer.regexToken
 
 internal object MemoirGrammar : Grammar<List<Memoir>>() {
     @Suppress("unused")
-    private val whiteSpace by token("""\s+""", ignore = true)
+    private val whiteSpace by regexToken("""\s+""", ignore = true)
 
-    private val COLON by token(":")
-    private val COMMA by token(",")
+    private val COLON by literalToken(":")
+    private val COMMA by literalToken(",")
 
-    private val SUE by token("Sue")
+    private val SUE by literalToken("Sue")
 
-    private val string by token("""[a-z]+""")
-    private val numeral by token("""\d+""")
+    private val string by regexToken("""[a-z]+""")
+    private val numeral by regexToken("""\d+""")
 
     private val identifier by string use { text }
     private val number by numeral use { text.toInt() }

@@ -16,11 +16,7 @@ application {
 
 repositories {
     jcenter()
-
     mavenCentral()
-    maven {
-        setUrl("https://dl.bintray.com/hotkeytlt/maven")
-    }
 }
 
 dependencies {
@@ -29,7 +25,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 
     implementation("com.github.ajalt.clikt:clikt:3.1.0")
-    implementation("com.github.h0tk3y.betterParse:better-parse-jvm:0.4.0-alpha-3")
+    implementation("com.github.h0tk3y.betterParse:better-parse:0.4.1")
     implementation("io.github.classgraph:classgraph:4.8.90")
     implementation("io.ktor:ktor-client-cio:1.4.3")
     implementation("org.koin:koin-core:2.2.1")

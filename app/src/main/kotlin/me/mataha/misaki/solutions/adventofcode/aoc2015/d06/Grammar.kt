@@ -8,20 +8,22 @@ import com.github.h0tk3y.betterParse.combinators.unaryMinus
 import com.github.h0tk3y.betterParse.combinators.use
 import com.github.h0tk3y.betterParse.combinators.zeroOrMore
 import com.github.h0tk3y.betterParse.grammar.Grammar
+import com.github.h0tk3y.betterParse.lexer.literalToken
+import com.github.h0tk3y.betterParse.lexer.regexToken
 import me.mataha.misaki.solutions.adventofcode.aoc2015.d06.Instruction.Type
 
 internal object LightGridGrammar : Grammar<List<Instruction>>() {
     @Suppress("unused")
-    private val whiteSpace by token("""\s+""", ignore = true)
+    private val whiteSpace by regexToken("""\s+""", ignore = true)
 
-    private val COMMA by token(",")
-    private val THROUGH by token("through")
+    private val COMMA by literalToken(",")
+    private val THROUGH by literalToken("through")
 
-    private val TOGGLE by token("toggle")
-    private val TURN_ON by token("turn on")
-    private val TURN_OFF by token("turn off")
+    private val TOGGLE by literalToken("toggle")
+    private val TURN_ON by literalToken("turn on")
+    private val TURN_OFF by literalToken("turn off")
 
-    private val numeral by token("""\d+""")
+    private val numeral by regexToken("""\d+""")
 
     private val number by numeral use { text.toInt() }
 
