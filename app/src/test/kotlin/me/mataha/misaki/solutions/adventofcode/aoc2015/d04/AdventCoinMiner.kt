@@ -25,7 +25,7 @@ private val TIMEOUT = 1.seconds
 @ExperimentalTime
 internal fun main(vararg args: String) = runBlocking {
     val iterations = parse {
-        args[0].toInt()
+        args.first().toInt()
             .also { arg -> require(arg > 0) }
     }
 
