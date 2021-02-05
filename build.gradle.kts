@@ -1,7 +1,7 @@
 description = "Solutions to programming koans bundled with a mini-framework"
 
-tasks.wrapper {
-    distributionType = Wrapper.DistributionType.ALL
+plugins {
+    base
 }
 
 allprojects {
@@ -9,4 +9,8 @@ allprojects {
         jcenter()
         mavenCentral()
     }
+}
+
+tasks.wrapper {
+    distributionType = Wrapper.DistributionType.ALL
 }
