@@ -5,3 +5,5 @@
 
 *.class binary
 *.jar   binary
+
+*.gsp linguist-language=Gosu
