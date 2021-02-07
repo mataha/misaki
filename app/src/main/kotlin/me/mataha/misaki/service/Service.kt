@@ -19,4 +19,4 @@ internal class DefaultPuzzleService(
         repository.get(origin) { taskName -> comparator.compare(task, taskName) }.firstOrNull()
 }
 
-internal class PuzzleNotFoundException(message: String?) : NoSuchElementException(message)
+private class PuzzleNotFoundException(message: String?) : NoSuchElementException(message)
