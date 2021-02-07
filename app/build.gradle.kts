@@ -3,63 +3,53 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    application
-    kotlin("jvm") version "1.4.21"
-    id("app.cash.exhaustive") version "0.1.1"
+    kotlin("jvm") version Kotlin.stdlib
+    id("app.cash.exhaustive") version BuildPlugins.Versions.exhaustive
+    id("misaki-application")
 }
 
 application {
-    mainClass.value("me.mataha.misaki.Main")
-
-    applicationDefaultJvmArgs += "-Dfile.encoding=UTF-8"
+    mainClass.set("me.mataha.misaki.Main")
 }
 
-repositories {
-    jcenter()
-    mavenCentral()
+java {
+    sourceCompatibility = Compatibility.JAVA_VERSION
+    targetCompatibility = Compatibility.JAVA_VERSION
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+    implementation(Libraries.KOTLIN_COROUTINES)
 
-    implementation("com.github.ajalt.clikt:clikt:3.1.0")
-    implementation("com.github.h0tk3y.betterParse:better-parse:0.4.1")
-    implementation("io.github.classgraph:classgraph:4.8.90")
-    implementation("io.ktor:ktor-client-cio:1.4.3")
-    implementation("org.koin:koin-core:2.2.1")
+    implementation(Libraries.BETTER_PARSE)
+    implementation(Libraries.CLASSGRAPH)
+    implementation(Libraries.CLIKT)
+    implementation(Libraries.KOIN)
+    implementation(Libraries.KTOR_CLIENT_CIO)
 
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("io.kotest:kotest-assertions-core:4.3.1")
-}
-
-tasks.jar {
-    manifest {
-        attributes(
-            "Implementation-Version" to project.version
-        )
-    }
+    testImplementation(TestLibraries.KOTEST_ASSERTIONS)
 }
 
 tasks.test {
     useJUnitPlatform()
-
     testLogging {
         events(SKIPPED, FAILED)
     }
 }
 
-@Suppress("SuspiciousCollectionReassignment")
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs += "-java-parameters"
-        freeCompilerArgs += "-Xinline-classes"
-        freeCompilerArgs += "-Xopt-in=kotlin.ExperimentalUnsignedTypes"
-        freeCompilerArgs += "-Xopt-in=kotlin.contracts.ExperimentalContracts"
-        freeCompilerArgs += "-Xopt-in=kotlin.io.path.ExperimentalPathApi"
-        freeCompilerArgs += "-Xopt-in=kotlin.time.ExperimentalTime"
+        jvmTarget = Target.BYTECODE_VERSION
+        freeCompilerArgs = listOf(
+            "-java-parameters",
+            "-Xinline-classes",
+            "-Xopt-in=kotlin.ExperimentalUnsignedTypes",
+            "-Xopt-in=kotlin.contracts.ExperimentalContracts",
+            "-Xopt-in=kotlin.io.path.ExperimentalPathApi",
+            "-Xopt-in=kotlin.time.ExperimentalTime"
+        )
     }
 }
