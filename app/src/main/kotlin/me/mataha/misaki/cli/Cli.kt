@@ -1,4 +1,4 @@
-package me.mataha.misaki
+package me.mataha.misaki.cli
 
 import com.github.ajalt.clikt.completion.CompletionCandidates
 import com.github.ajalt.clikt.core.Abort
@@ -40,17 +40,29 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 
-internal class Cli(runScriptName: String) :
-    CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
+internal fun interface Cli {
+    fun main(argv: Array<out String>)
+}
+
+internal class DefaultCli(
+    runScriptName: String,
+    version: String,
+    environmentFileName: String,
+    private val service: PuzzleService,
+    private val runner: SolutionRunner,
+    factory: HttpClientEngineFactory<*>
+) : Cli, CliktCommand(name = runScriptName, printHelpOnEmptyArgs = true, epilog = EPILOG) {
     init {
         context {
             valueSource = PropertiesValueSource.from(
-                file = koin.getProperty(ENVIRONMENT_KEY, ENVIRONMENT_VARIABLE_FILE),
+                file = environmentFileName.ifBlank { ENVIRONMENT_VARIABLE_FILE },
                 requireValid = true,
                 getKey = ValueSource.envvarKey()
             )
         }
-        versionOption(version) { string -> string.trim() }
+        versionOption(version) { string ->
+            string.trim()
+        }
     }
 
     private val source
@@ -63,7 +75,7 @@ internal class Cli(runScriptName: String) :
                 option(
                     "-u", "--url",
                     help = "URL to read puzzle input from"
-                ).urlSource()
+                ).urlSource(factory)
             ).single().defaultStdin()
 
     private val output
@@ -100,14 +112,9 @@ internal class Cli(runScriptName: String) :
 
         private const val ENVIRONMENT_VARIABLE_FILE = ".env"
         private const val ENVIRONMENT_VARIABLE_TOKEN = "MISAKI_APP_TOKEN"
-
-        private const val ENVIRONMENT_KEY = "misaki.app.cli.context.environment"
     }
 
     override fun run() {
-        val service = koin.get<PuzzleService>()
-        val runner = koin.get<SolutionRunner>()
-
         try {
             val puzzle = service.get(origin, name)
             val input = source.fetch(token)
@@ -130,15 +137,13 @@ private sealed class InputSource {
     }
 }
 
-private fun RawOption.urlSource(): NullableOption<InputSource, InputSource> =
+private fun RawOption.urlSource(factory: HttpClientEngineFactory<*>): NullableOption<InputSource, InputSource> =
     convert({ "URL" }, CompletionCandidates.Hostname) { url ->
-        UrlSource(url)
+        UrlSource(url, factory)
     }
 
-private class UrlSource(private val url: String) : InputSource() {
+private class UrlSource(private val url: String, private val factory: HttpClientEngineFactory<*>) : InputSource() {
     override fun fetch(data: String?): String = runBlocking {
-        val factory = koin.get<HttpClientEngineFactory<*>>()
-
         HttpClient(factory).use { client ->
             client.get(url) {
                 accept(ContentType.Text.Plain)

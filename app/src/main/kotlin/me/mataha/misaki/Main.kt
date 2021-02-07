@@ -1,35 +1,14 @@
-@file:JvmName("Main") // Has to be hardcoded - consts won't work
+@file:JvmName("Main")
 
 package me.mataha.misaki
 
-import java.nio.file.LinkOption.NOFOLLOW_LINKS
-import java.nio.file.Path
-import kotlin.io.path.ExperimentalPathApi
-import kotlin.io.path.Path
-import kotlin.io.path.isRegularFile
-import kotlin.io.path.listDirectoryEntries
-import kotlin.io.path.name
-import kotlin.io.path.nameWithoutExtension
+import me.mataha.misaki.cli.Cli
+import org.koin.core.parameter.parametersOf
 
-fun main(vararg args: String) = Cli(getRunScriptName()).main(args)
+fun main(vararg args: String) = koin.get<Cli> { parametersOf(runScriptName(project), version) }.main(args)
 
-internal val root: Package = ::main::class.java.`package`
+private val root: Package = ::main::class.java.`package`!!
 
-@ExperimentalPathApi
-private val path: Path = Path(".")
+private val project: String = root.implementationTitle ?: "app"
 
-@ExperimentalPathApi
-private fun getRunScriptName(default: String = ::main.name.capitalize()): String {
-    val files = path
-        .listDirectoryEntries()
-        .filter { entry -> entry.isRegularFile(NOFOLLOW_LINKS) }
-
-    val names = files
-        .filter { file -> !file.isGradle() }
-        .map { file -> file.nameWithoutExtension }
-        .filter { name -> name.isNotBlank() } // dotfiles
-
-    return names.firstOrNull { name -> name in names - name } ?: default
-}
-
-private fun Path.isGradle(): Boolean = "gradle" in this.name
+private val version: String = root.implementationVersion ?: "unspecified"
