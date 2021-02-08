@@ -169,7 +169,7 @@ private fun RawOption.inputStreamSource(): NullableOption<InputSource, InputSour
 private class InputStreamSource(private val inputStream: InputStream) : InputSource() {
     override fun fetch(data: String?): String =
         inputStream.bufferedReader().use { reader ->
-            if (inputStream.isDefault()) {
+            if (inputStream.isStdin()) {
                 println("Enter your puzzle input:")
             }
 
@@ -197,7 +197,7 @@ private class UnclosableInputStream(private var delegate: InputStream?) : InputS
 }
 
 /** Checks whether this stream is an unclosable [System.`in`] proxy. */
-private fun InputStream.isDefault(): Boolean = this is UnclosableInputStream
+private fun InputStream.isStdin(): Boolean = this is UnclosableInputStream
 
 private fun OutputStream.publish(result: Result, measure: Boolean) {
     this.printWriter().use { writer ->
