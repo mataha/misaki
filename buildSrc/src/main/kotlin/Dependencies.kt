@@ -18,13 +18,13 @@ object Libraries {
         const val ktorClientCio = "1.4.3"
     }
 
-    const val KOTLIN_COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Kotlin.coroutines}"
+    const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Kotlin.coroutines}"
 
-    const val BETTER_PARSE = "com.github.h0tk3y.betterParse:better-parse:${Versions.betterParse}"
-    const val CLASSGRAPH = "io.github.classgraph:classgraph:${Versions.classgraph}"
-    const val CLIKT = "com.github.ajalt.clikt:clikt:${Versions.clikt}"
-    const val KOIN = "org.koin:koin-core:${Versions.koin}"
-    const val KTOR_CLIENT_CIO = "io.ktor:ktor-client-cio:${Versions.ktorClientCio}"
+    const val betterParse = "com.github.h0tk3y.betterParse:better-parse:${Versions.betterParse}"
+    const val classgraph = "io.github.classgraph:classgraph:${Versions.classgraph}"
+    const val clikt = "com.github.ajalt.clikt:clikt:${Versions.clikt}"
+    const val koin = "org.koin:koin-core:${Versions.koin}"
+    const val ktorClientCio = "io.ktor:ktor-client-cio:${Versions.ktorClientCio}"
 }
 
 object TestLibraries {
@@ -33,7 +33,8 @@ object TestLibraries {
         const val kotestAssertions = "4.3.1"
     }
 
-    const val JUNIT = "org.junit:junit-bom:${Versions.junit5}"
+    const val junit5 = "org.junit:junit-bom:${Versions.junit5}"
+    const val junitJupiter = "org.junit.jupiter:junit-jupiter:${Versions.junit5}"
 
-    const val KOTEST_ASSERTIONS = "io.kotest:kotest-assertions-core:${Versions.kotestAssertions}"
+    const val kotestAssertions = "io.kotest:kotest-assertions-core:${Versions.kotestAssertions}"
 }

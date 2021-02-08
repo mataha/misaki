@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version Kotlin.stdlib
     id("app.cash.exhaustive") version BuildPlugins.Versions.exhaustive
-    id("misaki-application")
+    id("scripts.misaki-application")
 }
 
 application {
@@ -20,17 +20,17 @@ java {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-    implementation(Libraries.KOTLIN_COROUTINES)
+    implementation(Libraries.kotlinCoroutines)
 
-    implementation(Libraries.BETTER_PARSE)
-    implementation(Libraries.CLASSGRAPH)
-    implementation(Libraries.CLIKT)
-    implementation(Libraries.KOIN)
-    implementation(Libraries.KTOR_CLIENT_CIO)
+    implementation(Libraries.betterParse)
+    implementation(Libraries.classgraph)
+    implementation(Libraries.clikt)
+    implementation(Libraries.koin)
+    implementation(Libraries.ktorClientCio)
 
-    testImplementation(platform("org.junit:junit-bom:5.7.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation(TestLibraries.KOTEST_ASSERTIONS)
+    testImplementation(platform(TestLibraries.junit5))
+    testImplementation(TestLibraries.junitJupiter)
+    testImplementation(TestLibraries.kotestAssertions)
 }
 
 tasks.test {

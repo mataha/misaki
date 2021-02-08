@@ -1,3 +1,5 @@
+package scripts
+
 import me.mataha.gradle.util.extensions.plugins.application.useUtf8
 
 plugins {
