@@ -4,7 +4,7 @@ import com.github.h0tk3y.betterParse.grammar.parseToEnd
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
-/** See [https://adventofcode.com/2015/day/9]. */
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/9). */
 @AdventOfCode("All in a Single Night", 2015, 9)
 class AllInASingleNight : AdventOfCodeDay<WeightedGraph<Location>, Int>() {
     override fun parse(input: String): WeightedGraph<Location> =

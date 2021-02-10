@@ -5,7 +5,7 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.util.functional.take
 
-/** See [https://adventofcode.com/2015/day/1]. */
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/1). */
 @AdventOfCode("Not Quite Lisp", 2015, 1)
 class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun solvePartOne(input: String): Int =

@@ -25,7 +25,7 @@ function main(args: List<String>) {
         usage()
     }
 
-    print("/** See [https://adventofcode.com/${year}/day/${day}]. */")
+    print("/** See the puzzle's full description [here](https://adventofcode.com/${year}/day/${day}). */")
 }
 
 main(Gosu.RawArgs)

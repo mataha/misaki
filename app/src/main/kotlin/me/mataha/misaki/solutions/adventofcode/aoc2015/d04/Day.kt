@@ -6,7 +6,7 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.solutions.adventofcode.aoc2015.d04.IdealStockingStuffer.Companion.HASH_NOT_FOUND
 import me.mataha.misaki.util.extensions.md5Hex
 
-/** See [https://adventofcode.com/2015/day/4]. */
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/4). */
 @AdventOfCode("The Ideal Stocking Stuffer", 2015, 4)
 class IdealStockingStuffer : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun solvePartOne(input: String): Int = mine(input, "0".repeat(5))

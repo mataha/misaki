@@ -3,6 +3,7 @@ package me.mataha.misaki.solutions.adventofcode.aoc2020.d01
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
+/** See the puzzle's full description [here](https://adventofcode.com/2020/day/1). */
 @AdventOfCode("Report Repair", 2020, 1)
 class ReportRepair : AdventOfCodeDay<List<Int>, Int>() {
     override fun parse(input: String): List<Int> =

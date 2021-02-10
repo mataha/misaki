@@ -5,7 +5,7 @@ import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 import me.mataha.misaki.util.extensions.next
 
-/** See [https://adventofcode.com/2015/day/3]. */
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/3). */
 @AdventOfCode("Perfectly Spherical Houses in a Vacuum", 2015, 3)
 class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun solvePartOne(input: String): Int {

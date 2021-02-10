@@ -4,7 +4,7 @@ import com.github.h0tk3y.betterParse.grammar.parseToEnd
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
-/** See [https://adventofcode.com/2015/day/6]. */
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/6). */
 @AdventOfCode("Probably a Fire Hazard", 2015, 6)
 class ProbablyAFireHazard : AdventOfCodeDay<List<Instruction>, Int>() {
     override fun parse(input: String): List<Instruction> =

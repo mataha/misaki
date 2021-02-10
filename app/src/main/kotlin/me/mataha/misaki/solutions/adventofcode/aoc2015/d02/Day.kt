@@ -3,7 +3,7 @@ package me.mataha.misaki.solutions.adventofcode.aoc2015.d02
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
-/** See [https://adventofcode.com/2015/day/2]. */
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/2). */
 @AdventOfCode("I Was Told There Would Be No Math", 2015, 2)
 class ThereWouldBeNoMath : AdventOfCodeDay<List<Box>, Int>() {
     override fun parse(input: String): List<Box> =

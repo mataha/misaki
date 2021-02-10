@@ -7,7 +7,7 @@ import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.ENCODE
 import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.IN_CODE
 import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.IN_MEMORY
 
-/** See [https://adventofcode.com/2015/day/8]. */
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/8). */
 @AdventOfCode("Matchsticks", 2015, 8)
 class Matchsticks : AdventOfCodeDay<List<String>, Int>(), LineParser {
     override fun solvePartOne(input: List<String>): Int =

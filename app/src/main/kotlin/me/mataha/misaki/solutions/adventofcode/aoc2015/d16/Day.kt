@@ -4,6 +4,7 @@ import com.github.h0tk3y.betterParse.grammar.parseToEnd
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/16). */
 @AdventOfCode("Aunt Sue", 2015, 16)
 class AuntSue : AdventOfCodeDay<List<Memoir>, Int>() {
     override fun parse(input: String): List<Memoir> = MemoirGrammar.parseToEnd(input)

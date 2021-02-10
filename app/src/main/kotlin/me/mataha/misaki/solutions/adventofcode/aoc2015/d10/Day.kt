@@ -4,7 +4,7 @@ import me.mataha.misaki.domain.NoOpParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
 
-/** See [https://adventofcode.com/2015/day/10]. */
+/** See the puzzle's full description [here](https://adventofcode.com/2015/day/10). */
 @AdventOfCode("Elves Look, Elves Say", 2015, 10)
 class ElvesLookElvesSay : AdventOfCodeDay<String, Int>(), NoOpParser {
     override fun solvePartOne(input: String): Int = lookAndSay(input, 40).length
