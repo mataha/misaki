@@ -6,7 +6,7 @@ import kotlin.contracts.InvocationKind.EXACTLY_ONCE
 import kotlin.contracts.contract
 
 /**
- * Do [something], then return the original [value].
+ * Does [something], then returns the original [value].
  *
  * While this function is not far from representing the
  * [K-combinator](https://www.wolframscience.com/nks/notes-11-12--combinators/)
