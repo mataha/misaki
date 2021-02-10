@@ -169,7 +169,7 @@ private fun RawOption.inputStreamSource(): NullableOption<InputSource, InputSour
 private class InputStreamSource(private val inputStream: InputStream) : InputSource() {
     override fun fetch(data: String?): String =
         inputStream.bufferedReader().use { reader ->
-            if (inputStream.isStdin()) {
+            if (inputStream.isCliktParameterDefaultStdin) {
                 println("Enter your puzzle input:")
             }
 
@@ -179,6 +179,9 @@ private class InputStreamSource(private val inputStream: InputStream) : InputSou
 
 private fun MutuallyExclusiveOptions<InputSource, InputSource?>.defaultStdin():
         MutuallyExclusiveOptions<InputSource, InputSource> = default(InputSource.default())
+
+private val InputStream.isCliktParameterDefaultStdin
+    get() = this is UnclosableInputStream
 
 private class UnclosableInputStream(private var delegate: InputStream?) : InputStream() {
     private val stream get() = delegate ?: throw IOException("Stream is closed")
