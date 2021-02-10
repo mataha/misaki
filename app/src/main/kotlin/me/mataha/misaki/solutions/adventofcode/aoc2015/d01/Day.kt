@@ -3,6 +3,7 @@ package me.mataha.misaki.solutions.adventofcode.aoc2015.d01
 import me.mataha.misaki.domain.NoOpParser
 import me.mataha.misaki.domain.adventofcode.AdventOfCode
 import me.mataha.misaki.domain.adventofcode.AdventOfCodeDay
+import me.mataha.misaki.util.functional.take
 
 /** See [https://adventofcode.com/2015/day/1]. */
 @AdventOfCode("Not Quite Lisp", 2015, 1)
@@ -17,7 +18,7 @@ class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
             val floor = accumulator + go(direction)
             if (floor < 0) return index + 1
             floor
-        }.coerceAtMost(BASEMENT_NOT_ENTERED)
+        } take BASEMENT_NOT_ENTERED
 
     companion object {
         const val BASEMENT_NOT_ENTERED = -1
