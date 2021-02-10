@@ -5,6 +5,7 @@ import com.github.ajalt.clikt.core.Abort
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.ProgramResult
 import com.github.ajalt.clikt.core.context
+import com.github.ajalt.clikt.output.Localization
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.groups.MutuallyExclusiveOptions
 import com.github.ajalt.clikt.parameters.groups.default
@@ -137,8 +138,11 @@ private sealed class InputSource {
     }
 }
 
+@Suppress("unused")
+private fun Localization.urlMetavar() = "URL"
+
 private fun RawOption.urlSource(factory: HttpClientEngineFactory<*>): NullableOption<InputSource, InputSource> =
-    convert({ "URL" }, CompletionCandidates.Hostname) { url ->
+    convert({ localization.urlMetavar() }, CompletionCandidates.Hostname) { url ->
         UrlSource(url, factory)
     }
 
@@ -198,9 +202,6 @@ private class UnclosableInputStream(private var delegate: InputStream?) : InputS
         delegate = null
     }
 }
-
-/** Checks whether this stream is an unclosable [System.`in`] proxy. */
-private fun InputStream.isStdin(): Boolean = this is UnclosableInputStream
 
 private fun OutputStream.publish(result: Result, measure: Boolean) {
     this.printWriter().use { writer ->
