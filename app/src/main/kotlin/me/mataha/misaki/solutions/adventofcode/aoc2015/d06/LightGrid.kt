@@ -1,5 +1,6 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d06
 
+import app.cash.exhaustive.Exhaustive
 import me.mataha.misaki.solutions.adventofcode.aoc2015.d06.Instruction.Type
 
 internal abstract class LightGrid {
@@ -26,7 +27,7 @@ internal abstract class LightGrid {
     internal fun process(instruction: Instruction): LightGrid {
         for (x in instruction.x) {
             for (y in instruction.y) {
-                when (instruction.type) {
+                @Exhaustive when (instruction.type) {
                     Type.TURN_ON -> this.turnOn(x, y)
                     Type.TURN_OFF -> this.turnOff(x, y)
                     Type.TOGGLE -> this.toggle(x, y)
