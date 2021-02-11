@@ -19,26 +19,28 @@ class NoInternElvesForThis : AdventOfCodeDay<List<String>, Int>(), LineParser {
 
 private const val VOWELS = "aeiou"
 
-private fun String.isNiceBefore(): Boolean {
-    val forbidden = arrayOf("ab", "cd", "pq", "xy")
+private val String.isNiceBefore: Boolean
+    get() {
+        val forbidden = arrayOf("ab", "cd", "pq", "xy")
 
-    val predicates = arrayOf<suspend (string: String) -> Boolean>(
-        { string -> string.count { char -> char in VOWELS } >= 3 },
-        { string -> string.zipWithNext().any { pair -> pair.first == pair.second } },
-        { string -> forbidden.none { letters -> letters in string } }
-    )
+        val predicates = arrayOf<suspend (string: String) -> Boolean>(
+            { string -> string.count { char -> char in VOWELS } >= 3 },
+            { string -> string.zipWithNext().any { pair -> pair.first == pair.second } },
+            { string -> forbidden.none { letters -> letters in string } }
+        )
 
-    return this.isNice(*predicates)
-}
+        return this.isNice(*predicates)
+    }
 
-private fun String.isNiceAfter(): Boolean {
-    val predicates = arrayOf<suspend (string: String) -> Boolean>(
-        { string -> string.windowed(2).any { window -> window in string.replaceFirst(window, "  ") } },
-        { string -> string.zipAdjacent().any { pair -> pair.first == pair.second } }
-    )
+private val String.isNiceAfter: Boolean
+    get() {
+        val predicates = arrayOf<suspend (string: String) -> Boolean>(
+            { string -> string.windowed(2).any { window -> window in string.replaceFirst(window, "  ") } },
+            { string -> string.zipAdjacent().any { pair -> pair.first == pair.second } }
+        )
 
-    return this.isNice(*predicates)
-}
+        return this.isNice(*predicates)
+    }
 
 private fun String.isNice(vararg predicates: suspend (string: String) -> Boolean): Boolean = runBlocking {
     predicates

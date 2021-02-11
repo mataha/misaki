@@ -33,7 +33,7 @@ class PerfectlySphericalHouses : AdventOfCodeDay<String, Int>(), NoOpParser {
             grid += new
             map[turn] = new
 
-            turn = if (direction.isDirection()) turn.next() else turn
+            turn = if (direction.isDirection) turn.next() else turn
         }
 
         return grid.size
@@ -53,4 +53,6 @@ private data class Position(val x: Int, val y: Int) {
 }
 
 private const val DIRECTIONS = "^>v<"
-private fun Char.isDirection(): Boolean = this in DIRECTIONS
+
+private val Char.isDirection: Boolean
+    get() = this in DIRECTIONS
