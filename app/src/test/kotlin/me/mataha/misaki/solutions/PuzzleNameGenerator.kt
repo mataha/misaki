@@ -25,8 +25,12 @@ open class PuzzleNameGenerator : DisplayNameGenerator.Simple() {
     override fun generateDisplayNameForNestedClass(nestedClass: Class<*>): String =
         splitPascamelCasedWords(super.generateDisplayNameForNestedClass(nestedClass))
 
-    override fun generateDisplayNameForMethod(testClass: Class<*>, testMethod: Method): String =
-        testMethod.name + "."
+    override fun generateDisplayNameForMethod(testClass: Class<*>, testMethod: Method): String {
+        val name = testMethod.name
+        val terminal = if (name.first().isUpperCase()) "." else ""
+
+        return name + terminal
+    }
 
     open fun generateDisplayNameForPuzzle(puzzle: PuzzleData<*, *>): String {
         val origin = puzzle.origin
@@ -35,6 +39,17 @@ open class PuzzleNameGenerator : DisplayNameGenerator.Simple() {
         return header + puzzle.name
     }
 }
+
+private const val PLURAL = "s"
+private val TEST_SUFFIX = Test::class.java.simpleName + PLURAL
+
+private fun stripTestSuffix(fixtureName: String): String =
+    if (fixtureName.endsWith(TEST_SUFFIX)) fixtureName.dropLast(TEST_SUFFIX.length) else fixtureName
+
+private val WORD_DELIMITER = Regex("""(?<=\w)(?=[A-Z])""")
+
+/** Separates words in a *PascamelCase* [string] using a single whitespace character (`" "`). */
+private fun splitPascamelCasedWords(string: String): String = string.split(WORD_DELIMITER).joinToString(" ")
 
 private object PuzzleLookup {
     private val ROOT: Package = this::class.java.`package`
@@ -55,17 +70,6 @@ private object PuzzleLookup {
 
     operator fun get(simpleName: String): PuzzleData<*, *>? = lookup[simpleName]
 }
-
-private const val PLURAL = "s"
-private val TEST_SUFFIX = Test::class.java.simpleName + PLURAL
-
-private fun stripTestSuffix(fixtureName: String): String =
-    if (fixtureName.endsWith(TEST_SUFFIX)) fixtureName.dropLast(TEST_SUFFIX.length) else fixtureName
-
-private val WORD_DELIMITER = Regex("""(?<=\w)(?=[A-Z])""")
-
-/** Separates words in a *PascamelCase* [string] using a single whitespace character (`" "`). */
-private fun splitPascamelCasedWords(string: String): String = string.split(WORD_DELIMITER).joinToString(" ")
 
 /** Returns a predicate that always returns true. */
 @Suppress("NOTHING_TO_INLINE")
