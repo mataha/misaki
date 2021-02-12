@@ -9,7 +9,7 @@ class ThereWouldBeNoMath : AdventOfCodeDay<List<Box>, Int>() {
     override fun parse(input: String): List<Box> =
         input
             .lines()
-            .map { line -> line.split(PARSE_DELIMITER).map { dimension -> dimension.toInt() } }
+            .map { line -> line.split(DELIMITER).map { dimension -> dimension.toInt() } }
             .map { dimensions -> Box.create(dimensions) }
 
     override fun solvePartOne(input: List<Box>): Int =
@@ -19,7 +19,7 @@ class ThereWouldBeNoMath : AdventOfCodeDay<List<Box>, Int>() {
         input.sumBy { box -> getFeetOfRibbon(box) }
 
     private companion object {
-        private const val PARSE_DELIMITER = 'x'
+        private const val DELIMITER = 'x'
     }
 }
 
