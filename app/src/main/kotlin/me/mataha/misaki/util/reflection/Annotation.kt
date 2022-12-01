@@ -18,7 +18,7 @@ inline fun <reified A : Annotation> KAnnotatedElement.findAnnotation(): A =
  * or the result of the [default] function otherwise.
  */
 inline fun <reified A : Annotation> KAnnotatedElement.findAnnotationOrElse(default: () -> A): A =
-    findAnnotation<A>() ?: default()
+    findAnnotation() ?: default()
 
 /**
  * Thrown when the code tries to return an annotation that's not present

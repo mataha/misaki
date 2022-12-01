@@ -7,6 +7,7 @@ plugins {
 }
 
 application {
+    mainClass.set("${group}.Main")
     useUtf8()
 }
 

@@ -1,6 +1,5 @@
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d07
 
-@ExperimentalUnsignedTypes
 class Circuit private constructor() {
     private lateinit var parts: Map<String, Part>
 

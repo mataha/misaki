@@ -4,12 +4,10 @@ import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.engine.config
 import org.koin.dsl.module
-import kotlin.time.ExperimentalTime
-import kotlin.time.seconds
+import kotlin.time.Duration.Companion.seconds
 
 private const val ENVIRONMENT_KEY = "misaki.app.cli.context.environment"
 
-@ExperimentalTime
 internal val module = module {
     single<Cli> { (runScriptName: String, version: String) ->
         DefaultCli(
@@ -23,7 +21,7 @@ internal val module = module {
     }
     factory<HttpClientEngineFactory<*>> {
         CIO.config {
-            requestTimeout = 20.seconds.toLongMilliseconds()
+            requestTimeout = 20.seconds.inWholeMilliseconds
         }
     }
 }

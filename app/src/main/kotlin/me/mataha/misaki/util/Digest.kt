@@ -6,9 +6,7 @@ import java.security.MessageDigest
 
 private const val MD5_ALGORITHM = "MD5"
 
-private fun getMd5Digest(): MessageDigest = MessageDigest.getInstance(MD5_ALGORITHM)
-
-fun md5(bytes: ByteArray): ByteArray = getMd5Digest().digest(bytes)
+fun md5(bytes: ByteArray): ByteArray = MessageDigest.getInstance(MD5_ALGORITHM).digest(bytes)
 
 fun md5(string: String, charset: Charset = Charsets.UTF_8): ByteArray = md5(string.toByteArray(charset))
 

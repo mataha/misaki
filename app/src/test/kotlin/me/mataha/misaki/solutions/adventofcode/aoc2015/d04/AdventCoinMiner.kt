@@ -2,7 +2,6 @@
 
 package me.mataha.misaki.solutions.adventofcode.aoc2015.d04
 
-import app.cash.exhaustive.Exhaustive
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.Dispatchers
@@ -13,16 +12,18 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import me.mataha.misaki.util.extensions.md5Hex
 import kotlin.system.exitProcess
-import kotlin.time.ExperimentalTime
-import kotlin.time.seconds
+import kotlin.time.Duration.Companion.seconds
 
 private const val KEY = "a"
 private const val PREFIX = "00000" // "0".repeat(5)
 
-@ExperimentalTime
 private val TIMEOUT = 1.seconds
 
-@ExperimentalTime
+private fun usage(): Nothing {
+    println("Usage: AdventCoinMiner ITERATIONS [KEY=$KEY] [PREFIX=$PREFIX]")
+    exitProcess(1)
+}
+
 internal fun main(vararg args: String) = runBlocking {
     val iterations = parse {
         args.first().toInt()
@@ -53,11 +54,17 @@ internal fun main(vararg args: String) = runBlocking {
     }
 }
 
+private inline fun <T> parse(crossinline block: () -> T): T = try {
+    block()
+} catch (_: Exception) {
+    usage()
+}
+
 private suspend fun mine(key: String, prefix: String): Int = withContext(Dispatchers.Default) {
     repeat(Int.MAX_VALUE) { index ->
         val number = index + 1
 
-        @Exhaustive when (isActive) {
+        when (isActive) {
             true -> {
                 val string = key + number
 
@@ -84,15 +91,4 @@ private operator fun String.inc(): String {
     }
 
     return "a".repeat(length + 1)
-}
-
-private inline fun <T> parse(crossinline block: () -> T): T = try {
-    block()
-} catch (_: Exception) {
-    usage()
-}
-
-private fun usage(): Nothing {
-    println("Usage: AdventCoinMiner ITERATIONS [KEY=$KEY] [PREFIX=$PREFIX]")
-    exitProcess(1)
 }

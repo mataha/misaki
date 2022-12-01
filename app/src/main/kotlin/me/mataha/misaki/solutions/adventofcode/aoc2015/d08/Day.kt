@@ -11,8 +11,8 @@ import me.mataha.misaki.solutions.adventofcode.aoc2015.d08.Representation.IN_MEM
 @AdventOfCode("Matchsticks", 2015, 8)
 class Matchsticks : AdventOfCodeDay<List<String>, Int>(), LineParser {
     override fun solvePartOne(input: List<String>): Int =
-        input.sumBy { string -> string.length(IN_CODE) - string.length(IN_MEMORY) }
+        input.sumOf { string -> string.length(IN_CODE) - string.length(IN_MEMORY) }
 
     override fun solvePartTwo(input: List<String>): Int =
-        input.sumBy { string -> string.length(ENCODED) - string.length(IN_CODE) }
+        input.sumOf { string -> string.length(ENCODED) - string.length(IN_CODE) }
 }

@@ -13,10 +13,10 @@ class ThereWouldBeNoMath : AdventOfCodeDay<List<Box>, Int>() {
             .map { dimensions -> Box.create(dimensions) }
 
     override fun solvePartOne(input: List<Box>): Int =
-        input.sumBy { box -> getSquareFeetOfWrappingPaper(box) }
+        input.sumOf { box -> getSquareFeetOfWrappingPaper(box) }
 
     override fun solvePartTwo(input: List<Box>): Int =
-        input.sumBy { box -> getFeetOfRibbon(box) }
+        input.sumOf { box -> getFeetOfRibbon(box) }
 
     private companion object {
         private const val DELIMITER = 'x'

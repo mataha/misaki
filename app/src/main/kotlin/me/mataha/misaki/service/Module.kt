@@ -9,9 +9,9 @@ internal val module = module {
     single<EqualityComparator<String>> {
         EqualityComparator { a, b ->
             levenshteinDistance(
-                a.toLowerCase(),
-                b.toLowerCase()
-            ) <= getProperty(THRESHOLD_KEY).toInt()
+                a.lowercase(),
+                b.lowercase()
+            ) <= getProperty<Int>(THRESHOLD_KEY)
         }
     }
     single<PuzzleService> {

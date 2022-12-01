@@ -4,17 +4,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version Kotlin.stdlib
-    id("app.cash.exhaustive") version BuildPlugins.Versions.exhaustive
     id("scripts.misaki-application")
 }
 
-application {
-    mainClass.set("me.mataha.misaki.Main")
-}
-
 java {
-    sourceCompatibility = Compatibility.JAVA_VERSION
-    targetCompatibility = Compatibility.JAVA_VERSION
+    val compatibility = Compatibility.JAVA_VERSION
+
+    sourceCompatibility = compatibility
+    targetCompatibility = compatibility
 }
 
 dependencies {
@@ -43,13 +40,15 @@ tasks.test {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = Target.BYTECODE_VERSION
+
+        val experimentalClasses = arrayOf(
+            "kotlin.contracts.ExperimentalContracts",
+            "kotlin.time.ExperimentalTime"
+        )
+
         freeCompilerArgs = listOf(
-            "-java-parameters",
-            "-Xinline-classes",
-            "-Xopt-in=kotlin.ExperimentalUnsignedTypes",
-            "-Xopt-in=kotlin.contracts.ExperimentalContracts",
-            "-Xopt-in=kotlin.io.path.ExperimentalPathApi",
-            "-Xopt-in=kotlin.time.ExperimentalTime"
+            *experimentalClasses.map { cls -> "-opt-in=${cls}" }.toTypedArray(),
+            "-java-parameters"
         )
     }
 }

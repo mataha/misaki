@@ -27,8 +27,7 @@ class NotQuiteLisp : AdventOfCodeDay<String, Int>(), NoOpParser {
     }
 }
 
-@Suppress("NOTHING_TO_INLINE")
-private inline fun go(direction: Char): Int = when (direction) {
+private fun go(direction: Char): Int = when (direction) {
     '(' -> +1
     ')' -> -1
     else -> 0

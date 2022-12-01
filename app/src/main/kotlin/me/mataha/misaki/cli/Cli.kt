@@ -138,11 +138,13 @@ private sealed class InputSource {
     }
 }
 
-@Suppress("unused")
+@Suppress("UnusedReceiverParameter")
 private fun Localization.urlMetavar() = "URL"
 
 private fun RawOption.urlSource(factory: HttpClientEngineFactory<*>): NullableOption<InputSource, InputSource> =
-    convert({ localization.urlMetavar() }, CompletionCandidates.Hostname) { url ->
+    convert({
+        localization.urlMetavar()
+    }, CompletionCandidates.Hostname) { url ->
         UrlSource(url, factory)
     }
 

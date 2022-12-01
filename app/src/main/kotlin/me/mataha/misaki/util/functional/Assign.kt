@@ -1,7 +1,6 @@
 package me.mataha.misaki.util.functional
 
 import me.mataha.misaki.util.internal.annotations.InlineCall
-import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind.EXACTLY_ONCE
 import kotlin.contracts.contract
 
@@ -20,7 +19,6 @@ import kotlin.contracts.contract
  * assert(a == 3 && b == 2)
  * ```
  */
-@ExperimentalContracts
 @InlineCall
 inline fun <T> assign(value: T, crossinline something: (T) -> Unit): T {
     contract {

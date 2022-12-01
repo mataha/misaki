@@ -27,6 +27,6 @@ private fun lookAndSay(string: String, steps: Int = 1): String {
 private val REGEX = Regex("""(.)\1*""")
 
 private fun String.phonetic(): String =
-    REGEX.findAll(this).fold(StringBuilder(), { builder, match ->
+    REGEX.findAll(this).fold(StringBuilder()) { builder, match ->
         builder.append(match.value.length).append(match.value.first())
-    }).toString()
+    }.toString()

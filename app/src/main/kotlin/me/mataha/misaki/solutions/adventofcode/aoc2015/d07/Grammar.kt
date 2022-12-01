@@ -10,7 +10,6 @@ import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.lexer.literalToken
 import com.github.h0tk3y.betterParse.lexer.regexToken
 
-@ExperimentalUnsignedTypes
 internal object CircuitGrammar : Grammar<List<Part>>() {
     @Suppress("unused")
     private val whiteSpace by regexToken("""\s+""", ignore = true)
